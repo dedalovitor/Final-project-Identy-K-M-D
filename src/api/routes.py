@@ -22,14 +22,6 @@ def handle_hello():
 
     return jsonify(response_body), 200
 
-@api.route('/karen', methods=['POST', 'GET'])
-def handle_karen():
-
-    response_body = {
-        "message": "testing"
-    }
-
-    return jsonify(response_body), 200
 
 @api.route('/login', methods=['POST'])
 def user_login():
@@ -56,6 +48,7 @@ def getting_register():
     name = request.json.get("first_name")
     email = request.json.get("email")
     password = request.json.get("password")
+    user_already_exist = User.query.filter( email = email).first()
 
     user = User(
         name = name,
@@ -66,7 +59,7 @@ def getting_register():
     try:
         user.create()
     except exc.IntegrityError: 
-        return jsonify({"error": "This email already exists"}), 400
+        return jsonify({"error": "This email already exist"}), 400
 
 
     return jsonify({"response": "Hola", "email": email}), 200
