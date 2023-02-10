@@ -12,7 +12,7 @@ export const Register = () => {
 
   const gettinRegister = async () => {
     const response = await fetch(
-      "https://3000-dedalovitor-finalprojec-bi5hivpdal4.ws-eu86.gitpod.io/register",
+      "https://3001-dedalovitor-finalprojec-bi5hivpdal4.ws-eu86.gitpod.io/api/register",
       {
         method: "POST",
         headers: {

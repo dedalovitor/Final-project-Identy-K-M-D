@@ -45,10 +45,9 @@ def current_user_email():
 
 @api.route('/register', methods=['POST'])
 def getting_register():
-    name = request.json.get("first_name")
+    name = request.json.get("name")
     email = request.json.get("email")
     password = request.json.get("password")
-    user_already_exist = User.query.filter( email = email).first()
 
     user = User(
         name = name,
