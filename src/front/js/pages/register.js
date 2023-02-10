@@ -11,20 +11,17 @@ export const Register = () => {
   const [error, setError] = useState("");
 
   const gettinRegister = async () => {
-    const response = await fetch(
-      "https://3001-dedalovitor-finalprojec-bi5hivpdal4.ws-eu86.gitpod.io/api/register",
-      {
-        method: "POST",
-        headers: {
-          "content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: name,
-          email: email,
-          password: password,
-        }),
-      }
-    );
+    const response = await fetch(process.env.BACKEND_URL + "/api/register", {
+      method: "POST",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+      }),
+    });
     const data = await response.json();
     if (response.ok) {
       navigate("/login");
