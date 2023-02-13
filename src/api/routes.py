@@ -62,3 +62,24 @@ def getting_register():
 
 
     return jsonify({"response": "Hola", "email": email}), 200
+
+
+@api.route('/regionregister', methods=['POST'])
+def getting_region_register():
+    name = request.json.get("name")
+    email = request.json.get("email")
+    password = request.json.get("password")
+
+    user = User(
+        name = name,
+        email = email,
+        password = password
+    )
+    
+    try:
+        user.create()
+    except exc.IntegrityError: 
+        return jsonify({"error": "This email already exist"}), 400
+
+
+    return jsonify({"response": "Hola", "email": email}), 200
