@@ -10,9 +10,9 @@ export const Navbar = () => {
         <Link to="/">
           <p className="svg-component">{SvgComponent}</p>
         </Link>
-        <div className="buttons content-end">
+        <div className="navbarButtons">
           <Link to="/">
-            <i class="fa-solid fa-pencil"></i>
+            <i className="fa-solid fa-pencil"></i>
             <button className="btn btn-light">Opinión</button>
           </Link>
           <Link to="/">
