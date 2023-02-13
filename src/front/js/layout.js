@@ -6,9 +6,11 @@ import { Home } from "./pages/home";
 import { Login } from "./pages/login";
 import injectContext from "./store/appContext";
 import { Register } from "./pages/register";
-
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { Search } from "./component/search";
+import { CardRegion } from "./component/cardregion";
+
 
 //create your first component
 const Layout = () => {
