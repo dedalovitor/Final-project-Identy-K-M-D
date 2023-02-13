@@ -2,11 +2,12 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Region, Restoration
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import get_jwt_identity
+from sqlalchemy import exc
 
 
 api = Blueprint('api', __name__)
@@ -16,10 +17,11 @@ api = Blueprint('api', __name__)
 def handle_hello():
 
     response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
+        "message": "karen"
     }
 
     return jsonify(response_body), 200
+
 
 @api.route('/login', methods=['POST'])
 def user_login():
@@ -39,3 +41,31 @@ def current_user_email():
     user_id = get_jwt_identity()
     user = User.query.get(user_id)
     return jsonify({"response": "Hola", "email": user.email}), 200
+
+@api.route('/regions', methods=['GET'])
+def get_regions():
+    regions = Region.query.all()
+    return jsonify({"result": [x.serialize()for x in regions]}), 200
+
+
+
+@api.route('/register', methods=['POST'])
+def getting_register():
+    name = request.json.get("first_name")
+    email = request.json.get("email")
+    password = request.json.get("password")
+    user_already_exist = User.query.filter( email = email).first()
+
+    user = User(
+        name = name,
+        email = email,
+        password = password
+    )
+    
+    try:
+        user.create()
+    except exc.IntegrityError: 
+        return jsonify({"error": "This email already exist"}), 400
+
+
+    return jsonify({"response": "Hola", "email": email}), 200
