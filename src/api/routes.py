@@ -69,15 +69,29 @@ def getting_region_register():
     name = request.json.get("name")
     email = request.json.get("email")
     password = request.json.get("password")
+    contact_person_name = request.json.get("contact person name")
+    contact_person_telf = request.json.get("contact person telf")
+    nif = request.json.get("nif")
+    address = request.json.get("address")
+    country = request.json.get("country")
+    city = request.json.get("city")
+    regions = request.json.get("regions")
 
-    user = User(
+    user_region = user_region(
         name = name,
         email = email,
-        password = password
+        password = password,
+        contact_person_name = contact_person_name,
+        contact_person_telf = contact_person_telf,
+        nif = nif,
+        address = address,
+        country = country,
+        city = city,
+        regions = regions
     )
     
     try:
-        user.create()
+        user_region.create()
     except exc.IntegrityError: 
         return jsonify({"error": "This email already exist"}), 400
 
