@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, User_region
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
@@ -69,15 +69,15 @@ def getting_region_register():
     name = request.json.get("name")
     email = request.json.get("email")
     password = request.json.get("password")
-    contact_person_name = request.json.get("contact person name")
-    contact_person_telf = request.json.get("contact person telf")
+    contact_person_name = request.json.get("contactPersonName")
+    contact_person_telf = request.json.get("contactPersonTelf")
     nif = request.json.get("nif")
     address = request.json.get("address")
     country = request.json.get("country")
     city = request.json.get("city")
-    regions = request.json.get("regions")
 
-    user_region = user_region(
+
+    user_region = User_region(
         name = name,
         email = email,
         password = password,
@@ -87,9 +87,9 @@ def getting_region_register():
         address = address,
         country = country,
         city = city,
-        regions = regions
     )
-    
+    print("@@@@@@@@@@@@")
+    print(user_region.serialize())
     try:
         user_region.create()
     except exc.IntegrityError: 

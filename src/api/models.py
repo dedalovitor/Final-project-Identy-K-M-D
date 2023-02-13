@@ -31,9 +31,9 @@ class User_region(db.Model):
     contact_person_name = db.Column(db.String(100), unique=True, nullable=False)
     nif = db.Column(db.String(100), unique=True, nullable=False)
     contact_person_telf = db.Column(db.String(100), unique=True, nullable=False)
-    address = db.Column(db.String(100), unique=True, nullable=False)
-    country= db.Column(db.String(100), unique=True, nullable=False)
-    city = db.Column(db.String(100), unique=True, nullable=False)
+    address = db.Column(db.String(100), unique=False, nullable=False)
+    country= db.Column(db.String(100), unique=False, nullable=False)
+    city = db.Column(db.String(100), unique=False, nullable=False)
     regions = db.relationship('Region')
 
     def serialize(self):
@@ -47,11 +47,16 @@ class User_region(db.Model):
             "address": self.address,
             "country": self.country,
             "city": self.city
+        
 
             # do not serialize the password, its a security breach
         }
     def __repr__(self):
         return f'{self.name}'
+
+    def create(self):
+        db.session.add(self)
+        db.session.commit()
 
 class Region(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -77,6 +82,7 @@ class Region(db.Model):
         }
     def __repr__(self):
         return f'{self.name}'
+
 
 class RestorationChoices(Enum):
     bar= "bar"

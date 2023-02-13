@@ -15,7 +15,6 @@ export const Regionregister = () => {
   const [address, setAddress] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
-  const [regions, setRegions] = useState("");
 
   const gettinRegionregister = async () => {
     const response = await fetch(
@@ -29,6 +28,12 @@ export const Regionregister = () => {
           name: name,
           email: email,
           password: password,
+          contactPersonName: contactPersonName,
+          contactPersonTelf: contactPersonTelf,
+          address: address,
+          country: country,
+          city: city,
+          nif: nif,
         }),
       }
     );
@@ -93,7 +98,7 @@ export const Regionregister = () => {
           ></input>
         </div>
         <div>
-          <label htmlFor="contact person tel">Contact tel</label>
+          <label htmlFor="contact person telf">Contact tel</label>
           <input
             name="tel"
             placeholder="tel"
@@ -149,18 +154,6 @@ export const Regionregister = () => {
             onChange={(e) => {
               setError(false);
               setCity(e.target.value);
-            }}
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="regions">Regions</label>
-          <input
-            name="regions"
-            placeholder="regions"
-            value={regions}
-            onChange={(e) => {
-              setError(false);
-              setRegions(e.target.value);
             }}
           ></input>
         </div>
