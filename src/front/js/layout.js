@@ -13,7 +13,6 @@ import { Footer } from "./component/footer";
 import { Search } from "./component/search";
 import { CardRegion } from "./component/cardregion";
 
-
 //create your first component
 const Layout = () => {
   //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -28,6 +27,7 @@ const Layout = () => {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<Login />} path="/login" />
+            <Route element={<LoginRegion />} path="/loginregion" />
             <Route element={<Register />} path="/register" />
             <Route element={<Regionregister />} path="/regionregister" />
             <Route element={<Regionlogin />} path="/regionlogin" />
