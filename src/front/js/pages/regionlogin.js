@@ -24,7 +24,7 @@ export const Regionlogin = () => {
       const data = await response.json();
       localStorage.setItem("token", data.token);
       await actions.getCurrentUserEmail();
-      navigate("/");
+      navigate("/profileuserregion");
     } else {
       setError(true);
     }
