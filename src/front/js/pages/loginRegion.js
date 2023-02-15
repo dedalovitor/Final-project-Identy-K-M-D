@@ -13,7 +13,7 @@ export const LoginRegion = () => {
     const response = await fetch(process.env.BACKEND_URL + "/api/loginregion", {
       method: "POST",
       headers: {
-        "content-Type": "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email: email,
