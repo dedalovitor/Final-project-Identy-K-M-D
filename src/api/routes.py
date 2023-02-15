@@ -27,7 +27,7 @@ def handle_hello():
 def user_login():
      body_email = request.json.get("email")
      body_password = request.json.get("password")
-     user = User.query.filter_by(email = body_email, password = body_password).first()
+     user = User_region.query.filter_by(email = body_email, password = body_password).first()
      if not user: 
             return jsonify({"error": "credenciales no válidas"}), 401
      token = create_access_token(identity=user.id)
@@ -39,7 +39,7 @@ def user_login():
 @jwt_required()
 def current_user_email():
     user_id = get_jwt_identity()
-    user = User.query.get(user_id)
+    user = User_region.query.get(user_id)
     return jsonify({"response": "Hola", "email": user.email}), 200
 
 @api.route('/regions', methods=['GET'])
@@ -102,3 +102,14 @@ def getting_region_register():
 
 
     return jsonify({"response": "Hola", "email": email}), 200
+
+@api.route('/regionlogin', methods=['POST'])
+def user_region_login():
+     body_email = request.json.get("email")
+     body_password = request.json.get("password")
+     user = User_region.query.filter_by(email = body_email, password = body_password).first()
+     if not user: 
+            return jsonify({"error": "credenciales no válidas"}), 401
+     token = create_access_token(identity=user.id)
+     
+     return jsonify({"response": "hola", "token": token}), 200

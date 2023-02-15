@@ -1,10 +1,39 @@
-import React, { Component } from "react";
+import React, { useContext } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 
-export const Footer = () => (
-	<footer className="footer mt-auto py-3 text-center">
-		<p>
-			Made with <i className="fa fa-heart text-danger" /> by{" "}
-			<a href="http://www.4geeksacademy.com">4Geeks Academy</a>
-		</p>
-	</footer>
-);
+export const Footer = () => {
+	const { store, actions } = useContext(Context);
+	return (
+		<nav className="navbar navbar-light bg-light">
+			<div className="container">
+				<Link to="/">
+					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
+				</Link>
+				<div className="ml-auto">
+					{store.currentUserEmail ? (
+						<button
+							className="btn btn-danger"
+							onClick={async () => {
+								if (await actions.logout()) {
+									Navigate("/");
+								}
+							}}
+						>
+							Logout
+						</button>
+					) : (
+						<>
+							<Link to="/regionlogin">
+								<button className="btn btn-primary">Login</button>
+							</Link>
+							<Link to="/regionregister">
+								<button className="btn btn-success">Register</button>
+							</Link>
+						</>
+					)}
+				</div>
+			</div>
+		</nav>
+	);
+};
