@@ -17,7 +17,7 @@ api = Blueprint('api', __name__)
 def handle_hello():
 
     response_body = {
-        "message": "karen"
+        "message": "hello"
     }
 
     return jsonify(response_body), 200
@@ -34,6 +34,16 @@ def user_login():
      
      return jsonify({"response": "hola", "token": token}), 200
 
+@api.route('/loginregion', methods=['POST'])
+def region_login():
+    body_email = request.json.get("email")
+    body_password = request.json.get("password")
+    user = User_region.query.filter_by(email = body_email, password = body_password).first()
+    if not user: 
+        return jsonify({"error": "credenciales no válidas"}), 401
+    token = create_access_token(identity=user.id)
+     
+    return jsonify({"response": "hola", "token": token}), 200
 
 @api.route('/user', methods=['GET'])
 @jwt_required()
