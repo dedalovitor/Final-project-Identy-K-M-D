@@ -111,13 +111,13 @@ def user_region_login():
 @api.route('/region', methods=['POST'])
 @jwt_required()
 def create_region():
-    user_id = get_jwt_identity()
+    id = get_jwt_identity()
     body_name = request.json.get("name")
     body_resume = request.json.get("resume")
     body_photo = request.json.get("photo")
     body_logo = request.json.get("logo")
   
-    new_region = Region(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, user_id=user_id )
+    new_region = Region(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, id=id )
     db.session.add(new_region)
     db.session.commit()
     return jsonify({"response": "Region registered successfully"}), 200
