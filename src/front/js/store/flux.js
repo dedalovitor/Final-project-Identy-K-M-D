@@ -5,6 +5,31 @@ const getState = ({ getStore, getActions, setStore }) => {
     },
 
     actions: {
+      sendLoginRegionCredential: async (email, password) => {
+        const response = await fetch(
+          process.env.BACKEND_URL + "/api/loginregion",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: email,
+              password: password,
+            }),
+          }
+        );
+        if (response.ok) {
+          const data = await response.json();
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("email", data.email);
+          setStore({ currentUserEmail: data.email });
+          // await actions.getCurrentUserEmail();
+        } else {
+          setError(true);
+        }
+      },
+
       getCurrentUserEmail: async () => {
         const response = await fetch(process.env.BACKEND_URL + "/api/user", {
           headers: {

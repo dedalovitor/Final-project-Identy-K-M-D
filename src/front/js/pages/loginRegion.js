@@ -1,34 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 
 export const LoginRegion = () => {
-  const navigate = useNavigate();
+  const Navigate = useNavigate();
   const { store, actions } = useContext(Context);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-
-  const sendLoginRegionCredential = async () => {
-    const response = await fetch(process.env.BACKEND_URL + "/api/loginregion", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    });
-    if (response.ok) {
-      const data = await response.json();
-      localStorage.setItem("token", data.token);
-      await actions.getCurrentUserEmail();
-      navigate("/");
-    } else {
-      setError(true);
-    }
-  };
 
   return (
     <div className="text-center mt-5">
@@ -60,7 +39,10 @@ export const LoginRegion = () => {
         </div>
         <button
           className="btn btn-primary"
-          onClick={() => sendLoginRegionCredential()}
+          onClick={() => {
+            actions.sendLoginRegionCredential(email, password);
+            Navigate("/");
+          }}
         >
           Login
         </button>

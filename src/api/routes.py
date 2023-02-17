@@ -43,7 +43,7 @@ def region_login():
         return jsonify({"error": "credenciales no válidas"}), 401
     token = create_access_token(identity=user.id)
      
-    return jsonify({"response": "hola", "token": token}), 200
+    return jsonify({"email": user.email, "token": token}), 200
 
 @api.route('/user', methods=['GET'])
 @jwt_required()

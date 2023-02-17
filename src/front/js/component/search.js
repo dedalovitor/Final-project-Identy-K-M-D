@@ -4,7 +4,7 @@ export const Search = () => (
   <search className="input-group rounded p-4">
     <input
       type="search"
-      class="form-control rounded"
+      className="form-control rounded"
       placeholder="Search"
       aria-label="Search"
       aria-describedby="search-addon"
