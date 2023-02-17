@@ -8,7 +8,11 @@ export const Navbar = () => {
     <nav className="navbar navbar-light bg-light">
       <div className="container">
         <Link to="/">
-          <span className="navbar-brand mb-0 h1">React Boilerplate</span>
+          <img
+            src="https://www.pc-nexus.net/diplomas/logo.png"
+            alt="Indetity"
+            height="60"
+          ></img>
         </Link>
         <div className="ml-auto">
           {store.dataUser ? (
