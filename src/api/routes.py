@@ -25,32 +25,32 @@ def handle_hello():
 
 @api.route('/login', methods=['POST'])
 def user_login():
-     body_email = request.json.get("email")
-     body_password = request.json.get("password")
-     user = User.query.filter_by(email = body_email, password = body_password).first()
-     if not user: 
-            return jsonify({"error": "credenciales no válidas"}), 401
-     token = create_access_token(identity=user.id)
-     
-     return jsonify({"response": "hola", "token": token}), 200
-
-@api.route('/loginregion', methods=['POST'])
-def region_login():
     body_email = request.json.get("email")
     body_password = request.json.get("password")
-    user = User_region.query.filter_by(email = body_email, password = body_password).first()
-    if not user: 
+    user = User.query.filter_by(email = body_email, password = body_password).first()
+    region = User_region.query.filter_by(email = body_email, password = body_password).first()
+    if not user and not region: 
         return jsonify({"error": "credenciales no válidas"}), 401
-    token = create_access_token(identity=user.id)
-     
-    return jsonify({"email": user.email, "token": token}), 200
+    elif user: 
+        token = create_access_token(identity=user.id)
+        return jsonify({"user": "user", "token": token}), 200
+    elif region: 
+        token = create_access_token(identity=region.id)
+        return jsonify({"user": "region", "token": token}), 200
 
-@api.route('/user', methods=['GET'])
+
+@api.route('/user', methods=['POST'])
 @jwt_required()
-def current_user_email():
+def current_user():
+    user_type = request.json.get("user")
     user_id = get_jwt_identity()
-    user = User.query.get(user_id)
-    return jsonify({"response": "Hola", "email": user.email}), 200
+    if user_type == "user":
+        user = User.query.get(user_id)
+        return jsonify({"data":user.serialize(), "user":"user"}), 200
+    elif user_type == "region":
+        user = User_region.query.get(user_id)
+        return jsonify({"data":user.serialize(), "user":"region"}), 200
+    return jsonify({"error": True}), 400
 
 @api.route('/regions', methods=['GET'])
 def get_regions():
@@ -64,6 +64,10 @@ def getting_register():
     name = request.json.get("name")
     email = request.json.get("email")
     password = request.json.get("password")
+    user_already_exist = User.query.filter_by(email=email).first()
+    region_already_exist = User_region.query.filter_by(email=email).first()
+    if user_already_exist or region_already_exist:
+        return jsonify({"error": "This email already exist"}), 400
 
     user = User(
         name = name,
@@ -91,6 +95,11 @@ def getting_region_register():
     address = request.json.get("address")
     country = request.json.get("country")
     city = request.json.get("city")
+    user_already_exist = User.query.filter_by(email=email).first()
+    region_already_exist = User_region.query.filter_by(email=email).first()
+    if user_already_exist or region_already_exist:
+        return jsonify({"error": "This email already exist"}), 400
+
 
 
     user_region = User_region(

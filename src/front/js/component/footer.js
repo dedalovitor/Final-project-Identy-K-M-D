@@ -5,35 +5,8 @@ import { Context } from "../store/appContext";
 export const Footer = () => {
   const { store, actions } = useContext(Context);
   return (
-    <nav className="navbar navbar-light bg-light">
-      <div className="container">
-        <Link to="/">
-          <span className="navbar-brand mb-0 h1">React Boilerplate</span>
-        </Link>
-        <div className="ml-auto">
-          {store.currentUserEmail ? (
-            <button
-              className="btn btn-danger"
-              onClick={async () => {
-                if (await actions.logout()) {
-                  Navigate("/");
-                }
-              }}
-            >
-              Logout
-            </button>
-          ) : (
-            <>
-              <Link to="/loginRegion">
-                <button className="btn btn-primary">Login</button>
-              </Link>
-              <Link to="/regionregister">
-                <button className="btn btn-success">Register</button>
-              </Link>
-            </>
-          )}
-        </div>
-      </div>
-    </nav>
+    <div className="navbar navbar-light bg-light">
+      FOOTER
+    </div>
   );
 };

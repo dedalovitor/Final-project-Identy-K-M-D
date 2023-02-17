@@ -7,7 +7,6 @@ import { Login } from "./pages/login";
 import injectContext from "./store/appContext";
 import { Register } from "./pages/register";
 import { Regionregister } from "./pages/regionregister";
-import { LoginRegion } from "./pages/loginRegion";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { Search } from "./component/search";
@@ -27,7 +26,6 @@ const Layout = () => {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<Login />} path="/login" />
-            <Route element={<LoginRegion />} path="/loginRegion" />
             <Route element={<Register />} path="/register" />
             <Route element={<Regionregister />} path="/regionregister" />
             <Route element={<h1>Not found!</h1>} />
