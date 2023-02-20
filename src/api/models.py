@@ -85,9 +85,9 @@ class Region(db.Model):
 
 
 class RestorationChoices(Enum):
-    bar= "bar"
-    chiringuito= "chiringuito"
-    restaurante= "restaurante"
+    bar= "Bar"
+    chiringuito= "Chiringuito"
+    restaurante= "Restaurante"
 
 
 class Restoration(db.Model):
@@ -108,12 +108,13 @@ class Restoration(db.Model):
             "resume": self.resume,
             "photo": self.photo,
             "logo": self.logo,
-            "type_bussiness": self.type_bussiness
+            "type_bussiness": self.type_bussiness.name
             # do not serialize the password, its a security breach
         }
 
     def __repr__(self):
         return f'{self.name}'
+
 class AccommodationChoices(Enum):
     hotel= "hotel"
     hostal= "hostal"
@@ -136,12 +137,13 @@ class Accommodation(db.Model):
             "resume": self.resume,
             "photo": self.photo,
             "logo": self.logo,
-            "type_bussiness": self.type_bussiness
+            "type_bussiness": self.type_bussiness.name
 
             # do not serialize the password, its a security breach
         }
     def __repr__(self):
         return f'{self.name}'
+        
 class Experience(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100),  nullable=False)
