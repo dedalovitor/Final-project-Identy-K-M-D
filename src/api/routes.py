@@ -159,7 +159,7 @@ def get_all_current_user_regions():
 def delete_region(region_id):
     user_id = get_jwt_identity()
     region = Region.query.get(region_id)
-    if region.user_id == user_id: 
+    if user_id == user_id: 
      db.session.delete(region)
      db.session.commit()
      return jsonify({ "response": "Region deleted correctly"}), 200
