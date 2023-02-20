@@ -141,7 +141,7 @@ def create_region():
     body_photo = request.json.get("photo")
     body_logo = request.json.get("logo")
   
-    new_region = Region(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo)
+    new_region = Region(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, user_region_id=user_id)
     db.session.add(new_region)
     db.session.commit()
     return jsonify({"response": "Region registered successfully"}), 200
@@ -151,7 +151,7 @@ def create_region():
 @jwt_required()
 def get_all_current_user_regions():
     user_id = get_jwt_identity()
-    regions = Region.query.filter_by(user_id= user_id)
+    regions = Region.query.filter_by(user_region_id= user_id)
     return jsonify({ "results": [x.serialize() for x in regions ]}), 200
 
 @api.route('/region/<int:region_id>', methods=['DELETE'])
