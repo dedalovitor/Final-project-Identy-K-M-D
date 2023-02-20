@@ -11,7 +11,7 @@ export const Navbar = () => {
           <span className="navbar-brand mb-0 h1"><img src="https://www.pc-nexus.net/diplomas/logo.png" alt="Indetity" width="200" height="120"></img></span>
         </Link>
         <div className="ml-auto">
-          {store.currentUserEmail ? (
+          {store.dataUser ? (
             <button
               className="btn btn-danger"
               onClick={async () => {
