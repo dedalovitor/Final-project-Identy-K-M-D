@@ -49,7 +49,9 @@ export const Home = () => {
   }, []);
 
   const getCurrentAccommodation = async () => {
-    const response = await fetch(process.env.BACKEND_URL + "/api/accommodations");
+    const response = await fetch(
+      process.env.BACKEND_URL + "/api/accommodations"
+    );
     const data = await response.json();
     if (response.ok) {
       setAccommodations(data.result);
@@ -124,7 +126,7 @@ export const Home = () => {
                   <div className="card-text text-center">
                     <img src={regions[indexRegion].logo} height="100px"></img>
                     <div>
-                      <Link to={`/${regions[indexRegion].name}`}>
+                      <Link to={`/detail/${regions[indexRegion].name}`}>
                         <button className="btn btn-primary mt-4">
                           Ver lugar
                         </button>
@@ -185,7 +187,10 @@ export const Home = () => {
                     {patrimonys[indexPatrimony].resume}
                   </p>
                   <div className="card-text text-center">
-                    <img src={patrimonys[indexPatrimony].logo} height="100px"></img>
+                    <img
+                      src={patrimonys[indexPatrimony].logo}
+                      height="100px"
+                    ></img>
                     <div>
                       <Link to={`/${regions[indexPatrimony].name}`}>
                         <button className="btn btn-primary mt-4">
@@ -212,12 +217,10 @@ export const Home = () => {
         ) : null}
       </div>
 
-  
-
       <div className="text-center">
         <h3>Donde comer bien</h3>
       </div>
-      
+
       <div className="row mx-5 p-4">
         {indexRestorations[0] > 0 ? (
           <button
@@ -251,7 +254,10 @@ export const Home = () => {
                     {restorations[indexRestoration].resume}
                   </p>
                   <div className="card-text text-center">
-                    <img src={restorations[indexRestoration].logo} height="100px"></img>
+                    <img
+                      src={restorations[indexRestoration].logo}
+                      height="100px"
+                    ></img>
                     <div>
                       <Link to={`/${restorations[indexRestoration].name}`}>
                         <button className="btn btn-primary mt-4">
@@ -265,7 +271,8 @@ export const Home = () => {
             </div>
           );
         })}
-        {indexRestorations[indexRestorations.length - 1] < restorations.length - 1 ? (
+        {indexRestorations[indexRestorations.length - 1] <
+        restorations.length - 1 ? (
           <button
             className="btn btn-primary nextRestoration"
             onClick={() => {
@@ -276,7 +283,6 @@ export const Home = () => {
             <h2>→</h2>
           </button>
         ) : null}
-          
       </div>
       <div className="text-center">
         <h3>Alojamientos con encanto</h3>
@@ -315,7 +321,10 @@ export const Home = () => {
                     {accommodations[indexAccommodation].resume}
                   </p>
                   <div className="card-text text-center">
-                    <img src={accommodations[indexAccommodation].logo} height="100px"></img>
+                    <img
+                      src={accommodations[indexAccommodation].logo}
+                      height="100px"
+                    ></img>
                     <div>
                       <Link to={`/${accommodations[indexAccommodation].name}`}>
                         <button className="btn btn-primary mt-4">
@@ -329,7 +338,8 @@ export const Home = () => {
             </div>
           );
         })}
-        {indexAccommodations[indexAccommodations.length - 1] < accommodations.length - 1 ? (
+        {indexAccommodations[indexAccommodations.length - 1] <
+        accommodations.length - 1 ? (
           <button
             className="btn btn-primary nextAccommodation"
             onClick={() => {

@@ -65,3 +65,22 @@
   width: 90px;
   height: 90px;
 }
+
+.imageValencia {
+  position: relative;
+  z-index: -1;
+  height: auto;
+  width: auto;
+}
+
+.imageLogo {
+  position: absolute;
+  width: 291px;
+  height: 100px;
+  left: 400px;
+  bottom: 235px;
+}
+
+.navbarFooter {
+  height: 800;
+}
