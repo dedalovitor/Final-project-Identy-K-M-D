@@ -108,7 +108,7 @@ class Restoration(db.Model):
             "resume": self.resume,
             "photo": self.photo,
             "logo": self.logo,
-            "type_bussiness": self.type_bussiness
+            "type_bussiness": self.type_bussiness.name
             # do not serialize the password, its a security breach
         }
 
@@ -168,7 +168,7 @@ class Experience(db.Model):
 
 class Patrimony(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100),  nullable=False)
+    name = db.Column(db.String(100), unique=True, nullable=False)
     resume = db.Column(db.Text, unique=False, nullable=False)
     photo = db.Column(db.String(255), nullable=False)
     logo = db.Column(db.String(255), nullable=False)

@@ -94,7 +94,7 @@ export const Profileuserregion = () => {
             },
             body: JSON.stringify(patrimony)
         });
-        if (response.ok) getCurrentUserRegions();
+        if (response.ok) getCurrentRegionPatrimony();
     }
 
     const deletePatrimony = async (id) => {
