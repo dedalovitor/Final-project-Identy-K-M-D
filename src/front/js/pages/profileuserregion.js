@@ -151,13 +151,11 @@ export const Profileuserregion = () => {
             <div className="row">
                 {regions.map((x) => {
                     return <div key={x.id} className="card" style={{ width: "18rem" }}>
-                        <img className="card-img-top" src="https://www.cdc.gov/healthypets/images/pets/angry-dog.jpg?_=03873" alt="Card image cap" />
+                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
+                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
                         <div className="card-body">
                             <p className="card-text"> name: {x.name} </p>
                             <p className="card-text"> resume: {x.resume} </p>
-                            <p className="card-text"> photo: {x.photo} </p>
-                            <p className="card-text"> logo: {x.logo} </p>
-
                         </div>
                         <div className="card-footer">
                             <button className="btn btn-danger" onClick={() => deleteRegion(x.id)}>DEL</button>
@@ -184,13 +182,11 @@ export const Profileuserregion = () => {
             <div className="row">
                 {patrimonys.map((x) => {
                     return <div key={x.id} className="card" style={{ width: "18rem" }}>
-                        <img className="card-img-top" src="https://www.cdc.gov/healthypets/images/pets/angry-dog.jpg?_=03873" alt="Card image cap" />
+                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
+                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
                         <div className="card-body">
                             <p className="card-text"> name: {x.name} </p>
                             <p className="card-text"> resume: {x.resume} </p>
-                            <p className="card-text"> photo: {x.photo} </p>
-                            <p className="card-text"> logo: {x.logo} </p>
-
                         </div>
                         <div className="card-footer">
                             <button className="btn btn-danger" onClick={() => deletePatrimony(x.id)}>DEL</button>
@@ -212,12 +208,11 @@ export const Profileuserregion = () => {
             <div className="row">
                 {restorations.map((x) => {
                     return <div key={x.id} className="card" style={{ width: "18rem" }}>
-                        <img className="card-img-top" src="https://www.cdc.gov/healthypets/images/pets/angry-dog.jpg?_=03873" alt="Card image cap" />
+                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
+                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
                         <div className="card-body">
                             <p className="card-text"> name: {x.name} </p>
                             <p className="card-text"> resume: {x.resume} </p>
-                            <p className="card-text"> photo: {x.photo} </p>
-                            <p className="card-text"> logo: {x.logo} </p>
                             <p className="card-text"> type bussiness: {x.type_bussiness} </p>
                         </div>
                         <div className="card-footer">
