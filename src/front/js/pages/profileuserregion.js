@@ -215,154 +215,215 @@ export const Profileuserregion = () => {
 
     return (
         <>
-            <div className="card COL-5 w-25 p-3">
-                {Object.keys(region).map((key, i) => {
-                    if (typeof region[key] != "boolean") {
-                        return <input placeholder={key} key={i} name={key} defaultValue={region[key]}
-                            onChange={(e) => setRegion({ ...region, [key]: e.target.value })}>
-                        </input>
-                    } else {
-                        return <input type="checkbox" key={i} name={key} checked={region[key]}
-                            onChange={(e) => setRegion({ ...region, [key]: e.target.checked })}>
-                        </input>
-                    }
+            <nav id="navbar-example2" className="navbar bg-info px-3 mb-3 d-flex justify-content-center">
+                <ul class="nav nav-pills h4">
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="#scrollspyHeading1">Tu región</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="#scrollspyHeading2">Patrimonio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="#scrollspyHeading3">Restauración</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="#scrollspyHeading4">Hostelería</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="#scrollspyHeading5">Experiencias</a>
+                    </li>
+                </ul>
+            </nav>
+            <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
+                <div className="container mt-5">
+                    <p className="h2" id="scrollspyHeading1">Tu región</p>
+                    <div className="row col-12">
+                        <div className="col-4">
+                            <div className="card">
+                                {Object.keys(region).map((key, i) => {
+                                    if (typeof region[key] != "boolean") {
+                                        return <input placeholder={key} key={i} name={key} defaultValue={region[key]}
+                                            onChange={(e) => setRegion({ ...region, [key]: e.target.value })}>
+                                        </input>
+                                    } else {
+                                        return <input type="checkbox" key={i} name={key} checked={region[key]}
+                                            onChange={(e) => setRegion({ ...region, [key]: e.target.checked })}>
+                                        </input>
+                                    }
 
-                })}
-                <button className="btn btn-success" onClick={() => createRegion()}>CREATE REGION</button>
-            </div>
-            <div className="row">
-                {regions.map((x) => {
-                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
-                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
-                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
-                        <div className="card-body">
-                            <p className="card-text"> name: {x.name} </p>
-                            <p className="card-text"> resume: {x.resume} </p>
+                                })}
+                                <button className="btn btn-success" onClick={() => createRegion()}>CREATE REGION</button>
+                            </div>
                         </div>
-                        <div className="card-footer">
-                            <button className="btn btn-danger" onClick={() => deleteRegion(x.id)}>DEL</button>
-                        </div>
-                    </div>
-                })}
+                        <div className="col-8">
+                            <div className="row">
+                                {regions.map((x) => {
+                                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
+                                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
+                                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
+                                        <div className="card-body">
+                                            <p className="card-text"> name: {x.name} </p>
+                                            <p className="card-text"> resume: {x.resume} </p>
+                                        </div>
+                                        <div className="card-footer">
+                                            <button className="btn btn-danger" onClick={() => deleteRegion(x.id)}>DEL</button>
+                                        </div>
+                                    </div>
+                                })}
 
-            </div>
-            <div className="card COL-5 w-25 p-3">
-                {Object.keys(patrimony).map((key, i) => {
-                    if (typeof patrimony[key] != "boolean") {
-                        return <input placeholder={key} key={i} name={key} defaultValue={patrimony[key]}
-                            onChange={(e) => setPatrimony({ ...patrimony, [key]: e.target.value })}>
-                        </input>
-                    } else {
-                        return <input type="checkbox" key={i} name={key} checked={patrimony[key]}
-                            onChange={(e) => setPatrimony({ ...patrimony, [key]: e.target.checked })}>
-                        </input>
-                    }
-
-                })}
-                <button className="btn btn-success" onClick={() => createPatrimony()}>CREATE PATRIMONY</button>
-            </div>
-            <div className="row">
-                {patrimonys.map((x) => {
-                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
-                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
-                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
-                        <div className="card-body">
-                            <p className="card-text"> name: {x.name} </p>
-                            <p className="card-text"> resume: {x.resume} </p>
-                        </div>
-                        <div className="card-footer">
-                            <button className="btn btn-danger" onClick={() => deletePatrimony(x.id)}>DEL</button>
-                        </div>
-                    </div>
-                })}
-
-            </div>
-            <div className="card COL-5 w-25 p-3">
-                {Object.keys(restoration).map((key, i) => {
-                    return <input placeholder={key} key={i} name={key} defaultValue={restoration[key]}
-                        onChange={(e) => setRestoration({ ...restoration, [key]: e.target.value })}>
-                    </input>
-                }
-
-                )}
-                <button className="btn btn-success" onClick={() => createRestoration()}>CREATE RESTORATION</button>
-            </div>
-            <div className="row">
-                {restorations.map((x) => {
-                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
-                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
-                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
-                        <div className="card-body">
-                            <p className="card-text"> name: {x.name} </p>
-                            <p className="card-text"> resume: {x.resume} </p>
-                            <p className="card-text"> type bussiness: {x.type_bussiness} </p>
-                        </div>
-                        <div className="card-footer">
-                            <button className="btn btn-danger" onClick={() => deleteRestoration(x.id)}>DEL</button>
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div className="container mt-5">
+                    <p className="h2" id="scrollspyHeading2">Tu patrimonio</p>
+                    <div className="row col-12">
+                        <div className="col-4">
+                            <div className="card">
+                                {Object.keys(patrimony).map((key, i) => {
+                                    if (typeof patrimony[key] != "boolean") {
+                                        return <input placeholder={key} key={i} name={key} defaultValue={patrimony[key]}
+                                            onChange={(e) => setPatrimony({ ...patrimony, [key]: e.target.value })}>
+                                        </input>
+                                    } else {
+                                        return <input type="checkbox" key={i} name={key} checked={patrimony[key]}
+                                            onChange={(e) => setPatrimony({ ...patrimony, [key]: e.target.checked })}>
+                                        </input>
+                                    }
 
-
-                })}
-
-            </div>
-            <div className="card COL-5 w-25 p-3">
-                {Object.keys(accommodation).map((key, i) => {
-                    return <input placeholder={key} key={i} name={key} defaultValue={accommodation[key]}
-                        onChange={(e) => setAccommodation({ ...accommodation, [key]: e.target.value })}>
-                    </input>
-                }
-
-                )}
-                <button className="btn btn-success" onClick={() => createAccommodation()}>CREATE ACCOMMODATION</button>
-            </div>
-            <div className="row">
-                {accommodations.map((x) => {
-                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
-                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
-                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
-                        <div className="card-body">
-                            <p className="card-text"> name: {x.name} </p>
-                            <p className="card-text"> resume: {x.resume} </p>
-                            <p className="card-text"> type bussiness: {x.type_bussiness} </p>
+                                })}
+                                <button className="btn btn-success" onClick={() => createPatrimony()}>CREATE PATRIMONY</button>
+                            </div>
                         </div>
-                        <div className="card-footer">
-                            <button className="btn btn-danger" onClick={() => deleteAccommodation(x.id)}>DEL</button>
-                        </div>
-                    </div>
-
-
-                })}
-
-            </div>
-
-            <div className="card COL-5 w-25 p-3">
-                {Object.keys(experience).map((key, i) => {
-                    return <input placeholder={key} key={i} name={key} defaultValue={experience[key]}
-                        onChange={(e) => setExperience({ ...experience, [key]: e.target.value })}>
-                    </input>
-                }
-
-                )}
-                <button className="btn btn-success" onClick={() => createExperience()}>CREATE EXPERIENCE</button>
-            </div>
-            <div className="row">
-                {experiences.map((x) => {
-                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
-                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
-                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
-                        <div className="card-body">
-                            <p className="card-text"> name: {x.name} </p>
-                            <p className="card-text"> resume: {x.resume} </p>
-                        </div>
-                        <div className="card-footer">
-                            <button className="btn btn-danger" onClick={() => deleteExperience(x.id)}>DEL</button>
+                        <div className="col-8">
+                            <div className="row">
+                                {patrimonys.map((x) => {
+                                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
+                                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
+                                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
+                                        <div className="card-body">
+                                            <p className="card-text"> name: {x.name} </p>
+                                            <p className="card-text"> resume: {x.resume} </p>
+                                        </div>
+                                        <div className="card-footer">
+                                            <button className="btn btn-danger" onClick={() => deletePatrimony(x.id)}>DEL</button>
+                                        </div>
+                                    </div>
+                                })}
+                            </div>
                         </div>
                     </div>
+                </div>
+                <div className="container mt-5">
+                    <p className="h2" id="scrollspyHeading3">Tu restauración</p>
+                    <div className="row col-12">
+                        <div className="col-4">
+                            <div className="card">
+                                {Object.keys(restoration).map((key, i) => {
+                                    return <input placeholder={key} key={i} name={key} defaultValue={restoration[key]}
+                                        onChange={(e) => setRestoration({ ...restoration, [key]: e.target.value })}>
+                                    </input>
+                                })}
+                                <button className="btn btn-success" onClick={() => createRestoration()}>CREATE RESTORATION</button>
+                            </div>
+                        </div>
+                        <div className="col-8">
+                            <div className="row">
+                                {restorations.map((x) => {
+                                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
+                                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
+                                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
+                                        <div className="card-body">
+                                            <p className="card-text"> name: {x.name} </p>
+                                            <p className="card-text"> resume: {x.resume} </p>
+                                            <p className="card-text"> type bussiness: {x.type_bussiness} </p>
+                                        </div>
+                                        <div className="card-footer">
+                                            <button className="btn btn-danger" onClick={() => deleteRestoration(x.id)}>DEL</button>
+                                        </div>
+                                    </div>
+                                })}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="container mt-5">
+                    <p className="h2" id="scrollspyHeading4">Tu hostelería</p>
+                    <div className="row col-12">
+                        <div className="col-4">
+                            <div className="card">
+                                {Object.keys(accommodation).map((key, i) => {
+                                    return <input placeholder={key} key={i} name={key} defaultValue={accommodation[key]}
+                                        onChange={(e) => setAccommodation({ ...accommodation, [key]: e.target.value })}>
+                                    </input>
+                                }
+
+                                )}
+                                <button className="btn btn-success" onClick={() => createAccommodation()}>CREATE ACCOMMODATION</button>
+                            </div>
+                        </div>
+                        <div className="col-8">
+                            <div className="row">
+                                {accommodations.map((x) => {
+                                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
+                                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
+                                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
+                                        <div className="card-body">
+                                            <p className="card-text"> name: {x.name} </p>
+                                            <p className="card-text"> resume: {x.resume} </p>
+                                            <p className="card-text"> type bussiness: {x.type_bussiness} </p>
+                                        </div>
+                                        <div className="card-footer">
+                                            <button className="btn btn-danger" onClick={() => deleteAccommodation(x.id)}>DEL</button>
+                                        </div>
+                                    </div>
 
 
-                })}
+                                })}
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="container mt-5">
+                    <p className="h2" id="scrollspyHeading5">Tus experiencias</p>
+                    <div className="row col-12">
+                        <div className="col-4">
+                            <div className="card">
+                                {Object.keys(experience).map((key, i) => {
+                                    return <input placeholder={key} key={i} name={key} defaultValue={experience[key]}
+                                        onChange={(e) => setExperience({ ...experience, [key]: e.target.value })}>
+                                    </input>
+                                }
+
+                                )}
+                                <button className="btn btn-success" onClick={() => createExperience()}>CREATE EXPERIENCE</button>
+                            </div>
+                        </div>
+                        <div className="col-8">
+                            <div className="row">
+                                {experiences.map((x) => {
+                                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
+                                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
+                                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
+                                        <div className="card-body">
+                                            <p className="card-text"> name: {x.name} </p>
+                                            <p className="card-text"> resume: {x.resume} </p>
+                                        </div>
+                                        <div className="card-footer">
+                                            <button className="btn btn-danger" onClick={() => deleteExperience(x.id)}>DEL</button>
+                                        </div>
+                                    </div>
+
+
+                                })}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     );
