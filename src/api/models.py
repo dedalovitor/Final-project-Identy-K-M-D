@@ -88,6 +88,7 @@ class RestorationChoices(Enum):
     bar= "bar"
     chiringuito= "chiringuito"
     restaurante= "restaurante"
+    pub= "pub / discoteca"
 
 
 class Restoration(db.Model):
@@ -118,6 +119,7 @@ class AccommodationChoices(Enum):
     hotel= "hotel"
     hostal= "hostal"
     albergue= "albergue"
+    casa_rural= "casa rural"
 
 class Accommodation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -136,7 +138,7 @@ class Accommodation(db.Model):
             "resume": self.resume,
             "photo": self.photo,
             "logo": self.logo,
-            "type_bussiness": self.type_bussiness
+            "type_bussiness": self.type_bussiness.name
 
             # do not serialize the password, its a security breach
         }
