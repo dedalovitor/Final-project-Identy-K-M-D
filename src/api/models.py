@@ -144,6 +144,13 @@ class Accommodation(db.Model):
         }
     def __repr__(self):
         return f'{self.name}'
+
+class ExperienceChoices(Enum):
+    activo= "turismo activo"
+    gastronomico= "turismo gastronómico"
+    historico= "turismo histórico"
+    cultural= "turismo cultural"
+
 class Experience(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100),  nullable=False)
