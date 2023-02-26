@@ -175,6 +175,12 @@ class Experience(db.Model):
     def __repr__(self):
         return f'{self.name}'
 
+class PatrimonyChoices(Enum):
+    natural= "patrimonio natural"
+    cultural= "patrimonio cultural"
+    historico= "patrimonio histórico"
+    fiestas= "fiestas y eventos"
+
 class Patrimony(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True, nullable=False)
