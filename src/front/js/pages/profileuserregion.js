@@ -9,7 +9,7 @@ export const Profileuserregion = () => {
     const [regions, setRegions] = useState([]);
     const [patrimony, setPatrimony] = useState({ name: "", resume: "", photo: "", logo: "" });
     const [patrimonys, setPatrimonys] = useState([]);
-    const [restoration, setRestoration] = useState({ name: "", resume: "", photo: "", logo: "" });
+    const [restoration, setRestoration] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "" });
     const [restorations, setRestorations] = useState([]);
 
 
@@ -201,17 +201,12 @@ export const Profileuserregion = () => {
             </div>
             <div className="card COL-5 w-25 p-3">
                 {Object.keys(restoration).map((key, i) => {
-                    if (typeof restoration[key] != "boolean") {
-                        return <input placeholder={key} key={i} name={key} defaultValue={restoration[key]}
-                            onChange={(e) => setRestoration({ ...restoration, [key]: e.target.value })}>
-                        </input>
-                    } else {
-                        return <input type="checkbox" key={i} name={key} checked={restoration[key]}
-                            onChange={(e) => setRestoration({ ...patrimony, [key]: e.target.checked })}>
-                        </input>
-                    }
+                    return <input placeholder={key} key={i} name={key} defaultValue={restoration[key]}
+                        onChange={(e) => setRestoration({ ...restoration, [key]: e.target.value })}>
+                    </input>
+                }
 
-                })}
+                )}
                 <button className="btn btn-success" onClick={() => createRestoration()}>CREATE RESTORATION</button>
             </div>
             <div className="row">
@@ -223,6 +218,7 @@ export const Profileuserregion = () => {
                             <p className="card-text"> resume: {x.resume} </p>
                             <p className="card-text"> photo: {x.photo} </p>
                             <p className="card-text"> logo: {x.logo} </p>
+                            <p className="card-text"> type bussiness: {x.type_bussiness} </p>
                         </div>
                         <div className="card-footer">
                             <button className="btn btn-danger" onClick={() => deleteRestoration(x.id)}>DEL</button>
