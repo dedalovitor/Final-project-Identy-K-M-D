@@ -11,6 +11,10 @@ export const Profileuserregion = () => {
     const [patrimonys, setPatrimonys] = useState([]);
     const [restoration, setRestoration] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "" });
     const [restorations, setRestorations] = useState([]);
+    const [accommodation, setAccommodation] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "" });
+    const [accommodations, setAccommodations] = useState([]);
+    const [experience, setExperience] = useState({ name: "", resume: "", photo: "", logo: "" });
+    const [experiences, setExperiences] = useState([]);
 
 
     useEffect(() => {
@@ -23,6 +27,14 @@ export const Profileuserregion = () => {
 
     useEffect(() => {
         getCurrentRegionRestoration();
+    }, [])
+
+    useEffect(() => {
+        getCurrentRegionAccommodation();
+    }, [])
+
+    useEffect(() => {
+        getCurrentRegionExperience();
     }, [])
 
     const getCurrentUserRegions = async () => {
@@ -60,6 +72,31 @@ export const Profileuserregion = () => {
         const data = await response.json();
         setRestorations(data.results);
     }
+
+    const getCurrentRegionAccommodation = async () => {
+        const response = await fetch(process.env.BACKEND_URL + "/api/accommodations", {
+            method: "GET",
+            headers: {
+                "content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        });
+        const data = await response.json();
+        setAccommodations(data.results);
+    }
+
+    const getCurrentRegionExperience = async () => {
+        const response = await fetch(process.env.BACKEND_URL + "/api/experiences", {
+            method: "GET",
+            headers: {
+                "content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        });
+        const data = await response.json();
+        setExperiences(data.results);
+    }
+
 
     const createRegion = async () => {
         const response = await fetch(process.env.BACKEND_URL + "/api/region", {
@@ -129,6 +166,51 @@ export const Profileuserregion = () => {
             }
         });
         if (response.ok) getCurrentRegionRestoration();
+    }
+    const createAccommodation = async () => {
+        const response = await fetch(process.env.BACKEND_URL + "/api/accommodation", {
+            method: "POST",
+            headers: {
+                "content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+            body: JSON.stringify(accommodation)
+        });
+        if (response.ok) getCurrentRegionAccommodation();
+    }
+
+    const deleteAccommodation = async (id) => {
+        const response = await fetch(process.env.BACKEND_URL + "/api/accommodation/" + id, {
+            method: "DELETE",
+            headers: {
+                "content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        });
+        if (response.ok) getCurrentRegionAccommodation();
+    }
+
+    const createExperience = async () => {
+        const response = await fetch(process.env.BACKEND_URL + "/api/experience", {
+            method: "POST",
+            headers: {
+                "content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            },
+            body: JSON.stringify(experience)
+        });
+        if (response.ok) getCurrentRegionExperience();
+    }
+
+    const deleteExperience = async (id) => {
+        const response = await fetch(process.env.BACKEND_URL + "/api/experience/" + id, {
+            method: "DELETE",
+            headers: {
+                "content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        });
+        if (response.ok) getCurrentRegionExperience();
     }
 
     return (
@@ -219,6 +301,66 @@ export const Profileuserregion = () => {
                             <button className="btn btn-danger" onClick={() => deleteRestoration(x.id)}>DEL</button>
                         </div>
                     </div>
+
+
+                })}
+
+            </div>
+            <div className="card COL-5 w-25 p-3">
+                {Object.keys(accommodation).map((key, i) => {
+                    return <input placeholder={key} key={i} name={key} defaultValue={accommodation[key]}
+                        onChange={(e) => setAccommodation({ ...accommodation, [key]: e.target.value })}>
+                    </input>
+                }
+
+                )}
+                <button className="btn btn-success" onClick={() => createAccommodation()}>CREATE ACCOMMODATION</button>
+            </div>
+            <div className="row">
+                {accommodations.map((x) => {
+                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
+                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
+                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
+                        <div className="card-body">
+                            <p className="card-text"> name: {x.name} </p>
+                            <p className="card-text"> resume: {x.resume} </p>
+                            <p className="card-text"> type bussiness: {x.type_bussiness} </p>
+                        </div>
+                        <div className="card-footer">
+                            <button className="btn btn-danger" onClick={() => deleteAccommodation(x.id)}>DEL</button>
+                        </div>
+                    </div>
+
+
+                })}
+
+            </div>
+
+            <div className="card COL-5 w-25 p-3">
+                {Object.keys(experience).map((key, i) => {
+                    return <input placeholder={key} key={i} name={key} defaultValue={experience[key]}
+                        onChange={(e) => setExperience({ ...experience, [key]: e.target.value })}>
+                    </input>
+                }
+
+                )}
+                <button className="btn btn-success" onClick={() => createExperience()}>CREATE EXPERIENCE</button>
+            </div>
+            <div className="row">
+                {experiences.map((x) => {
+                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
+                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
+                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
+                        <div className="card-body">
+                            <p className="card-text"> name: {x.name} </p>
+                            <p className="card-text"> resume: {x.resume} </p>
+                        </div>
+                        <div className="card-footer">
+                            <button className="btn btn-danger" onClick={() => deleteExperience(x.id)}>DEL</button>
+                        </div>
+                    </div>
+
+
                 })}
 
             </div>

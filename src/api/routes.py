@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Region, Restoration, User_region, Patrimony
+from api.models import db, User, Region, Restoration, User_region, Patrimony, Accommodation, Experience
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
@@ -228,7 +228,74 @@ def delete_restoration(region_id):
     user_id = get_jwt_identity()
     restoration = Restoration.query.get(region_id)
     if user_id == user_id: 
-     db.session.delete(patrimony)
+     db.session.delete(restoration)
      db.session.commit()
-     return jsonify({ "response": "Patrimony deleted correctly"}), 200
-     return jsonify({ "response": "Patrimony not deleted"}), 400
+     return jsonify({ "response": "Restoration deleted correctly"}), 200
+     return jsonify({ "response": "Restoration not deleted"}), 400
+
+@api.route('/accommodation', methods=['POST'])
+@jwt_required()
+def create_accommodation():
+    region_id = get_jwt_identity()
+    body_name = request.json.get("name")
+    body_resume = request.json.get("resume")
+    body_photo = request.json.get("photo")
+    body_logo = request.json.get("logo")
+    body_type_bussiness = request.json.get("type_bussiness")
+  
+    new_accommodation = Accommodation(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, type_bussiness=body_type_bussiness, region_id=region_id)
+    db.session.add(new_accommodation)
+    db.session.commit()
+    return jsonify({"response": "Accommodation registered successfully"}), 200
+
+
+@api.route('/accommodations', methods=['GET'])
+@jwt_required()
+def get_current_region_accommodations():
+    region_id = get_jwt_identity()
+    accommodations = Accommodation.query.filter_by(region_id= region_id)
+    return jsonify({ "results": [x.serialize() for x in accommodations]}), 200
+
+@api.route('/accommodation/<int:region_id>', methods=['DELETE'])
+@jwt_required()
+def delete_accommodation(region_id):
+    user_id = get_jwt_identity()
+    accommodation = Accommodation.query.get(region_id)
+    if user_id == user_id: 
+     db.session.delete(accommodation)
+     db.session.commit()
+     return jsonify({ "response": "Accommodation deleted correctly"}), 200
+     return jsonify({ "response": "Accommodation not deleted"}), 400
+
+@api.route('/experience', methods=['POST'])
+@jwt_required()
+def create_experience():
+    region_id = get_jwt_identity()
+    body_name = request.json.get("name")
+    body_resume = request.json.get("resume")
+    body_photo = request.json.get("photo")
+    body_logo = request.json.get("logo")
+  
+    new_experience = Experience(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, region_id=region_id)
+    db.session.add(new_experience)
+    db.session.commit()
+    return jsonify({"response": "Experience registered successfully"}), 200
+
+
+@api.route('/experiences', methods=['GET'])
+@jwt_required()
+def get_current_region_experiences():
+    region_id = get_jwt_identity()
+    experiences = Experience.query.filter_by(region_id= region_id)
+    return jsonify({ "results": [x.serialize() for x in experiences]}), 200
+
+@api.route('/experience/<int:region_id>', methods=['DELETE'])
+@jwt_required()
+def delete_experience(region_id):
+    user_id = get_jwt_identity()
+    experience = Experience.query.get(region_id)
+    if user_id == user_id: 
+     db.session.delete(experience)
+     db.session.commit()
+     return jsonify({ "response": "Experience deleted correctly"}), 200
+     return jsonify({ "response": "Experience not deleted"}), 400
