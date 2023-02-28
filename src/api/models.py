@@ -115,6 +115,7 @@ class Restoration(db.Model):
 
     def __repr__(self):
         return f'{self.name}'
+
 class AccommodationChoices(Enum):
     hotel= "hotel"
     hostal= "hostal"
