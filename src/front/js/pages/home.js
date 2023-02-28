@@ -72,11 +72,6 @@ export const Home = () => {
 
   return (
     <>
-      <div className="container">
-        {store.currentUserEmail
-          ? "Hola usuario" + store.currentUserEmail
-          : "Please register or login"}
-      </div>
       <div
         className="container h-25 d-flex justify-content-center align-items-center"
         style={{
