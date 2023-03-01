@@ -32,7 +32,7 @@ const Layout = () => {
             <Route element={<Login />} path="/login" />
             <Route element={<Register />} path="/register" />
             <Route element={<Regionregister />} path="/regionregister" />
-            <Route element={<CityDetail />} path="/detail/:city" />
+            <Route element={<CityDetail />} path="/region/:city" />
             <Route element={<h1>Not found!</h1>} />
             <Route element={<Footer />} path="/" />
           </Routes>
