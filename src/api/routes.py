@@ -72,6 +72,23 @@ def get_regions():
     regions = Region.query.all()
     return jsonify({"result": [x.serialize()for x in regions]}), 200
 
+# @api.route('/regions/<int:region_id>', methods=['GET'])
+# def get_regions_by_id(region_id):
+#     regions = Region.query.filter_by(region_id=region_id)
+#     return jsonify({"result": [x.serialize()for x in regions]}), 200
+
+
+@api.route('/regions_with_patrimony', methods=['GET'])
+def get_regions_with_patrimony():
+    regions = Region.query.all()
+    regions_with_patrimony= []
+    for region in regions:
+        region_serialize=region.serialize()
+        region_serialize["patrimonys"] = [x.serialize() for x in region.patrimonies]
+        regions_with_patrimony.append(region_serialize)
+    return jsonify({"result": regions_with_patrimony}), 200
+
+
 @api.route('/restorations', methods=['GET'])
 def get_restorations():
     restorations = Restoration.query.all()
@@ -81,6 +98,7 @@ def get_restorations():
 def get_patrimonys():
     patrimonys = Patrimony.query.all()
     return jsonify({"result": [x.serialize()for x in patrimonys]}), 200
+
 
 @api.route('/accommodations', methods=['GET'])
 def get_accommodations():

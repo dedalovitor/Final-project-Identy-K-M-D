@@ -80,9 +80,24 @@ class Region(db.Model):
 
             # do not serialize the password, its a security breach
         }
+    
     def __repr__(self):
         return f'{self.name}'
 
+    def inforegion(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "resume": self.resume,
+            "photo": self.photo,
+            "logo": self.logo,
+            "restorations": [x.serialize()for x in self.restorations],
+            "accomodation": [x.serialize()for x in self.accomodation],
+            "experiences": [x.serialize()for x in self.experiences],
+            "patrimonies": [x.serialize()for x in self.patrimonies]
+
+            # do not serialize the password, its a security breach
+        }
 
 class RestorationChoices(Enum):
     bar= "Bar"

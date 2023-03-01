@@ -1,6 +1,6 @@
 .nextRegion {
   position: absolute;
-  top: 37%;
+  top: 50%;
   right: 0;
   z-index: 1000;
   width: 90px;
@@ -9,7 +9,7 @@
 
 .previousRegion {
   position: absolute;
-  top: 37%;
+  top: 50%;
   left: 0;
   z-index: 1000;
   width: 90px;
@@ -17,7 +17,7 @@
 }
 .nextPatrimony {
   position: absolute;
-  top: 97%;
+  top: 50%;
   right: 0;
   z-index: 1000;
   width: 90px;
@@ -26,7 +26,7 @@
 
 .previousPatrimony {
   position: absolute;
-  top: 97%;
+  top: 50%;
   left: 0;
   z-index: 1000;
   width: 90px;
@@ -35,7 +35,7 @@
 
 .nextRestoration {
   position: absolute;
-  top: 165%;
+  top: 50%;
   right: 0;
   z-index: 1000;
   width: 90px;
@@ -43,7 +43,7 @@
 }
 .previousRestoration {
   position: absolute;
-  top: 165%;
+  top: 50%;
   left: 0;
   z-index: 1000;
   width: 90px;
@@ -51,7 +51,7 @@
 }
 .nextAccommodation {
   position: absolute;
-  top: 230%;
+  top: 50%;
   right: 0;
   z-index: 1000;
   width: 90px;
@@ -59,9 +59,49 @@
 }
 .previousAccommodation {
   position: absolute;
-  top: 230%;
+  top: 50%;
   left: 0;
   z-index: 1000;
   width: 90px;
   height: 90px;
+}
+.nextExperience {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  z-index: 1000;
+  width: 90px;
+  height: 90px;
+}
+.previousExperience {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 1000;
+  width: 90px;
+  height: 90px;
+}
+
+.custom-search {
+  background-image: url("https://images.freeimages.com/images/large-previews/d18/nice-landscape-1058202.jpg");
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 600px;
+}
+
+.small-search-input {
+  width: 800px;
+  text-align: center;
+}
+.custom-discover {
+  background-image: url("https://www.turismodeobservacion.com/media/fotografias/barriopalacio-paisaje-rural-en-valdeolea-44617-xl.jpg");
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 600px;
+}
+.card-row{
+  position: relative;
+
 }

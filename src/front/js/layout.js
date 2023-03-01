@@ -4,6 +4,7 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
 import { Login } from "./pages/login";
+import { DiscoRegion } from "./pages/discoregion";
 import injectContext from "./store/appContext";
 import { Register } from "./pages/register";
 import { Regionregister } from "./pages/regionregister";
@@ -29,6 +30,7 @@ const Layout = () => {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<Login />} path="/login" />
+            <Route element={<DiscoRegion />} path="/discoregion" />
             <Route element={<Register />} path="/register" />
             <Route element={<Regionregister />} path="/regionregister" />
             <Route element={<h1>Not found!</h1>} />

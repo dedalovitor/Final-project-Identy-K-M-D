@@ -2,10 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Search } from "../component/search";
+import { Discover } from "../component/discoverregions";
 import { CardRegion } from "../component/cardregion";
 import { CardRestoration } from "../component/cardrestoration";
 import { CardPatrimony } from "../component/cardpatrimony";
 import { CardAccommodation } from "../component/cardaccommodation";
+import { CardExperience } from "../component/cardexperience";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -17,6 +19,8 @@ export const Home = () => {
   const [indexPatrimonys, setIndexPatrimonys] = useState([]);
   const [accommodations, setAccommodations] = useState([]);
   const [indexAccommodations, setIndexAccommodations] = useState([]);
+  const [experiences, setExperiences] = useState([]);
+  const [indexExperiences, setIndexExperiences] = useState([]);
 
   useEffect(() => {
     getCurrentRegion();
@@ -70,6 +74,19 @@ export const Home = () => {
     }
   };
 
+  useEffect(() => {
+    getCurrentExperience();
+  }, []);
+
+  const getCurrentExperience = async () => {
+    const response = await fetch(process.env.BACKEND_URL + "/api/experiences");
+    const data = await response.json();
+    if (response.ok) {
+      setExperiences(data.result);
+      setIndexExperiences([0, 1, 2, 3]);
+    }
+  };
+
   return (
     <>
       <div className="container">
@@ -84,12 +101,24 @@ export const Home = () => {
           backgroundSize: "cover",
         }}
       >
-        <Search />
-      </div>
+        <div>
+        <button type="button" className="btn btn-outline-primary m-2">Alojamientos</button>
+        <button type="button" className="btn btn-outline-dark m-2">Cosas que hacer</button>
+        <button type="button" className="btn btn-outline-success m-2">Restaurantes/Gastronomia</button>
+        <button type="button" className="btn btn-outline-danger m-2">Lugares que Visitar/Patrimonio</button>
+        <button type="button" className="btn btn-outline-warning m-2">Visitas Guiadas</button>
+        </div>
+        </div>
+        <div className="row mx-5 p-4">
+       <Search />
+        </div>
+        <div className="row mx-5 p-4">
+        <Discover />
+        </div>
       <div className="text-center">
         <h3>Ciudades con encanto</h3>
       </div>
-      <div className="row mx-5 p-4">
+      <div className="row mx-5 p-4 card-row">
         {indexRegions[0] > 0 ? (
           <button
             className="btn btn-primary previousRegion"
@@ -118,9 +147,6 @@ export const Home = () => {
                   <h5 className="card-title text-center">
                     {regions[indexRegion].name}
                   </h5>
-                  <p className="card-text text-center">
-                    {regions[indexRegion].resume}
-                  </p>
                   <div className="card-text text-center">
                     <img src={regions[indexRegion].logo} height="100px"></img>
                     <div>
@@ -152,7 +178,7 @@ export const Home = () => {
         <h3>Patrimonio natural, arquitectónico, histórico que descubrir</h3>
       </div>
 
-      <div className="row mx-5 p-4">
+      <div className="row mx-5 p-4 card-row">
         {indexPatrimonys[0] > 0 ? (
           <button
             className="btn btn-primary previousPatrimony"
@@ -181,13 +207,10 @@ export const Home = () => {
                   <h5 className="card-title text-center">
                     {patrimonys[indexPatrimony].name}
                   </h5>
-                  <p className="card-text text-center">
-                    {patrimonys[indexPatrimony].resume}
-                  </p>
-                  <div className="card-text text-center">
+                 <div className="card-text text-center">
                     <img src={patrimonys[indexPatrimony].logo} height="100px"></img>
                     <div>
-                      <Link to={`/${regions[indexPatrimony].name}`}>
+                      <Link to={`/${patrimonys[indexPatrimony].name}`}>
                         <button className="btn btn-primary mt-4">
                           Ver lugar
                         </button>
@@ -218,7 +241,7 @@ export const Home = () => {
         <h3>Donde comer bien</h3>
       </div>
       
-      <div className="row mx-5 p-4">
+      <div className="row mx-5 p-4 card-row">
         {indexRestorations[0] > 0 ? (
           <button
             className="btn btn-primary previousRestoration"
@@ -248,7 +271,7 @@ export const Home = () => {
                     {restorations[indexRestoration].name}
                   </h5>
                   <p className="card-text text-center">
-                    {restorations[indexRestoration].resume}
+                    {restorations[indexRestoration].type_bussiness}
                   </p>
                   <div className="card-text text-center">
                     <img src={restorations[indexRestoration].logo} height="100px"></img>
@@ -282,7 +305,7 @@ export const Home = () => {
         <h3>Alojamientos con encanto</h3>
       </div>
 
-      <div className="row mx-5 p-4">
+      <div className="row mx-5 p-4 card-row">
         {indexAccommodations[0] > 0 ? (
           <button
             className="btn btn-primary previousAccommodation"
@@ -312,7 +335,7 @@ export const Home = () => {
                     {accommodations[indexAccommodation].name}
                   </h5>
                   <p className="card-text text-center">
-                    {accommodations[indexAccommodation].resume}
+                    {accommodations[indexAccommodation].type_bussiness}
                   </p>
                   <div className="card-text text-center">
                     <img src={accommodations[indexAccommodation].logo} height="100px"></img>
@@ -341,6 +364,67 @@ export const Home = () => {
           </button>
         ) : null}
       </div>
+      <div className="text-center">
+        <h3>Visitas / Experiencias Guiadas</h3>
+      </div>
+
+      <div className="row mx-5 p-4 card-row">
+        {indexExperiences[0] > 0 ? (
+          <button
+            className="btn btn-primary previousExperience"
+            onClick={() => {
+              const newIndexExperience = [...indexExperiences];
+              setIndexExperiences(newIndexExperience.map((x) => x - 1));
+            }}
+          >
+            <h2>←</h2>
+          </button>
+        ) : null}
+        {indexExperiences.map((indexExperience) => {
+          return (
+            <div
+              key={experiences[indexExperience].id}
+              className="col-2 col-sm-6 col-md-4 col-lg-3"
+            >
+              <div className="card">
+                <img
+                  src={experiences[indexExperience].photo}
+                  height="300px"
+                  className="card-img-top"
+                  alt={experiences[indexExperience].name}
+                />
+                <div className="card-body">
+                  <h5 className="card-title text-center">
+                    {experiences[indexExperience].name}
+                  </h5>
+                  <div className="card-text text-center">
+                    <img src={experiences[indexExperience].logo} height="100px"></img>
+                    <div>
+                      <Link to={`/${experiences[indexExperience].name}`}>
+                        <button className="btn btn-primary mt-4">
+                          Ver lugar
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+        {indexExperiences[indexExperiences.length - 1] < experiences.length - 1 ? (
+          <button
+            className="btn btn-primary nextExperience"
+            onClick={() => {
+              const newIndexExperience = [...indexExperiences];
+              setIndexExperiences(newIndexExperience.map((x) => x + 1));
+            }}
+          >
+            <h2>→</h2>
+          </button>
+        ) : null}
+      </div> 
+      
     </>
   );
 };
