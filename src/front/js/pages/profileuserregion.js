@@ -38,7 +38,7 @@ export const Profileuserregion = () => {
     }, [])
 
     const getCurrentUserRegions = async () => {
-        const response = await fetch(process.env.BACKEND_URL + "/api/regions", {
+        const response = await fetch(process.env.BACKEND_URL + "/api/regions_user", {
             method: "GET",
             headers: {
                 "content-Type": "application/json",
@@ -50,7 +50,7 @@ export const Profileuserregion = () => {
     }
 
     const getCurrentRegionPatrimony = async () => {
-        const response = await fetch(process.env.BACKEND_URL + "/api/patrimonys", {
+        const response = await fetch(process.env.BACKEND_URL + "/api/patrimonys_user", {
             method: "GET",
             headers: {
                 "content-Type": "application/json",
@@ -62,7 +62,7 @@ export const Profileuserregion = () => {
     }
 
     const getCurrentRegionRestoration = async () => {
-        const response = await fetch(process.env.BACKEND_URL + "/api/restorations", {
+        const response = await fetch(process.env.BACKEND_URL + "/api/restorations_user", {
             method: "GET",
             headers: {
                 "content-Type": "application/json",
@@ -74,7 +74,7 @@ export const Profileuserregion = () => {
     }
 
     const getCurrentRegionAccommodation = async () => {
-        const response = await fetch(process.env.BACKEND_URL + "/api/accommodations", {
+        const response = await fetch(process.env.BACKEND_URL + "/api/accommodations_user", {
             method: "GET",
             headers: {
                 "content-Type": "application/json",
@@ -86,7 +86,7 @@ export const Profileuserregion = () => {
     }
 
     const getCurrentRegionExperience = async () => {
-        const response = await fetch(process.env.BACKEND_URL + "/api/experiences", {
+        const response = await fetch(process.env.BACKEND_URL + "/api/experiences_user", {
             method: "GET",
             headers: {
                 "content-Type": "application/json",

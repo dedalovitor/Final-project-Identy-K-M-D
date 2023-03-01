@@ -185,7 +185,7 @@ def create_region():
     return jsonify({"response": "Region registered successfully"}), 200
 
 
-@api.route('/regions', methods=['GET'])
+@api.route('/regions_user', methods=['GET'])
 @jwt_required()
 def get_all_current_user_regions():
     user_id = get_jwt_identity()
@@ -320,7 +320,7 @@ def create_experience():
     return jsonify({"response": "Experience registered successfully"}), 200
 
 
-@api.route('/experiences', methods=['GET'])
+@api.route('/experiences_user', methods=['GET'])
 @jwt_required()
 def get_current_region_experiences():
     region_id = get_jwt_identity()
