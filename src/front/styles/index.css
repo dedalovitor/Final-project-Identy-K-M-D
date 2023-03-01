@@ -101,7 +101,25 @@
   width: 100%;
   height: 600px;
 }
-.card-row{
+.card-row {
   position: relative;
+}
 
+.imageValencia {
+  position: relative;
+  z-index: -1;
+  height: auto;
+  width: auto;
+}
+
+.imageLogo {
+  position: absolute;
+  width: 291px;
+  height: 100px;
+  left: 582x;
+  top: 303px;
+}
+
+.navbarFooter {
+  height: 800;
 }

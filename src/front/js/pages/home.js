@@ -53,7 +53,9 @@ export const Home = () => {
   }, []);
 
   const getCurrentAccommodation = async () => {
-    const response = await fetch(process.env.BACKEND_URL + "/api/accommodations");
+    const response = await fetch(
+      process.env.BACKEND_URL + "/api/accommodations"
+    );
     const data = await response.json();
     if (response.ok) {
       setAccommodations(data.result);
@@ -97,19 +99,29 @@ export const Home = () => {
         }}
       >
         <div>
-        <button type="button" className="btn btn-outline-primary m-2">Alojamientos</button>
-        <button type="button" className="btn btn-outline-dark m-2">Cosas que hacer</button>
-        <button type="button" className="btn btn-outline-success m-2">Restaurantes/Gastronomia</button>
-        <button type="button" className="btn btn-outline-danger m-2">Lugares que Visitar/Patrimonio</button>
-        <button type="button" className="btn btn-outline-warning m-2">Visitas Guiadas</button>
+          <button type="button" className="btn btn-outline-primary m-2">
+            Alojamientos
+          </button>
+          <button type="button" className="btn btn-outline-dark m-2">
+            Cosas que hacer
+          </button>
+          <button type="button" className="btn btn-outline-success m-2">
+            Restaurantes/Gastronomia
+          </button>
+          <button type="button" className="btn btn-outline-danger m-2">
+            Lugares que Visitar/Patrimonio
+          </button>
+          <button type="button" className="btn btn-outline-warning m-2">
+            Visitas Guiadas
+          </button>
         </div>
-        </div>
-        <div className="row mx-5 p-4">
-       <Search />
-        </div>
-        <div className="row mx-5 p-4">
+      </div>
+      <div className="row mx-5 p-4">
+        <Search />
+      </div>
+      <div className="row mx-5 p-4">
         <Discover />
-        </div>
+      </div>
       <div className="text-center">
         <h3>Ciudades con encanto</h3>
       </div>
@@ -202,8 +214,11 @@ export const Home = () => {
                   <h5 className="card-title text-center">
                     {patrimonys[indexPatrimony].name}
                   </h5>
-                 <div className="card-text text-center">
-                    <img src={patrimonys[indexPatrimony].logo} height="100px"></img>
+                  <div className="card-text text-center">
+                    <img
+                      src={patrimonys[indexPatrimony].logo}
+                      height="100px"
+                    ></img>
                     <div>
                       <Link to={`/${patrimonys[indexPatrimony].name}`}>
                         <button className="btn btn-primary mt-4">
@@ -230,12 +245,10 @@ export const Home = () => {
         ) : null}
       </div>
 
-  
-
       <div className="text-center">
         <h3>Donde comer bien</h3>
       </div>
-      
+
       <div className="row mx-5 p-4 card-row">
         {indexRestorations[0] > 0 ? (
           <button
@@ -269,7 +282,10 @@ export const Home = () => {
                     {restorations[indexRestoration].type_bussiness}
                   </p>
                   <div className="card-text text-center">
-                    <img src={restorations[indexRestoration].logo} height="100px"></img>
+                    <img
+                      src={restorations[indexRestoration].logo}
+                      height="100px"
+                    ></img>
                     <div>
                       <Link to={`/${restorations[indexRestoration].name}`}>
                         <button className="btn btn-primary mt-4">
@@ -283,7 +299,8 @@ export const Home = () => {
             </div>
           );
         })}
-        {indexRestorations[indexRestorations.length - 1] < restorations.length - 1 ? (
+        {indexRestorations[indexRestorations.length - 1] <
+        restorations.length - 1 ? (
           <button
             className="btn btn-primary nextRestoration"
             onClick={() => {
@@ -294,7 +311,6 @@ export const Home = () => {
             <h2>→</h2>
           </button>
         ) : null}
-          
       </div>
       <div className="text-center">
         <h3>Alojamientos con encanto</h3>
@@ -333,7 +349,10 @@ export const Home = () => {
                     {accommodations[indexAccommodation].type_bussiness}
                   </p>
                   <div className="card-text text-center">
-                    <img src={accommodations[indexAccommodation].logo} height="100px"></img>
+                    <img
+                      src={accommodations[indexAccommodation].logo}
+                      height="100px"
+                    ></img>
                     <div>
                       <Link to={`/${accommodations[indexAccommodation].name}`}>
                         <button className="btn btn-primary mt-4">
@@ -347,7 +366,8 @@ export const Home = () => {
             </div>
           );
         })}
-        {indexAccommodations[indexAccommodations.length - 1] < accommodations.length - 1 ? (
+        {indexAccommodations[indexAccommodations.length - 1] <
+        accommodations.length - 1 ? (
           <button
             className="btn btn-primary nextAccommodation"
             onClick={() => {
@@ -393,7 +413,10 @@ export const Home = () => {
                     {experiences[indexExperience].name}
                   </h5>
                   <div className="card-text text-center">
-                    <img src={experiences[indexExperience].logo} height="100px"></img>
+                    <img
+                      src={experiences[indexExperience].logo}
+                      height="100px"
+                    ></img>
                     <div>
                       <Link to={`/${experiences[indexExperience].name}`}>
                         <button className="btn btn-primary mt-4">
@@ -407,7 +430,8 @@ export const Home = () => {
             </div>
           );
         })}
-        {indexExperiences[indexExperiences.length - 1] < experiences.length - 1 ? (
+        {indexExperiences[indexExperiences.length - 1] <
+        experiences.length - 1 ? (
           <button
             className="btn btn-primary nextExperience"
             onClick={() => {
@@ -418,8 +442,7 @@ export const Home = () => {
             <h2>→</h2>
           </button>
         ) : null}
-      </div> 
-      
+      </div>
     </>
   );
 };

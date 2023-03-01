@@ -11,6 +11,7 @@ import { Regionregister } from "./pages/regionregister";
 import { Profileuserregion } from "./pages/profileuserregion";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { CityDetail } from "./pages/detail";
 import { Search } from "./component/search";
 import { CardRegion } from "./component/cardregion";
 import { CardRestoration } from "./component/cardrestoration.js";
@@ -35,6 +36,7 @@ const Layout = () => {
             <Route element={<Register />} path="/register" />
             <Route element={<Regionregister />} path="/regionregister" />
             <Route element={<Profileuserregion />} path="/profileuserregion" />
+            <Route element={<CityDetail />} path="/detail/:city" />
             <Route element={<h1>Not found!</h1>} />
             <Route element={<Footer />} path="/" />
           </Routes>
