@@ -65,6 +65,7 @@
   width: 90px;
   height: 90px;
 }
+<<<<<<< HEAD
 .nextExperience {
   position: absolute;
   top: 50%;
@@ -105,3 +106,24 @@
   position: relative;
 
 }
+=======
+
+.imageValencia {
+  position: relative;
+  z-index: -1;
+  height: auto;
+  width: auto;
+}
+
+.imageLogo {
+  position: absolute;
+  width: 291px;
+  height: 100px;
+  left: 400px;
+  bottom: 235px;
+}
+
+.navbarFooter {
+  height: 800;
+}
+>>>>>>> 6e2f286 (adding a new view)
