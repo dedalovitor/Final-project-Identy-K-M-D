@@ -157,7 +157,7 @@ export const Home = () => {
                   <div className="card-text text-center">
                     <img src={regions[indexRegion].logo} height="100px"></img>
                     <div>
-                      <Link to={`/detail/${regions[indexRegion].name}`}>
+                      <Link to={`/${regions[indexRegion].name}`}>
                         <button className="btn btn-primary mt-4">
                           Ver lugar
                         </button>
