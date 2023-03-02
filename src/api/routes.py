@@ -230,13 +230,14 @@ def create_patrimony():
     body_resume = request.json.get("resume")
     body_photo = request.json.get("photo")
     body_logo = request.json.get("logo")
+    body_type_bussiness = request.json.get("type_bussiness")
   
-    new_patrimony = Patrimony(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, region_id=region_id)
+    new_patrimony = Patrimony(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, type_bussiness=body_type_bussiness, region_id=region_id)
     db.session.add(new_patrimony)
     db.session.commit()
     return jsonify({"response": "Patrimony registered successfully"}), 200
 
-@api.route('/patrimonys', methods=['GET'])
+@api.route('/patrimonys_user', methods=['GET'])
 @jwt_required()
 def get_current_region_patrimonys():
     region_id = get_jwt_identity()
@@ -271,7 +272,7 @@ def create_restoration():
     return jsonify({"response": "Restoration registered successfully"}), 200
 
 
-@api.route('/restorations', methods=['GET'])
+@api.route('/restorations_user', methods=['GET'])
 @jwt_required()
 def get_current_region_restorations():
     region_id = get_jwt_identity()
@@ -305,7 +306,7 @@ def create_accommodation():
     return jsonify({"response": "Accommodation registered successfully"}), 200
 
 
-@api.route('/accommodations', methods=['GET'])
+@api.route('/accommodations_user', methods=['GET'])
 @jwt_required()
 def get_current_region_accommodations():
     region_id = get_jwt_identity()
@@ -331,8 +332,9 @@ def create_experience():
     body_resume = request.json.get("resume")
     body_photo = request.json.get("photo")
     body_logo = request.json.get("logo")
+    body_type_bussiness = request.json.get("type_bussiness")
   
-    new_experience = Experience(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, region_id=region_id)
+    new_experience = Experience(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, type_bussiness=body_type_bussiness, region_id=region_id)
     db.session.add(new_experience)
     db.session.commit()
     return jsonify({"response": "Experience registered successfully"}), 200
