@@ -4,14 +4,19 @@ import ScrollToTop from "./component/scrollToTop";
 
 import { Home } from "./pages/home";
 import { Login } from "./pages/login";
+import { DiscoRegion } from "./pages/discoregion";
 import injectContext from "./store/appContext";
 import { Register } from "./pages/register";
 import { Regionregister } from "./pages/regionregister";
-import { LoginRegion } from "./pages/loginRegion";
+import { Profileuserregion } from "./pages/profileuserregion";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { CityDetail } from "./pages/detail";
 import { Search } from "./component/search";
 import { CardRegion } from "./component/cardregion";
+import { CardRestoration } from "./component/cardrestoration.js";
+import { CardPatrimony } from "./component/cardpatrimony.js";
+import { CardAccommodation } from "./component/cardaccommodation.js";
 
 //create your first component
 const Layout = () => {
@@ -27,11 +32,13 @@ const Layout = () => {
           <Routes>
             <Route element={<Home />} path="/" />
             <Route element={<Login />} path="/login" />
-            <Route element={<LoginRegion />} path="/loginRegion" />
+            <Route element={<DiscoRegion />} path="/discoregion" />
             <Route element={<Register />} path="/register" />
             <Route element={<Regionregister />} path="/regionregister" />
+            <Route element={<Profileuserregion />} path="/profileuserregion" />
+            <Route element={<CityDetail />} path="/:name" />
             <Route element={<h1>Not found!</h1>} />
-            <Route element={<Footer />} path="/" />
+            <Route element={<Footer />} />
           </Routes>
           <Footer />
         </ScrollToTop>

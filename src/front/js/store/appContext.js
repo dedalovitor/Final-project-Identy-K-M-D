@@ -3,26 +3,19 @@ import getState from "./flux.js";
 
 export const Context = React.createContext(null);
 
-
-const injectContext = PassedComponent => {
-	const StoreWrapper = props => {
-
+const injectContext = (PassedComponent) => {
+	const StoreWrapper = (props) => {
 		const [state, setState] = useState(
 			getState({
 				getStore: () => state.store,
 				getActions: () => state.actions,
-				setStore: updatedStore =>
+				setStore: (updatedStore) =>
 					setState({
 						store: Object.assign(state.store, updatedStore),
-						actions: { ...state.actions }
-					})
+						actions: { ...state.actions },
+					}),
 			})
 		);
-
-		useEffect(() => {
-			state.actions.getCurrentUserEmail();
-		}, []);
-
 
 		return (
 			<Context.Provider value={state}>

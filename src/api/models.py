@@ -34,7 +34,7 @@ class User_region(db.Model):
     address = db.Column(db.String(100), unique=False, nullable=False)
     country= db.Column(db.String(100), unique=False, nullable=False)
     city = db.Column(db.String(100), unique=False, nullable=False)
-    regions = db.relationship('Region')
+    regions = db.relationship('Region', backref='user_region')
 
     def serialize(self):
         return {
@@ -60,11 +60,11 @@ class User_region(db.Model):
 
 class Region(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100),  nullable=False)
+    name = db.Column(db.String(100), unique=True,  nullable=False)
     resume = db.Column(db.Text, unique=False, nullable=False)
     photo = db.Column(db.String(255), nullable=False)
     logo = db.Column(db.String(255), nullable=False)
-    user_region = db.Column(db.Integer, db.ForeignKey('user_region.id'))
+    user_region_id = db.Column(db.Integer, db.ForeignKey('user_region.id'))
     restorations = db.relationship('Restoration' ,backref='region')
     accomodation = db.relationship('Accommodation', backref='region')
     experiences = db.relationship('Experience' ,backref='region')
@@ -80,19 +80,35 @@ class Region(db.Model):
 
             # do not serialize the password, its a security breach
         }
+    
     def __repr__(self):
         return f'{self.name}'
 
+    def inforegion(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "resume": self.resume,
+            "photo": self.photo,
+            "logo": self.logo,
+            "restorations": [x.serialize()for x in self.restorations],
+            "accomodation": [x.serialize()for x in self.accomodation],
+            "experiences": [x.serialize()for x in self.experiences],
+            "patrimonies": [x.serialize()for x in self.patrimonies]
+
+            # do not serialize the password, its a security breach
+        }
 
 class RestorationChoices(Enum):
     bar= "bar"
     chiringuito= "chiringuito"
     restaurante= "restaurante"
+    pub= "pub / discoteca"
 
 
 class Restoration(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100),  nullable=False)
+    name = db.Column(db.String(100), unique=True, nullable=False)
     resume = db.Column(db.Text, unique=False, nullable=False)
     photo = db.Column(db.String(255), nullable=False)
     logo = db.Column(db.String(255), nullable=False)
@@ -108,16 +124,18 @@ class Restoration(db.Model):
             "resume": self.resume,
             "photo": self.photo,
             "logo": self.logo,
-            "type_bussiness": self.type_bussiness
+            "type_bussiness": self.type_bussiness.name
             # do not serialize the password, its a security breach
         }
 
     def __repr__(self):
         return f'{self.name}'
+
 class AccommodationChoices(Enum):
     hotel= "hotel"
     hostal= "hostal"
     albergue= "albergue"
+    casa_rural= "casa rural"
 
 class Accommodation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -136,12 +154,19 @@ class Accommodation(db.Model):
             "resume": self.resume,
             "photo": self.photo,
             "logo": self.logo,
-            "type_bussiness": self.type_bussiness
+            "type_bussiness": self.type_bussiness.name
 
             # do not serialize the password, its a security breach
         }
     def __repr__(self):
         return f'{self.name}'
+
+class ExperienceChoices(Enum):
+    activo= "turismo activo"
+    gastronomico= "turismo gastronómico"
+    historico= "turismo histórico"
+    cultural= "turismo cultural"
+
 class Experience(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100),  nullable=False)
@@ -166,9 +191,15 @@ class Experience(db.Model):
     def __repr__(self):
         return f'{self.name}'
 
+class PatrimonyChoices(Enum):
+    natural= "patrimonio natural"
+    cultural= "patrimonio cultural"
+    historico= "patrimonio histórico"
+    fiestas= "fiestas y eventos"
+
 class Patrimony(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100),  nullable=False)
+    name = db.Column(db.String(100), unique=True, nullable=False)
     resume = db.Column(db.Text, unique=False, nullable=False)
     photo = db.Column(db.String(255), nullable=False)
     logo = db.Column(db.String(255), nullable=False)
@@ -182,7 +213,7 @@ class Patrimony(db.Model):
             "resume": self.resume,
             "photo": self.photo,
             "logo": self.logo,
-            
+        
             # do not serialize the password, its a security breach
             }
     def __repr__(self):
