@@ -173,6 +173,7 @@ class Experience(db.Model):
     resume = db.Column(db.Text, unique=False, nullable=False)
     photo = db.Column(db.String(255), nullable=False)
     logo = db.Column(db.String(255), nullable=False)
+    type_bussiness = db.Column(db.Enum(ExperienceChoices), nullable=False, server_default="turismo activo")
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
     
 
@@ -184,6 +185,7 @@ class Experience(db.Model):
             "resume": self.resume,
             "photo": self.photo,
             "logo": self.logo,
+            "type_bussiness": self.type_bussiness.name
             
             # do not serialize the password, its a security breach
             }
