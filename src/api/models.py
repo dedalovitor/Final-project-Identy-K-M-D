@@ -173,7 +173,7 @@ class Experience(db.Model):
     resume = db.Column(db.Text, unique=False, nullable=False)
     photo = db.Column(db.String(255), nullable=False)
     logo = db.Column(db.String(255), nullable=False)
-    type_bussiness = db.Column(db.Enum(ExperienceChoices), nullable=False, server_default="turismo activo")
+    type_bussiness = db.Column(db.Enum(ExperienceChoices), nullable=False, server_default="activo")
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
     
 
@@ -205,7 +205,7 @@ class Patrimony(db.Model):
     resume = db.Column(db.Text, unique=False, nullable=False)
     photo = db.Column(db.String(255), nullable=False)
     logo = db.Column(db.String(255), nullable=False)
-    type_bussiness = db.Column(db.Enum(PatrimonyChoices), nullable=False, server_default="patrimonio cultural")
+    type_bussiness = db.Column(db.Enum(PatrimonyChoices), nullable=False, server_default="cultural")
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
     
 
