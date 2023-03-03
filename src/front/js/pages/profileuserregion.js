@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { NewFile } from "../component/newfile";
 import { useNavigate } from "react-router-dom";
 
 export const Profileuserregion = () => {
@@ -240,18 +241,11 @@ export const Profileuserregion = () => {
                     <div className="row col-12">
                         <div className="col-4">
                             <div className="card">
-                                {Object.keys(region).map((key, i) => {
-                                    if (typeof region[key] != "boolean") {
-                                        return <input placeholder={key} key={i} name={key} defaultValue={region[key]}
-                                            onChange={(e) => setRegion({ ...region, [key]: e.target.value })}>
-                                        </input>
-                                    } else {
-                                        return <input type="checkbox" key={i} name={key} checked={region[key]}
-                                            onChange={(e) => setRegion({ ...region, [key]: e.target.checked })}>
-                                        </input>
-                                    }
+                                <input name="name" value={region.name} onChange={(e) => setRegion({ ...region, "name": e.target.value })}></input>
+                                <input name="resume" value={region.resume} onChange={(e) => setRegion({ ...region, "resume": e.target.value })}></input>
 
-                                })}
+                                <NewFile />
+
                                 <button className="btn btn-success" onClick={() => createRegion()}>CREATE REGION</button>
                             </div>
                         </div>

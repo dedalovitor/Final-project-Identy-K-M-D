@@ -12,11 +12,6 @@ import { Profileuserregion } from "./pages/profileuserregion";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { CityDetail } from "./pages/detail";
-import { Search } from "./component/search";
-import { CardRegion } from "./component/cardregion";
-import { CardRestoration } from "./component/cardrestoration.js";
-import { CardPatrimony } from "./component/cardpatrimony.js";
-import { CardAccommodation } from "./component/cardaccommodation.js";
 
 //create your first component
 const Layout = () => {

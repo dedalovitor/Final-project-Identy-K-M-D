@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Search } from "../component/search";
 import { Discover } from "../component/discoverregions";
+import { NewFile } from "../component/newfile";
 import { CardRegion } from "../component/cardregion";
 import { CardRestoration } from "../component/cardrestoration";
 import { CardPatrimony } from "../component/cardpatrimony";
@@ -91,6 +92,7 @@ export const Home = () => {
 
   return (
     <>
+      <NewFile></NewFile>
       <div
         className="container h-25 d-flex justify-content-center align-items-center"
         style={{
@@ -300,7 +302,7 @@ export const Home = () => {
           );
         })}
         {indexRestorations[indexRestorations.length - 1] <
-        restorations.length - 1 ? (
+          restorations.length - 1 ? (
           <button
             className="btn btn-primary nextRestoration"
             onClick={() => {
@@ -367,7 +369,7 @@ export const Home = () => {
           );
         })}
         {indexAccommodations[indexAccommodations.length - 1] <
-        accommodations.length - 1 ? (
+          accommodations.length - 1 ? (
           <button
             className="btn btn-primary nextAccommodation"
             onClick={() => {
@@ -431,7 +433,7 @@ export const Home = () => {
           );
         })}
         {indexExperiences[indexExperiences.length - 1] <
-        experiences.length - 1 ? (
+          experiences.length - 1 ? (
           <button
             className="btn btn-primary nextExperience"
             onClick={() => {
