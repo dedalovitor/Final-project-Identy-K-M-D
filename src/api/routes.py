@@ -232,7 +232,7 @@ def create_patrimony():
     body_logo = request.json.get("logo")
     body_type_bussiness = request.json.get("type_bussiness")
   
-    new_patrimony = Patrimony(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, region_id=region_id)
+    new_patrimony = Patrimony(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, type_bussiness=body_type_bussiness, region_id=region_id)
     db.session.add(new_patrimony)
     db.session.commit()
     return jsonify({"response": "Patrimony registered successfully"}), 200
@@ -334,7 +334,7 @@ def create_experience():
     body_logo = request.json.get("logo")
     body_type_bussiness = request.json.get("type_bussiness")
   
-    new_experience = Experience(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, region_id=region_id)
+    new_experience = Experience(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, type_bussiness=body_type_bussiness, region_id=region_id)
     db.session.add(new_experience)
     db.session.commit()
     return jsonify({"response": "Experience registered successfully"}), 200

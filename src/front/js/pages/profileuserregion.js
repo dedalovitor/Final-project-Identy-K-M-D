@@ -7,13 +7,13 @@ export const Profileuserregion = () => {
     const { store, actions } = useContext(Context);
     const [region, setRegion] = useState({ name: "", resume: "", photo: "", logo: "" });
     const [regions, setRegions] = useState([]);
-    const [patrimony, setPatrimony] = useState({ name: "", resume: "", photo: "", logo: "" });
+    const [patrimony, setPatrimony] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "" });
     const [patrimonys, setPatrimonys] = useState([]);
     const [restoration, setRestoration] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "" });
     const [restorations, setRestorations] = useState([]);
     const [accommodation, setAccommodation] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "" });
     const [accommodations, setAccommodations] = useState([]);
-    const [experience, setExperience] = useState({ name: "", resume: "", photo: "", logo: "" });
+    const [experience, setExperience] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "" });
     const [experiences, setExperiences] = useState([]);
 
 
@@ -304,6 +304,7 @@ export const Profileuserregion = () => {
                                         <div className="card-body">
                                             <p className="card-text"> name: {x.name} </p>
                                             <p className="card-text"> resume: {x.resume} </p>
+                                            <p className="card-text"> type bussiness: {x.type_bussiness} </p>
                                         </div>
                                         <div className="card-footer">
                                             <button className="btn btn-danger" onClick={() => deletePatrimony(x.id)}>DEL</button>
@@ -411,6 +412,7 @@ export const Profileuserregion = () => {
                                         <div className="card-body">
                                             <p className="card-text"> name: {x.name} </p>
                                             <p className="card-text"> resume: {x.resume} </p>
+                                            <p className="card-text"> type bussiness: {x.type_bussiness} </p>
                                         </div>
                                         <div className="card-footer">
                                             <button className="btn btn-danger" onClick={() => deleteExperience(x.id)}>DEL</button>
