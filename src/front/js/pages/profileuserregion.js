@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Profileuserregion = () => {
     const { store, actions } = useContext(Context);
-    const [region, setRegion] = useState({ name: "", resume: "", photo: "", logo: "" });
+    const [region, setRegion] = useState({ name: "", resume: "" });
     const [regions, setRegions] = useState([]);
     const [patrimony, setPatrimony] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", location: "", coordinates: "", contact: "" });
     const [patrimonys, setPatrimonys] = useState([]);
@@ -16,6 +16,9 @@ export const Profileuserregion = () => {
     const [accommodations, setAccommodations] = useState([]);
     const [experience, setExperience] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", meeting_point: "", coordinates: "", contact: "" });
     const [experiences, setExperiences] = useState([]);
+    const [photo, setPhoto] = useState(null);
+    const [logo, setLogo] = useState(null);
+
 
 
     useEffect(() => {
@@ -100,13 +103,16 @@ export const Profileuserregion = () => {
 
 
     const createRegion = async () => {
+        let body = new FormData();
+        body.append("photo", photo[0]);
+        body.append("logo", logo[0]);
+        body.append("region", JSON.stringify(region));
         const response = await fetch(process.env.BACKEND_URL + "/api/region", {
             method: "POST",
             headers: {
-                "content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("token")
             },
-            body: JSON.stringify(region)
+            body: body
         });
         if (response.ok) getCurrentUserRegions();
     }
@@ -244,7 +250,10 @@ export const Profileuserregion = () => {
                                 <input name="name" value={region.name} onChange={(e) => setRegion({ ...region, "name": e.target.value })}></input>
                                 <input name="resume" value={region.resume} onChange={(e) => setRegion({ ...region, "resume": e.target.value })}></input>
 
-                                <NewFile />
+
+                                <input type="file" onChange={e => setPhoto(e.target.files)} />
+                                <input type="file" onChange={e => setLogo(e.target.files)} />
+
 
                                 <button className="btn btn-success" onClick={() => createRegion()}>CREATE REGION</button>
                             </div>

@@ -1,7 +1,7 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint
+from flask import Flask, request, jsonify, url_for, Blueprint, json
 
 from api.models import db, User, Region, Restoration, Accommodation, Experience, Patrimony , User_region 
 from api.utils import generate_sitemap, APIException
@@ -24,7 +24,7 @@ def handle_upload():
     if 'photo' in request.files:
         # upload file to uploadcare
         result = cloudinary.uploader.upload(request.files['photo'])
-
+        print(user_region_id)
         # fetch for the user
         region1 = Region.query.filter_by(user_region_id=user_region_id).first()
         # update the user with the given cloudinary image URL
@@ -36,6 +36,28 @@ def handle_upload():
         return jsonify(region1.serialize()), 200
     else:
         raise APIException('Missing profile_image on the FormData')
+
+@api.route('/region/logo', methods=['POST'])
+@jwt_required()
+def handle_upload_logo():
+    user_region_id = get_jwt_identity()
+    # validate that the front-end request was built correctly
+    if 'logo' in request.files:
+        # upload file to uploadcare
+        result = cloudinary.uploader.upload(request.files['logo'])
+
+        # fetch for the user
+        region2 = Region.query.filter_by(user_region_id=user_region_id).first()
+        # update the user with the given cloudinary image URL
+        region2.logo = result['secure_url']
+
+        db.session.add(region2)
+        db.session.commit()
+
+        return jsonify(region2.serialize()), 200
+    else:
+        raise APIException('Missing profile_image on the FormData')
+
 
 
 
@@ -218,12 +240,13 @@ def user_region_login():
 @jwt_required()
 def create_region():
     user_id = get_jwt_identity()
-    body_name = request.json.get("name")
-    body_resume = request.json.get("resume")
-    body_photo = request.json.get("photo")
-    body_logo = request.json.get("logo")
+    body = json.loads(request.form["region"])
+    body_name = body["name"]
+    body_resume = body["resume"]
+    body_photo = cloudinary.uploader.upload(request.files['photo'])
+    body_logo = cloudinary.uploader.upload(request.files['logo'])
   
-    new_region = Region(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, user_region_id=user_id)
+    new_region = Region(name=body_name, resume=body_resume, photo=body_photo['secure_url'], logo=body_logo['secure_url'], user_region_id=user_id)
     db.session.add(new_region)
     db.session.commit()
     return jsonify({"response": "Region registered successfully"}), 200
