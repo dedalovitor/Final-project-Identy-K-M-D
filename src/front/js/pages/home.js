@@ -3,11 +3,6 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Search } from "../component/search";
 import { Discover } from "../component/discoverregions";
-import { CardRegion } from "../component/cardregion";
-import { CardRestoration } from "../component/cardrestoration";
-import { CardPatrimony } from "../component/cardpatrimony";
-import { CardAccommodation } from "../component/cardaccommodation";
-import { CardExperience } from "../component/cardexperience";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -162,6 +157,7 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
+                      <Link to="/favorites">❤</Link>
                     </div>
                   </div>
                 </div>
@@ -225,6 +221,7 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
+                      <Link to="/favorites">❤</Link>
                     </div>
                   </div>
                 </div>
@@ -292,6 +289,7 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
+                      <Link to="/favorites">❤</Link>
                     </div>
                   </div>
                 </div>
@@ -359,6 +357,7 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
+                      <Link to="/favorites">❤</Link>
                     </div>
                   </div>
                 </div>
@@ -423,6 +422,7 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
+                      <Link to="/favorites">❤</Link>
                     </div>
                   </div>
                 </div>

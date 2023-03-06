@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { CardRegion } from "../component/cardregion";
-import { CardPatrimony } from "../component/cardpatrimony";
 
 export const DiscoRegion = () => {
   const { store, actions } = useContext(Context);
@@ -35,7 +33,7 @@ export const DiscoRegion = () => {
     const data = await response.json();
     if (response.ok) {
       setPatrimonys(data.result);
-      setIndexPatrimonys([0, 1, 2, 3 ,4]);
+      setIndexPatrimonys([0, 1, 2, 3, 4]);
     }
   };
 
@@ -119,7 +117,7 @@ export const DiscoRegion = () => {
                             <h5 className="card-title text-center">
                               {patrimony.name}
                             </h5>
-                            
+
                             <div className="card-text text-center">
                               <div>
                                 <Link to={`/${patrimony.name}`}>

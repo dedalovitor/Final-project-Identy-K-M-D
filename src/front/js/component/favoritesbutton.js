@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-{
-  store.userInfo ? (
-    <button type="button" class="btn btn-outline-success">
-      Success
-      <Favorites />
+export const FavoritesButton = () => {
+  const navigate = useNavigate();
+  return (
+    <button
+      type="button"
+      class="btn btn-outline-success"
+      onClick={() => navigate("/favorites")}
+    >
+      Favorites
     </button>
-  ) : (
-    ""
   );
-}
+};
