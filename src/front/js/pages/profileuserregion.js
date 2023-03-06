@@ -8,13 +8,13 @@ export const Profileuserregion = () => {
     const { store, actions } = useContext(Context);
     const [region, setRegion] = useState({ name: "", resume: "", photo: "", logo: "" });
     const [regions, setRegions] = useState([]);
-    const [patrimony, setPatrimony] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "" });
+    const [patrimony, setPatrimony] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", location: "", coordinates: "", contact: "" });
     const [patrimonys, setPatrimonys] = useState([]);
-    const [restoration, setRestoration] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "" });
+    const [restoration, setRestoration] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", location: "", coordinates: "", cart: "", contact: "" });
     const [restorations, setRestorations] = useState([]);
-    const [accommodation, setAccommodation] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "" });
+    const [accommodation, setAccommodation] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", location: "", coordinates: "", contact: "" });
     const [accommodations, setAccommodations] = useState([]);
-    const [experience, setExperience] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "" });
+    const [experience, setExperience] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", meeting_point: "", coordinates: "", contact: "" });
     const [experiences, setExperiences] = useState([]);
 
 
