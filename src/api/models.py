@@ -109,10 +109,14 @@ class RestorationChoices(Enum):
 class Restoration(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True, nullable=False)
-    resume = db.Column(db.Text, unique=False, nullable=False)
-    photo = db.Column(db.String(255), nullable=False)
-    logo = db.Column(db.String(255), nullable=False)
-    type_bussiness = db.Column(db.Enum(RestorationChoices), nullable=False, server_default="bar")
+    resume = db.Column(db.Text, unique=False, nullable=True)
+    photo = db.Column(db.String(255), nullable=True)
+    logo = db.Column(db.String(255), nullable=True)
+    time_open = db.Column(db.String(255), nullable=True)
+    cart = db.Column(db.String(255), nullable=True)
+    location = db.Column(db.String(255), nullable=True)
+    coordinates = db.Column(db.String(255), nullable=True)
+    type_bussiness = db.Column(db.Enum(RestorationChoices), nullable=True, server_default="bar")
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
     
 
@@ -124,6 +128,10 @@ class Restoration(db.Model):
             "resume": self.resume,
             "photo": self.photo,
             "logo": self.logo,
+            "time_open": self.time_open,
+            "cart": self.cart,
+            "location": self.location,
+            "coordinates": self.coordinates,
             "type_bussiness": self.type_bussiness.name
             # do not serialize the password, its a security breach
         }
@@ -139,11 +147,14 @@ class AccommodationChoices(Enum):
 
 class Accommodation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100),  nullable=False)
-    resume = db.Column(db.Text, unique=False, nullable=False)
-    photo = db.Column(db.String(255), nullable=False)
-    logo = db.Column(db.String(255), nullable=False)
-    type_bussiness = db.Column(db.Enum(AccommodationChoices), nullable=False, server_default="hotel")
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    resume = db.Column(db.Text, unique=False, nullable=True)
+    photo = db.Column(db.String(255), nullable=True)
+    logo = db.Column(db.String(255), nullable=True)
+    time_open = db.Column(db.String(255), nullable=True)
+    location = db.Column(db.String(255), nullable=True)
+    coordinates = db.Column(db.String(255), nullable=True)
+    type_bussiness = db.Column(db.Enum(AccommodationChoices), nullable=True, server_default="hotel")
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
     
 
@@ -154,6 +165,9 @@ class Accommodation(db.Model):
             "resume": self.resume,
             "photo": self.photo,
             "logo": self.logo,
+            "time_open": self.time_open,
+            "location": self.location,
+            "coordinates": self.coordinates,
             "type_bussiness": self.type_bussiness.name
 
             # do not serialize the password, its a security breach
@@ -169,11 +183,12 @@ class ExperienceChoices(Enum):
 
 class Experience(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100),  nullable=False)
-    resume = db.Column(db.Text, unique=False, nullable=False)
-    photo = db.Column(db.String(255), nullable=False)
-    logo = db.Column(db.String(255), nullable=False)
-    type_bussiness = db.Column(db.Enum(ExperienceChoices), nullable=False, server_default="activo")
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    resume = db.Column(db.Text, nullable=True)
+    photo = db.Column(db.String(255), nullable=True)
+    logo = db.Column(db.String(255), nullable=True)
+    time_open = db.Column(db.String(255), nullable=True)
+    type_bussiness = db.Column(db.Enum(ExperienceChoices), nullable=True, server_default="activo")
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
     
 
@@ -185,6 +200,7 @@ class Experience(db.Model):
             "resume": self.resume,
             "photo": self.photo,
             "logo": self.logo,
+            "time_open": self.time_open,
             "type_bussiness": self.type_bussiness.name
             
             # do not serialize the password, its a security breach
@@ -205,6 +221,9 @@ class Patrimony(db.Model):
     resume = db.Column(db.Text, unique=False, nullable=False)
     photo = db.Column(db.String(255), nullable=False)
     logo = db.Column(db.String(255), nullable=False)
+    time_open = db.Column(db.String(255), nullable=True)
+    location = db.Column(db.String(255), nullable=True)
+    coordinates = db.Column(db.String(255), nullable=True)
     type_bussiness = db.Column(db.Enum(PatrimonyChoices), nullable=False, server_default="cultural")
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
     
@@ -216,12 +235,16 @@ class Patrimony(db.Model):
             "resume": self.resume,
             "photo": self.photo,
             "logo": self.logo,
+            "time_open": self.time_open,
+            "location": self.location,
+            "coordinates": self.coordinates,
             "type_bussiness": self.type_bussiness.name
             
             # do not serialize the password, its a security breach
             }
     def __repr__(self):
         return f'{self.name}'
+
 class Favorites(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
