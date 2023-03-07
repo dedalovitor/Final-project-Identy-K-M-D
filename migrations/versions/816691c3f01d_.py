@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: f1d0626c16ad
+Revision ID: 816691c3f01d
 Revises: 
-Create Date: 2023-03-03 16:56:55.754213
+Create Date: 2023-03-07 19:28:40.241165
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'f1d0626c16ad'
+revision = '816691c3f01d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -59,24 +59,34 @@ def upgrade():
     op.create_table('accommodation',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=100), nullable=False),
-    sa.Column('resume', sa.Text(), nullable=False),
-    sa.Column('photo', sa.String(length=255), nullable=False),
-    sa.Column('logo', sa.String(length=255), nullable=False),
-    sa.Column('type_bussiness', sa.Enum('hotel', 'hostal', 'albergue', 'casa_rural', name='accommodationchoices'), server_default='hotel', nullable=False),
+    sa.Column('resume', sa.Text(), nullable=True),
+    sa.Column('photo', sa.String(length=255), nullable=True),
+    sa.Column('logo', sa.String(length=255), nullable=True),
+    sa.Column('time_open', sa.String(length=255), nullable=True),
+    sa.Column('location', sa.String(length=255), nullable=True),
+    sa.Column('coordinates', sa.String(length=255), nullable=True),
+    sa.Column('contact', sa.String(length=255), nullable=True),
+    sa.Column('type_bussiness', sa.Enum('hotel', 'hostal', 'albergue', 'casa_rural', name='accommodationchoices'), server_default='hotel', nullable=True),
     sa.Column('region_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['region_id'], ['region.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
     )
     op.create_table('experience',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=100), nullable=False),
-    sa.Column('resume', sa.Text(), nullable=False),
-    sa.Column('photo', sa.String(length=255), nullable=False),
-    sa.Column('logo', sa.String(length=255), nullable=False),
-    sa.Column('type_bussiness', sa.Enum('activo', 'gastronomico', 'historico', 'cultural', name='experiencechoices'), server_default='activo', nullable=False),
+    sa.Column('resume', sa.Text(), nullable=True),
+    sa.Column('photo', sa.String(length=255), nullable=True),
+    sa.Column('logo', sa.String(length=255), nullable=True),
+    sa.Column('time_open', sa.String(length=255), nullable=True),
+    sa.Column('meeting_point', sa.String(length=255), nullable=True),
+    sa.Column('coordinates', sa.String(length=255), nullable=True),
+    sa.Column('contact', sa.String(length=255), nullable=True),
+    sa.Column('type_bussiness', sa.Enum('activo', 'gastronomico', 'historico', 'cultural', name='experiencechoices'), server_default='activo', nullable=True),
     sa.Column('region_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['region_id'], ['region.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('name')
     )
     op.create_table('patrimony',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -84,7 +94,11 @@ def upgrade():
     sa.Column('resume', sa.Text(), nullable=False),
     sa.Column('photo', sa.String(length=255), nullable=False),
     sa.Column('logo', sa.String(length=255), nullable=False),
-    sa.Column('type_bussiness', sa.Enum('natural', 'cultural', 'historico', 'fiestas', name='patrimonychoices'), server_default='cultural', nullable=False),
+    sa.Column('time_open', sa.String(length=255), nullable=True),
+    sa.Column('location', sa.String(length=255), nullable=True),
+    sa.Column('coordinates', sa.String(length=255), nullable=True),
+    sa.Column('contact', sa.String(length=255), nullable=True),
+    sa.Column('type_bussiness', sa.Enum('natural', 'cultural', 'historico', 'fiestas', name='patrimonychoices'), server_default='cultural', nullable=True),
     sa.Column('region_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['region_id'], ['region.id'], ),
     sa.PrimaryKeyConstraint('id'),
@@ -93,10 +107,15 @@ def upgrade():
     op.create_table('restoration',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=100), nullable=False),
-    sa.Column('resume', sa.Text(), nullable=False),
-    sa.Column('photo', sa.String(length=255), nullable=False),
-    sa.Column('logo', sa.String(length=255), nullable=False),
-    sa.Column('type_bussiness', sa.Enum('bar', 'chiringuito', 'restaurante', 'pub', name='restorationchoices'), server_default='bar', nullable=False),
+    sa.Column('resume', sa.Text(), nullable=True),
+    sa.Column('photo', sa.String(length=255), nullable=True),
+    sa.Column('logo', sa.String(length=255), nullable=True),
+    sa.Column('time_open', sa.String(length=255), nullable=True),
+    sa.Column('cart', sa.String(length=255), nullable=True),
+    sa.Column('location', sa.String(length=255), nullable=True),
+    sa.Column('coordinates', sa.String(length=255), nullable=True),
+    sa.Column('contact', sa.String(length=255), nullable=True),
+    sa.Column('type_bussiness', sa.Enum('bar', 'chiringuito', 'restaurante', 'pub', name='restorationchoices'), server_default='bar', nullable=True),
     sa.Column('region_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['region_id'], ['region.id'], ),
     sa.PrimaryKeyConstraint('id'),
