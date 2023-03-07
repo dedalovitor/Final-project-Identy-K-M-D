@@ -16,52 +16,6 @@ import cloudinary.uploader
 api = Blueprint('api', __name__)
 
 
-@api.route('/region/photo', methods=['POST'])
-@jwt_required()
-def handle_upload():
-    user_region_id = get_jwt_identity()
-    # validate that the front-end request was built correctly
-    if 'photo' in request.files:
-        # upload file to uploadcare
-        result = cloudinary.uploader.upload(request.files['photo'])
-        print(user_region_id)
-        # fetch for the user
-        region1 = Region.query.filter_by(user_region_id=user_region_id).first()
-        # update the user with the given cloudinary image URL
-        region1.photo = result['secure_url']
-
-        db.session.add(region1)
-        db.session.commit()
-
-        return jsonify(region1.serialize()), 200
-    else:
-        raise APIException('Missing profile_image on the FormData')
-
-@api.route('/region/logo', methods=['POST'])
-@jwt_required()
-def handle_upload_logo():
-    user_region_id = get_jwt_identity()
-    # validate that the front-end request was built correctly
-    if 'logo' in request.files:
-        # upload file to uploadcare
-        result = cloudinary.uploader.upload(request.files['logo'])
-
-        # fetch for the user
-        region2 = Region.query.filter_by(user_region_id=user_region_id).first()
-        # update the user with the given cloudinary image URL
-        region2.logo = result['secure_url']
-
-        db.session.add(region2)
-        db.session.commit()
-
-        return jsonify(region2.serialize()), 200
-    else:
-        raise APIException('Missing profile_image on the FormData')
-
-
-
-
-
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
 
