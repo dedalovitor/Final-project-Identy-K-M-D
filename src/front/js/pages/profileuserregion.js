@@ -8,7 +8,7 @@ export const Profileuserregion = () => {
     const { store, actions } = useContext(Context);
     const [region, setRegion] = useState({ name: "", resume: "" });
     const [regions, setRegions] = useState([]);
-    const [patrimony, setPatrimony] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", location: "", coordinates: "", contact: "" });
+    const [patrimony, setPatrimony] = useState({ name: "", resume: "", type_bussiness: "", time_open: "", location: "", coordinates: "", contact: "" });
     const [patrimonys, setPatrimonys] = useState([]);
     const [restoration, setRestoration] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", location: "", coordinates: "", cart: "", contact: "" });
     const [restorations, setRestorations] = useState([]);
@@ -130,13 +130,16 @@ export const Profileuserregion = () => {
 
 
     const createPatrimony = async () => {
+        let body = new FormData();
+        body.append("photo", photo[0]);
+        body.append("logo", logo[0]);
+        body.append("patrimony", JSON.stringify(patrimony));
         const response = await fetch(process.env.BACKEND_URL + "/api/patrimony", {
             method: "POST",
             headers: {
-                "content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("token")
             },
-            body: JSON.stringify(patrimony)
+            body: body
         });
         if (response.ok) getCurrentRegionPatrimony();
     }
@@ -283,18 +286,17 @@ export const Profileuserregion = () => {
                     <div className="row col-12">
                         <div className="col-4">
                             <div className="card">
-                                {Object.keys(patrimony).map((key, i) => {
-                                    if (typeof patrimony[key] != "boolean") {
-                                        return <input placeholder={key} key={i} name={key} defaultValue={patrimony[key]}
-                                            onChange={(e) => setPatrimony({ ...patrimony, [key]: e.target.value })}>
-                                        </input>
-                                    } else {
-                                        return <input type="checkbox" key={i} name={key} checked={patrimony[key]}
-                                            onChange={(e) => setPatrimony({ ...patrimony, [key]: e.target.checked })}>
-                                        </input>
-                                    }
+                                <input name="name" placeholder="name" value={patrimony.name} onChange={(e) => setPatrimony({ ...patrimony, "name": e.target.value })}></input>
+                                <input name="resume" placeholder="resume" value={patrimony.resume} onChange={(e) => setPatrimony({ ...patrimony, "resume": e.target.value })}></input>
+                                <input name="location" placeholder="location" value={patrimony.location} onChange={(e) => setPatrimony({ ...patrimony, "location": e.target.value })}></input>
+                                <input name="time_open" placeholder="time open" value={patrimony.time_open} onChange={(e) => setPatrimony({ ...patrimony, "time_open": e.target.value })}></input>
+                                <input name="coordinates" placeholder="coordinates" value={patrimony.coordinates} onChange={(e) => setPatrimony({ ...patrimony, "coordinates": e.target.value })}></input>
+                                <input name="contact" placeholder="contact" value={patrimony.contact} onChange={(e) => setPatrimony({ ...patrimony, "contact": e.target.value })}></input>
+                                <input name="type_bussiness" placeholder="type_bussiness" value={patrimony.type_bussiness} onChange={(e) => setPatrimony({ ...patrimony, "type_bussiness": e.target.value })}></input>
 
-                                })}
+                                <input type="file" onChange={e => setPhoto(e.target.files)} />
+                                <input type="file" onChange={e => setLogo(e.target.files)} />
+
                                 <button className="btn btn-success" onClick={() => createPatrimony()}>CREATE PATRIMONY</button>
                             </div>
                         </div>
@@ -307,6 +309,10 @@ export const Profileuserregion = () => {
                                         <div className="card-body">
                                             <p className="card-text"> name: {x.name} </p>
                                             <p className="card-text"> resume: {x.resume} </p>
+                                            <p className="card-text"> location: {x.location} </p>
+                                            <p className="card-text"> time_open: {x.time_open} </p>
+                                            <p className="card-text"> coordinates: {x.coordinates} </p>
+                                            <p className="card-text"> contact: {x.contact} </p>
                                             <p className="card-text"> type bussiness: {x.type_bussiness} </p>
                                         </div>
                                         <div className="card-footer">

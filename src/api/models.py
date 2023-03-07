@@ -235,7 +235,7 @@ class Patrimony(db.Model):
     location = db.Column(db.String(255), nullable=True)
     coordinates = db.Column(db.String(255), nullable=True)
     contact = db.Column(db.String(255), nullable=True)
-    type_bussiness = db.Column(db.Enum(PatrimonyChoices), nullable=False, server_default="cultural")
+    type_bussiness = db.Column(db.Enum(PatrimonyChoices), nullable=True, server_default="cultural")
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
     
 

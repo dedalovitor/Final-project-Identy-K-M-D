@@ -275,13 +275,18 @@ def delete_region(region_id):
 @jwt_required()
 def create_patrimony():
     region_id = get_jwt_identity()
-    body_name = request.json.get("name")
-    body_resume = request.json.get("resume")
-    body_photo = request.json.get("photo")
-    body_logo = request.json.get("logo")
-    body_type_bussiness = request.json.get("type_bussiness")
+    body = json.loads(request.form["patrimony"])
+    body_name = body["name"]
+    body_resume = body["resume"]
+    body_time_open = body["time_open"]
+    body_location = body["location"]
+    body_coordinates = body["coordinates"]
+    body_contact = body["contact"]
+    body_photo = cloudinary.uploader.upload(request.files['photo'])
+    body_logo = cloudinary.uploader.upload(request.files['logo'])
+    body_type_bussiness = body["type_bussiness"]
   
-    new_patrimony = Patrimony(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, type_bussiness=body_type_bussiness, region_id=region_id)
+    new_patrimony = Patrimony(name=body_name, resume=body_resume, location = body_location, time_open = body_time_open, coordinates = body_coordinates, contact = body_contact, type_bussiness=body_type_bussiness, photo=body_photo['secure_url'], logo=body_logo['secure_url'], region_id=region_id)
     db.session.add(new_patrimony)
     db.session.commit()
     return jsonify({"response": "Patrimony registered successfully"}), 200
