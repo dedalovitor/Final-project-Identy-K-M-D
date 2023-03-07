@@ -292,7 +292,7 @@ export const Profileuserregion = () => {
                                 <input name="time_open" placeholder="time open" value={patrimony.time_open} onChange={(e) => setPatrimony({ ...patrimony, "time_open": e.target.value })}></input>
                                 <input name="coordinates" placeholder="coordinates" value={patrimony.coordinates} onChange={(e) => setPatrimony({ ...patrimony, "coordinates": e.target.value })}></input>
                                 <input name="contact" placeholder="contact" value={patrimony.contact} onChange={(e) => setPatrimony({ ...patrimony, "contact": e.target.value })}></input>
-                                <input name="type_bussiness" placeholder="type_bussiness" value={patrimony.type_bussiness} onChange={(e) => setPatrimony({ ...patrimony, "type_bussiness": e.target.value })}></input>
+                                <input name="type_bussiness" placeholder="natural, cultural, histórico o fiestas" value={patrimony.type_bussiness} onChange={(e) => setPatrimony({ ...patrimony, "type_bussiness": e.target.value })}></input>
 
                                 <input type="file" onChange={e => setPhoto(e.target.files)} />
                                 <input type="file" onChange={e => setLogo(e.target.files)} />
