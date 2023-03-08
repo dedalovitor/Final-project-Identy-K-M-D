@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { NewFile } from "../component/newfile";
+import { MyComponent } from "../component/mycomponent";
 import { useNavigate } from "react-router-dom";
 
 export const Profileuserregion = () => {
@@ -241,6 +241,7 @@ export const Profileuserregion = () => {
 
     return (
         <>
+            <MyComponent></MyComponent>
             <nav id="navbar-example2" className="navbar bg-info px-3 mb-3 d-flex justify-content-center">
                 <ul class="nav nav-pills h4">
                     <li class="nav-item">

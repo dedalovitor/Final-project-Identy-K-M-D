@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { MyComponent } from "../component/mycomponent";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ export const Login = () => {
   return (
     <div className="text-center mt-5">
       LOGIN
+      <MyComponent></MyComponent>
       <div>
         <div>
           <label htmlFor="email">Email</label>

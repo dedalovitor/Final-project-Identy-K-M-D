@@ -10,6 +10,7 @@ import { Register } from "./pages/register";
 import { Regionregister } from "./pages/regionregister";
 import { Profileuserregion } from "./pages/profileuserregion";
 import { Navbar } from "./component/navbar";
+import { MyComponent } from "./component/mycomponent";
 import { Footer } from "./component/footer";
 import { CityDetail } from "./pages/detail";
 
