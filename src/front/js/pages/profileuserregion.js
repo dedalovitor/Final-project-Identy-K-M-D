@@ -8,7 +8,7 @@ export const Profileuserregion = () => {
     const { store, actions } = useContext(Context);
     const [region, setRegion] = useState({ name: "", resume: "" });
     const [regions, setRegions] = useState([]);
-    const [patrimony, setPatrimony] = useState({ name: "", resume: "", type_bussiness: "", time_open: "", location: "", coordinates: "", contact: "" });
+    const [patrimony, setPatrimony] = useState({ name: "", resume: "", type_bussiness: "patrimonio natural", time_open: "", location: "", coordinates: "", contact: "" });
     const [patrimonys, setPatrimonys] = useState([]);
     const [restoration, setRestoration] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", location: "", coordinates: "", cart: "", contact: "" });
     const [restorations, setRestorations] = useState([]);
@@ -18,6 +18,7 @@ export const Profileuserregion = () => {
     const [experiences, setExperiences] = useState([]);
     const [photo, setPhoto] = useState(null);
     const [logo, setLogo] = useState(null);
+    const [patrimonyChoice, setPatrimonyChoice] = useState([]);
 
 
 
@@ -41,6 +42,10 @@ export const Profileuserregion = () => {
         getCurrentRegionExperience();
     }, [])
 
+    useEffect(() => {
+        getCurrentPatrimonyChoices();
+    }, [])
+
     const getCurrentUserRegions = async () => {
         const response = await fetch(process.env.BACKEND_URL + "/api/regions_user", {
             method: "GET",
@@ -51,6 +56,17 @@ export const Profileuserregion = () => {
         });
         const data = await response.json();
         setRegions(data.results);
+    }
+
+    const getCurrentPatrimonyChoices = async () => {
+        const response = await fetch(process.env.BACKEND_URL + "/api/patrimony_choice", {
+            method: "GET",
+            headers: {
+                "content-Type": "application/json",
+            }
+        });
+        const data = await response.json();
+        setPatrimonyChoice(data.results);
     }
 
     const getCurrentRegionPatrimony = async () => {
@@ -292,7 +308,13 @@ export const Profileuserregion = () => {
                                 <input name="time_open" placeholder="time open" value={patrimony.time_open} onChange={(e) => setPatrimony({ ...patrimony, "time_open": e.target.value })}></input>
                                 <input name="coordinates" placeholder="coordinates" value={patrimony.coordinates} onChange={(e) => setPatrimony({ ...patrimony, "coordinates": e.target.value })}></input>
                                 <input name="contact" placeholder="contact" value={patrimony.contact} onChange={(e) => setPatrimony({ ...patrimony, "contact": e.target.value })}></input>
-                                <input name="type_bussiness" placeholder="natural, cultural, histórico o fiestas" value={patrimony.type_bussiness} onChange={(e) => setPatrimony({ ...patrimony, "type_bussiness": e.target.value })}></input>
+                                <select class="form-select" aria-label="Default select example" onChange={(e) => setPatrimony({ ...patrimony, "type_bussiness": e.target.value })}>
+                                    <option disabled>tipo de patrimonio</option>
+                                    {patrimonyChoice.map((x) => {
+                                        return <option key={x} value={x} >{x}</option>
+                                    })}
+
+                                </select>
 
                                 <input type="file" onChange={e => setPhoto(e.target.files)} />
                                 <input type="file" onChange={e => setLogo(e.target.files)} />

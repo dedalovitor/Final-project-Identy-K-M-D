@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, json
 
-from api.models import db, User, Region, Restoration, Accommodation, Experience, Patrimony , User_region 
+from api.models import db, User, Region, Restoration, Accommodation, Experience, Patrimony , User_region , PatrimonyChoices
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
@@ -24,6 +24,11 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@api.route('/patrimony_choice', methods=['GET'])
+def patrimony_choice():
+    patrimony_choice = [str(e.value) for e in PatrimonyChoices]
+    return jsonify({"results": patrimony_choice}), 200
 
 
 @api.route('/login', methods=['POST'])
@@ -239,8 +244,9 @@ def create_patrimony():
     body_photo = cloudinary.uploader.upload(request.files['photo'])
     body_logo = cloudinary.uploader.upload(request.files['logo'])
     body_type_bussiness = body["type_bussiness"]
+    
   
-    new_patrimony = Patrimony(name=body_name, resume=body_resume, location = body_location, time_open = body_time_open, coordinates = body_coordinates, contact = body_contact, type_bussiness=body_type_bussiness, photo=body_photo['secure_url'], logo=body_logo['secure_url'], region_id=region_id)
+    new_patrimony = Patrimony(name=body_name, resume=body_resume, location = body_location, time_open = body_time_open, coordinates = body_coordinates, contact = body_contact, type_bussiness=PatrimonyChoices(body_type_bussiness), photo=body_photo['secure_url'], logo=body_logo['secure_url'], region_id=region_id)
     db.session.add(new_patrimony)
     db.session.commit()
     return jsonify({"response": "Patrimony registered successfully"}), 200
