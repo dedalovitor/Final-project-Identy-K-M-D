@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 816691c3f01d
+Revision ID: 55bad00cf2bb
 Revises: 
-Create Date: 2023-03-07 19:28:40.241165
+Create Date: 2023-03-08 20:17:42.969128
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '816691c3f01d'
+revision = '55bad00cf2bb'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -64,7 +64,8 @@ def upgrade():
     sa.Column('logo', sa.String(length=255), nullable=True),
     sa.Column('time_open', sa.String(length=255), nullable=True),
     sa.Column('location', sa.String(length=255), nullable=True),
-    sa.Column('coordinates', sa.String(length=255), nullable=True),
+    sa.Column('longitud', sa.Float(), nullable=True),
+    sa.Column('latitud', sa.Float(), nullable=True),
     sa.Column('contact', sa.String(length=255), nullable=True),
     sa.Column('type_bussiness', sa.Enum('hotel', 'hostal', 'albergue', 'casa_rural', name='accommodationchoices'), server_default='hotel', nullable=True),
     sa.Column('region_id', sa.Integer(), nullable=True),
@@ -80,7 +81,8 @@ def upgrade():
     sa.Column('logo', sa.String(length=255), nullable=True),
     sa.Column('time_open', sa.String(length=255), nullable=True),
     sa.Column('meeting_point', sa.String(length=255), nullable=True),
-    sa.Column('coordinates', sa.String(length=255), nullable=True),
+    sa.Column('longitud', sa.Float(), nullable=True),
+    sa.Column('latitud', sa.Float(), nullable=True),
     sa.Column('contact', sa.String(length=255), nullable=True),
     sa.Column('type_bussiness', sa.Enum('activo', 'gastronomico', 'historico', 'cultural', name='experiencechoices'), server_default='activo', nullable=True),
     sa.Column('region_id', sa.Integer(), nullable=True),
@@ -96,7 +98,8 @@ def upgrade():
     sa.Column('logo', sa.String(length=255), nullable=False),
     sa.Column('time_open', sa.String(length=255), nullable=True),
     sa.Column('location', sa.String(length=255), nullable=True),
-    sa.Column('coordinates', sa.String(length=255), nullable=True),
+    sa.Column('longitud', sa.Float(), nullable=True),
+    sa.Column('latitud', sa.Float(), nullable=True),
     sa.Column('contact', sa.String(length=255), nullable=True),
     sa.Column('type_bussiness', sa.Enum('natural', 'cultural', 'historico', 'fiestas', name='patrimonychoices'), server_default='cultural', nullable=True),
     sa.Column('region_id', sa.Integer(), nullable=True),
@@ -113,7 +116,8 @@ def upgrade():
     sa.Column('time_open', sa.String(length=255), nullable=True),
     sa.Column('cart', sa.String(length=255), nullable=True),
     sa.Column('location', sa.String(length=255), nullable=True),
-    sa.Column('coordinates', sa.String(length=255), nullable=True),
+    sa.Column('longitud', sa.Float(), nullable=True),
+    sa.Column('latitud', sa.Float(), nullable=True),
     sa.Column('contact', sa.String(length=255), nullable=True),
     sa.Column('type_bussiness', sa.Enum('bar', 'chiringuito', 'restaurante', 'pub', name='restorationchoices'), server_default='bar', nullable=True),
     sa.Column('region_id', sa.Integer(), nullable=True),
