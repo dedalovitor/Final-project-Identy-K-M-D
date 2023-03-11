@@ -4,17 +4,18 @@ import { Context } from "../store/appContext";
 import { MyComponent } from "../component/mycomponent";
 import { useNavigate } from "react-router-dom";
 
+
 export const Profileuserregion = () => {
     const { store, actions } = useContext(Context);
     const [region, setRegion] = useState({ name: "", resume: "" });
     const [regions, setRegions] = useState([]);
-    const [patrimony, setPatrimony] = useState({ name: "", resume: "", type_bussiness: "patrimonio natural", time_open: "", location: "", coordinates: "", contact: "" });
+    const [patrimony, setPatrimony] = useState({ name: "", resume: "", type_bussiness: "patrimonio natural", time_open: "", location: "", longitud: "", latitud: "", contact: "" });
     const [patrimonys, setPatrimonys] = useState([]);
-    const [restoration, setRestoration] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", location: "", coordinates: "", cart: "", contact: "" });
+    const [restoration, setRestoration] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", location: "", longitud: "", latitud: "", cart: "", contact: "" });
     const [restorations, setRestorations] = useState([]);
-    const [accommodation, setAccommodation] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", location: "", coordinates: "", contact: "" });
+    const [accommodation, setAccommodation] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", location: "", longitud: "", latitud: "", contact: "" });
     const [accommodations, setAccommodations] = useState([]);
-    const [experience, setExperience] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", meeting_point: "", coordinates: "", contact: "" });
+    const [experience, setExperience] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", meeting_point: "", longitud: "", latitud: "", contact: "" });
     const [experiences, setExperiences] = useState([]);
     const [photo, setPhoto] = useState(null);
     const [logo, setLogo] = useState(null);
@@ -242,6 +243,7 @@ export const Profileuserregion = () => {
     return (
         <>
             <MyComponent></MyComponent>
+
             <nav id="navbar-example2" className="navbar bg-info px-3 mb-3 d-flex justify-content-center">
                 <ul class="nav nav-pills h4">
                     <li class="nav-item">
@@ -307,7 +309,8 @@ export const Profileuserregion = () => {
                                 <input name="resume" placeholder="resume" value={patrimony.resume} onChange={(e) => setPatrimony({ ...patrimony, "resume": e.target.value })}></input>
                                 <input name="location" placeholder="location" value={patrimony.location} onChange={(e) => setPatrimony({ ...patrimony, "location": e.target.value })}></input>
                                 <input name="time_open" placeholder="time open" value={patrimony.time_open} onChange={(e) => setPatrimony({ ...patrimony, "time_open": e.target.value })}></input>
-                                <input name="coordinates" placeholder="coordinates" value={patrimony.coordinates} onChange={(e) => setPatrimony({ ...patrimony, "coordinates": e.target.value })}></input>
+                                <input name="latitud" placeholder="latitud" value={patrimony.latitud} onChange={(e) => setPatrimony({ ...patrimony, "latitud": e.target.value })}></input>
+                                <input name="longitud" placeholder="longitud" value={patrimony.longitud} onChange={(e) => setPatrimony({ ...patrimony, "longitud": e.target.value })}></input>
                                 <input name="contact" placeholder="contact" value={patrimony.contact} onChange={(e) => setPatrimony({ ...patrimony, "contact": e.target.value })}></input>
                                 <select class="form-select" aria-label="Default select example" onChange={(e) => setPatrimony({ ...patrimony, "type_bussiness": e.target.value })}>
                                     <option disabled>tipo de patrimonio</option>
@@ -334,9 +337,9 @@ export const Profileuserregion = () => {
                                             <p className="card-text"> resume: {x.resume} </p>
                                             <p className="card-text"> location: {x.location} </p>
                                             <p className="card-text"> time_open: {x.time_open} </p>
-                                            <p className="card-text"> coordinates: {x.coordinates} </p>
                                             <p className="card-text"> contact: {x.contact} </p>
                                             <p className="card-text"> type bussiness: {x.type_bussiness} </p>
+
                                         </div>
                                         <div className="card-footer">
                                             <button className="btn btn-danger" onClick={() => deletePatrimony(x.id)}>DEL</button>

@@ -1,23 +1,22 @@
 import React from 'react'
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
-const containerStyle = {
-    width: '400px',
-    height: '400px'
-};
 
-const center = {
-    lat: -3.745,
-    lng: -38.523
-};
+
 
 export const MyComponent = () => {
+
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
     })
 
     const [map, setMap] = React.useState(null)
+
+    const center = {
+        lat: 39.45712255279278,
+        lng: -0.3541559016389045
+    }
 
     const onLoad = React.useCallback(function callback(map) {
         // This is just an example of getting and using the map instance!!! don't just blindly copy!
@@ -33,9 +32,12 @@ export const MyComponent = () => {
 
     return isLoaded ? (
         <GoogleMap
-            mapContainerStyle={containerStyle}
+            mapContainerStyle={{
+                width: '400px',
+                height: '400px'
+            }}
             center={center}
-            zoom={10}
+            zoom={2}
             onLoad={onLoad}
             onUnmount={onUnmount}
         >

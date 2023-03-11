@@ -252,7 +252,8 @@ class Patrimony(db.Model):
             "logo": self.logo,
             "time_open": self.time_open,
             "location": self.location,
-            "coordinates": self.coordinates,
+            "longitud": self.longitud,
+            "latitud": self.latitud,
             "contact": self.contact,
             "type_bussiness": self.type_bussiness.name
             

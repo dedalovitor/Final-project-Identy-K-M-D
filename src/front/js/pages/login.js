@@ -36,7 +36,6 @@ export const Login = () => {
   return (
     <div className="text-center mt-5">
       LOGIN
-      <MyComponent></MyComponent>
       <div>
         <div>
           <label htmlFor="email">Email</label>
