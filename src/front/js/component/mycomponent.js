@@ -37,7 +37,7 @@ export const MyComponent = () => {
                 height: '400px'
             }}
             center={center}
-            zoom={2}
+            zoom={100}
             onLoad={onLoad}
             onUnmount={onUnmount}
         >

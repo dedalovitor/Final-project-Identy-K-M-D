@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { MyComponent } from "../component/mycomponent";
 import { useNavigate } from "react-router-dom";
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 
 export const Profileuserregion = () => {
@@ -45,6 +46,30 @@ export const Profileuserregion = () => {
 
     useEffect(() => {
         getCurrentPatrimonyChoices();
+    }, [])
+
+    const { isLoaded } = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+    })
+
+    const [map, setMap] = React.useState(null)
+
+    const center = {
+        lat: 39.45712255279278,
+        lng: -0.3541559016389045
+    }
+
+    const onLoad = React.useCallback(function callback(map) {
+        // This is just an example of getting and using the map instance!!! don't just blindly copy!
+        const bounds = new window.google.maps.LatLngBounds(center);
+        map.fitBounds(bounds);
+
+        setMap(map)
+    }, [])
+
+    const onUnmount = React.useCallback(function callback(map) {
+        setMap(null)
     }, [])
 
     const getCurrentUserRegions = async () => {
@@ -242,7 +267,6 @@ export const Profileuserregion = () => {
 
     return (
         <>
-            <MyComponent></MyComponent>
 
             <nav id="navbar-example2" className="navbar bg-info px-3 mb-3 d-flex justify-content-center">
                 <ul class="nav nav-pills h4">
@@ -339,7 +363,20 @@ export const Profileuserregion = () => {
                                             <p className="card-text"> time_open: {x.time_open} </p>
                                             <p className="card-text"> contact: {x.contact} </p>
                                             <p className="card-text"> type bussiness: {x.type_bussiness} </p>
+                                            <GoogleMap
+                                                mapContainerStyle={{
+                                                    width: '400px',
+                                                    height: '400px'
+                                                }}
+                                                center={center}
+                                                zoom={2000}
 
+                                                onLoad={onLoad}
+                                                onUnmount={onUnmount}
+                                            >
+                                                { /* Child components, such as markers, info windows, etc. */}
+                                                <></>
+                                            </GoogleMap>
                                         </div>
                                         <div className="card-footer">
                                             <button className="btn btn-danger" onClick={() => deletePatrimony(x.id)}>DEL</button>
