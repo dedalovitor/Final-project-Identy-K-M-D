@@ -34,7 +34,7 @@ class User_region(db.Model):
     address = db.Column(db.String(100), unique=False, nullable=False)
     country= db.Column(db.String(100), unique=False, nullable=False)
     city = db.Column(db.String(100), unique=False, nullable=False)
-    regions = db.relationship('Region', backref='user_region')
+    regions = db.relationship('Region', backref='user_region', uselist=False)
 
     def serialize(self):
         return {
@@ -64,7 +64,7 @@ class Region(db.Model):
     resume = db.Column(db.Text, unique=False, nullable=False)
     photo = db.Column(db.String(255), nullable=False)
     logo = db.Column(db.String(255), nullable=False)
-    user_region_id = db.Column(db.Integer, db.ForeignKey('user_region.id'))
+    user_region_id = db.Column(db.Integer, db.ForeignKey('user_region.id'), unique=True)
     restorations = db.relationship('Restoration' ,backref='region')
     accomodation = db.relationship('Accommodation', backref='region')
     experiences = db.relationship('Experience' ,backref='region')
