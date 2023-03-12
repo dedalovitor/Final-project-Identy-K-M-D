@@ -12,7 +12,7 @@ import { Profileuserregion } from "./pages/profileuserregion";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { CityDetail } from "./pages/detail";
-import { Favorites } from "./pages/favorites";
+import Favorites from "./pages/favorites";
 
 //create your first component
 const Layout = () => {

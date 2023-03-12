@@ -157,7 +157,12 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
-                      <Link to="/favorites">❤</Link>
+                      <button
+                        className="btn btn-outline-danger mt-4"
+                        onClick={handleAddFavorite}
+                      >
+                        ❤
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -221,7 +226,12 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
-                      <Link to="/favorites">❤</Link>
+                      <button
+                        className="btn btn-outline-danger mt-4"
+                        onClick={handleAddFavorite}
+                      >
+                        ❤
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -289,7 +299,12 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
-                      <Link to="/favorites">❤</Link>
+                      <button
+                        className="btn btn-outline-danger mt-4"
+                        onClick={handleAddFavorite}
+                      >
+                        ❤
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -357,7 +372,12 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
-                      <Link to="/favorites">❤</Link>
+                      <button
+                        className="btn btn-outline-danger mt-4"
+                        onClick={handleAddFavorite}
+                      >
+                        ❤
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -422,7 +442,12 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
-                      <Link to="/favorites">❤</Link>
+                      <button
+                        className="btn btn-outline-danger mt-4"
+                        onClick={handleAddFavorite}
+                      >
+                        ❤
+                      </button>
                     </div>
                   </div>
                 </div>

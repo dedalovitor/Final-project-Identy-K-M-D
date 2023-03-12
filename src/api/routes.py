@@ -355,3 +355,52 @@ def delete_experience(region_id):
      db.session.commit()
      return jsonify({ "response": "Experience deleted correctly"}), 200
      return jsonify({ "response": "Experience not deleted"}), 400
+
+
+@api.route('/favorites', methods=['GET'])
+@jwt_required()
+def get_favorites():
+    user_id = get_jwt_identity()
+    favorites = Favorites.query.filter_by(user_id=user_id).all()
+    favorites_list = []
+    for favorite in favorites:
+        favorite_data = {}
+        favorite_data['id'] = favorite.id
+        favorite_data['user_id'] = favorite.user_id
+        favorite_data['region_id'] = favorite.region_id
+        favorite_data['restoration_id'] = favorite.restoration_id
+        favorite_data['accommodation_id'] = favorite.accommodation_id
+        favorite_data['patrimony_id'] = favorite.patrimony_id
+        favorites_list.append(favorite_data)
+    return jsonify(favorites_list), 200
+
+
+@api.route('/addfavorite', methods=['POST'])
+@jwt_required
+def add_favorite():
+    user_id = get_jwt_identity()
+    data = request.json
+    favorite = Favorites(user_id=user_id)
+    if 'region_id' in data:
+        favorite.region_id = data['region_id']
+    if 'restoration_id' in data:
+        favorite.restoration_id = data['restoration_id']
+    if 'accommodation_id' in data:
+        favorite.accommodation_id = data['accommodation_id']
+    if 'patrimony_id' in data:
+        favorite.patrimony_id = data['patrimony_id']
+    db.session.add(favorite)
+    db.session.commit()
+    return jsonify({'message': 'Favorite added successfully'}), 201
+
+@api.route('/deletefavorites/<int:id>', methods=['DELETE'])
+@jwt_required()
+def delete_favorite(id):
+    user_id = get_jwt_identity()
+    favorite = Favorites.query.filter_by(id=id, user_id=user_id).first()
+    if not favorite:
+        return jsonify({'message': 'Favorite not found'}), 404
+    db.session.delete(favorite)
+    db.session.commit()
+    return jsonify({'message': 'Favorite deleted successfully'}), 200
+
