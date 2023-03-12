@@ -92,7 +92,6 @@ export const Home = () => {
 
   return (
     <>
-      <NewFile></NewFile>
       <div
         className="container h-25 d-flex justify-content-center align-items-center"
         style={{
