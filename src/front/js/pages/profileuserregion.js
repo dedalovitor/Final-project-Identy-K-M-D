@@ -369,7 +369,7 @@ export const Profileuserregion = () => {
                                                     height: '400px'
                                                 }}
                                                 center={center}
-                                                zoom={2000}
+                                                zoom={14}
 
                                                 onLoad={onLoad}
                                                 onUnmount={onUnmount}
