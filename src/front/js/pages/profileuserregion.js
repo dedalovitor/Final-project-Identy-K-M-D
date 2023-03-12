@@ -12,15 +12,19 @@ export const Profileuserregion = () => {
     const [regions, setRegions] = useState([]);
     const [patrimony, setPatrimony] = useState({ name: "", resume: "", type_bussiness: "patrimonio natural", time_open: "", location: "", longitud: "", latitud: "", contact: "" });
     const [patrimonys, setPatrimonys] = useState([]);
-    const [restoration, setRestoration] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", location: "", longitud: "", latitud: "", cart: "", contact: "" });
+    const [restoration, setRestoration] = useState({ name: "", resume: "", type_bussiness: "restaurante", time_open: "", location: "", longitud: "", latitud: "", contact: "" });
     const [restorations, setRestorations] = useState([]);
-    const [accommodation, setAccommodation] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", location: "", longitud: "", latitud: "", contact: "" });
+    const [accommodation, setAccommodation] = useState({ name: "", resume: "", type_bussiness: "hotel", time_open: "", location: "", longitud: "", latitud: "", contact: "" });
     const [accommodations, setAccommodations] = useState([]);
-    const [experience, setExperience] = useState({ name: "", resume: "", photo: "", logo: "", type_bussiness: "", time_open: "", meeting_point: "", longitud: "", latitud: "", contact: "" });
+    const [experience, setExperience] = useState({ name: "", resume: "", type_bussiness: "turismo activo", time_open: "", meeting_point: "", longitud: "", latitud: "", contact: "" });
     const [experiences, setExperiences] = useState([]);
     const [photo, setPhoto] = useState(null);
     const [logo, setLogo] = useState(null);
+    const [cart, setCart] = useState(null);
     const [patrimonyChoice, setPatrimonyChoice] = useState([]);
+    const [restorationChoice, setRestorationChoice] = useState([]);
+    const [experienceChoice, setExperienceChoice] = useState([]);
+    const [accommodationChoice, setAccommodationChoice] = useState([]);
 
 
 
@@ -46,6 +50,18 @@ export const Profileuserregion = () => {
 
     useEffect(() => {
         getCurrentPatrimonyChoices();
+    }, [])
+
+    useEffect(() => {
+        getCurrentRestorationChoices();
+    }, [])
+
+    useEffect(() => {
+        getCurrentExperienceChoices();
+    }, [])
+
+    useEffect(() => {
+        getCurrentAccommodationChoices();
     }, [])
 
     const { isLoaded } = useJsApiLoader({
@@ -95,6 +111,38 @@ export const Profileuserregion = () => {
         setPatrimonyChoice(data.results);
     }
 
+    const getCurrentRestorationChoices = async () => {
+        const response = await fetch(process.env.BACKEND_URL + "/api/restoration_choice", {
+            method: "GET",
+            headers: {
+                "content-Type": "application/json",
+            }
+        });
+        const data = await response.json();
+        setRestorationChoice(data.results);
+    }
+
+    const getCurrentExperienceChoices = async () => {
+        const response = await fetch(process.env.BACKEND_URL + "/api/experience_choice", {
+            method: "GET",
+            headers: {
+                "content-Type": "application/json",
+            }
+        });
+        const data = await response.json();
+        setExperienceChoice(data.results);
+    }
+
+    const getCurrentAccommodationChoices = async () => {
+        const response = await fetch(process.env.BACKEND_URL + "/api/accommodation_choice", {
+            method: "GET",
+            headers: {
+                "content-Type": "application/json",
+            }
+        });
+        const data = await response.json();
+        setAccommodationChoice(data.results);
+    }
     const getCurrentRegionPatrimony = async () => {
         const response = await fetch(process.env.BACKEND_URL + "/api/patrimonys_user", {
             method: "GET",
@@ -197,18 +245,22 @@ export const Profileuserregion = () => {
         if (response.ok) getCurrentRegionPatrimony();
     }
 
+
     const createRestoration = async () => {
+        let body = new FormData();
+        body.append("photo", photo[0]);
+        body.append("logo", logo[0]);
+        body.append("cart", cart[0]);
+        body.append("restoration", JSON.stringify(restoration));
         const response = await fetch(process.env.BACKEND_URL + "/api/restoration", {
             method: "POST",
             headers: {
-                "content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("token")
             },
-            body: JSON.stringify(restoration)
+            body: body
         });
         if (response.ok) getCurrentRegionRestoration();
     }
-
     const deleteRestoration = async (id) => {
         const response = await fetch(process.env.BACKEND_URL + "/api/restoration/" + id, {
             method: "DELETE",
@@ -219,14 +271,18 @@ export const Profileuserregion = () => {
         });
         if (response.ok) getCurrentRegionRestoration();
     }
+
     const createAccommodation = async () => {
+        let body = new FormData();
+        body.append("photo", photo[0]);
+        body.append("logo", logo[0]);
+        body.append("accommodation", JSON.stringify(accommodation));
         const response = await fetch(process.env.BACKEND_URL + "/api/accommodation", {
             method: "POST",
             headers: {
-                "content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("token")
             },
-            body: JSON.stringify(accommodation)
+            body: body
         });
         if (response.ok) getCurrentRegionAccommodation();
     }
@@ -243,13 +299,16 @@ export const Profileuserregion = () => {
     }
 
     const createExperience = async () => {
+        let body = new FormData();
+        body.append("photo", photo[0]);
+        body.append("logo", logo[0]);
+        body.append("experience", JSON.stringify(experience));
         const response = await fetch(process.env.BACKEND_URL + "/api/experience", {
             method: "POST",
             headers: {
-                "content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("token")
             },
-            body: JSON.stringify(experience)
+            body: body
         });
         if (response.ok) getCurrentRegionExperience();
     }
@@ -296,8 +355,9 @@ export const Profileuserregion = () => {
                                 <input name="name" value={region.name} onChange={(e) => setRegion({ ...region, "name": e.target.value })}></input>
                                 <input name="resume" value={region.resume} onChange={(e) => setRegion({ ...region, "resume": e.target.value })}></input>
 
-
+                                <p>Sube la foto</p>
                                 <input type="file" onChange={e => setPhoto(e.target.files)} />
+                                <p>Sube el logo</p>
                                 <input type="file" onChange={e => setLogo(e.target.files)} />
 
 
@@ -343,8 +403,9 @@ export const Profileuserregion = () => {
                                     })}
 
                                 </select>
-
+                                <p>Sube la foto</p>
                                 <input type="file" onChange={e => setPhoto(e.target.files)} />
+                                <p>Sube el logo</p>
                                 <input type="file" onChange={e => setLogo(e.target.files)} />
 
                                 <button className="btn btn-success" onClick={() => createPatrimony()}>CREATE PATRIMONY</button>
@@ -362,7 +423,7 @@ export const Profileuserregion = () => {
                                             <p className="card-text"> location: {x.location} </p>
                                             <p className="card-text"> time_open: {x.time_open} </p>
                                             <p className="card-text"> contact: {x.contact} </p>
-                                            <p className="card-text"> type bussiness: {x.type_bussiness} </p>
+                                            <p className="card-text"> type bussiness: patrimonio {x.type_bussiness} </p>
                                             <GoogleMap
                                                 mapContainerStyle={{
                                                     width: '400px',
@@ -392,11 +453,27 @@ export const Profileuserregion = () => {
                     <div className="row col-12">
                         <div className="col-4">
                             <div className="card">
-                                {Object.keys(restoration).map((key, i) => {
-                                    return <input placeholder={key} key={i} name={key} defaultValue={restoration[key]}
-                                        onChange={(e) => setRestoration({ ...restoration, [key]: e.target.value })}>
-                                    </input>
-                                })}
+                                <input name="name" placeholder="name" value={restoration.name} onChange={(e) => setRestoration({ ...restoration, "name": e.target.value })}></input>
+                                <input name="resume" placeholder="resume" value={restoration.resume} onChange={(e) => setRestoration({ ...restoration, "resume": e.target.value })}></input>
+                                <input name="location" placeholder="location" value={restoration.location} onChange={(e) => setRestoration({ ...restoration, "location": e.target.value })}></input>
+                                <input name="time_open" placeholder="time open" value={restoration.time_open} onChange={(e) => setRestoration({ ...restoration, "time_open": e.target.value })}></input>
+                                <input name="latitud" placeholder="latitud" value={restoration.latitud} onChange={(e) => setRestoration({ ...restoration, "latitud": e.target.value })}></input>
+                                <input name="longitud" placeholder="longitud" value={restoration.longitud} onChange={(e) => setRestoration({ ...restoration, "longitud": e.target.value })}></input>
+                                <input name="contact" placeholder="contact" value={restoration.contact} onChange={(e) => setRestoration({ ...restoration, "contact": e.target.value })}></input>
+                                <select class="form-select" aria-label="Default select example" onChange={(e) => setRestoration({ ...restoration, "type_bussiness": e.target.value })}>
+                                    <option disabled>tipo de restauración</option>
+                                    {restorationChoice.map((x) => {
+                                        return <option key={x} value={x} >{x}</option>
+                                    })}
+
+                                </select>
+                                <p>Sube la foto</p>
+                                <input type="file" onChange={e => setPhoto(e.target.files)} />
+                                <p>Sube el logo</p>
+                                <input type="file" onChange={e => setLogo(e.target.files)} />
+                                <p>Sube la carta</p>
+                                <input type="file" onChange={e => setCart(e.target.files)} />
+
                                 <button className="btn btn-success" onClick={() => createRestoration()}>CREATE RESTORATION</button>
                             </div>
                         </div>
@@ -409,7 +486,11 @@ export const Profileuserregion = () => {
                                         <div className="card-body">
                                             <p className="card-text"> name: {x.name} </p>
                                             <p className="card-text"> resume: {x.resume} </p>
+                                            <p className="card-text"> location: {x.location} </p>
+                                            <p className="card-text"> time_open: {x.time_open} </p>
+                                            <p className="card-text"> contact: {x.contact} </p>
                                             <p className="card-text"> type bussiness: {x.type_bussiness} </p>
+                                            <a href={x.cart} download>ve la carta</a>
                                         </div>
                                         <div className="card-footer">
                                             <button className="btn btn-danger" onClick={() => deleteRestoration(x.id)}>DEL</button>
@@ -426,13 +507,23 @@ export const Profileuserregion = () => {
                     <div className="row col-12">
                         <div className="col-4">
                             <div className="card">
-                                {Object.keys(accommodation).map((key, i) => {
-                                    return <input placeholder={key} key={i} name={key} defaultValue={accommodation[key]}
-                                        onChange={(e) => setAccommodation({ ...accommodation, [key]: e.target.value })}>
-                                    </input>
-                                }
+                                <input name="name" placeholder="name" value={accommodation.name} onChange={(e) => setAccommodation({ ...accommodation, "name": e.target.value })}></input>
+                                <input name="resume" placeholder="resume" value={accommodation.resume} onChange={(e) => setAccommodation({ ...accommodation, "resume": e.target.value })}></input>
+                                <input name="time_open" placeholder="time open" value={accommodation.time_open} onChange={(e) => setAccommodation({ ...accommodation, "time_open": e.target.value })}></input>
+                                <input name="latitud" placeholder="latitud" value={accommodation.latitud} onChange={(e) => setAccommodation({ ...accommodation, "latitud": e.target.value })}></input>
+                                <input name="longitud" placeholder="longitud" value={accommodation.longitud} onChange={(e) => setAccommodation({ ...accommodation, "longitud": e.target.value })}></input>
+                                <input name="contact" placeholder="contact" value={accommodation.contact} onChange={(e) => setAccommodation({ ...accommodation, "contact": e.target.value })}></input>
+                                <select class="form-select" aria-label="Default select example" onChange={(e) => setAccommodation({ ...accommodation, "type_bussiness": e.target.value })}>
+                                    <option disabled>tipo de hostelería</option>
+                                    {accommodationChoice.map((x) => {
+                                        return <option key={x} value={x} >{x}</option>
+                                    })}
 
-                                )}
+                                </select>
+                                <p>Sube la foto</p>
+                                <input type="file" onChange={e => setPhoto(e.target.files)} />
+                                <p>Sube el logo</p>
+                                <input type="file" onChange={e => setLogo(e.target.files)} />
                                 <button className="btn btn-success" onClick={() => createAccommodation()}>CREATE ACCOMMODATION</button>
                             </div>
                         </div>
@@ -445,6 +536,9 @@ export const Profileuserregion = () => {
                                         <div className="card-body">
                                             <p className="card-text"> name: {x.name} </p>
                                             <p className="card-text"> resume: {x.resume} </p>
+                                            <p className="card-text"> location: {x.location} </p>
+                                            <p className="card-text"> time_open: {x.time_open} </p>
+                                            <p className="card-text"> contact: {x.contact} </p>
                                             <p className="card-text"> type bussiness: {x.type_bussiness} </p>
                                         </div>
                                         <div className="card-footer">
@@ -465,13 +559,25 @@ export const Profileuserregion = () => {
                     <div className="row col-12">
                         <div className="col-4">
                             <div className="card">
-                                {Object.keys(experience).map((key, i) => {
-                                    return <input placeholder={key} key={i} name={key} defaultValue={experience[key]}
-                                        onChange={(e) => setExperience({ ...experience, [key]: e.target.value })}>
-                                    </input>
-                                }
+                                <input name="name" placeholder="name" value={experience.name} onChange={(e) => setExperience({ ...experience, "name": e.target.value })}></input>
+                                <input name="resume" placeholder="resume" value={experience.resume} onChange={(e) => setExperience({ ...experience, "resume": e.target.value })}></input>
+                                <input name="meeting point" placeholder="meeting point" value={experience.meeting_point} onChange={(e) => setExperience({ ...experience, "meeting_point": e.target.value })}></input>
+                                <input name="time_open" placeholder="time open" value={experience.time_open} onChange={(e) => setExperience({ ...experience, "time_open": e.target.value })}></input>
+                                <input name="latitud" placeholder="latitud" value={experience.latitud} onChange={(e) => setExperience({ ...experience, "latitud": e.target.value })}></input>
+                                <input name="longitud" placeholder="longitud" value={experience.longitud} onChange={(e) => setExperience({ ...experience, "longitud": e.target.value })}></input>
+                                <input name="contact" placeholder="contact" value={experience.contact} onChange={(e) => setExperience({ ...experience, "contact": e.target.value })}></input>
+                                <select class="form-select" aria-label="Default select example" onChange={(e) => setExperience({ ...experience, "type_bussiness": e.target.value })}>
+                                    <option disabled>tipo de experiencia</option>
+                                    {experienceChoice.map((x) => {
+                                        return <option key={x} value={x} >{x}</option>
+                                    })}
 
-                                )}
+                                </select>
+                                <p>Sube la foto</p>
+                                <input type="file" onChange={e => setPhoto(e.target.files)} />
+                                <p>Sube el logo</p>
+                                <input type="file" onChange={e => setLogo(e.target.files)} />
+
                                 <button className="btn btn-success" onClick={() => createExperience()}>CREATE EXPERIENCE</button>
                             </div>
                         </div>
@@ -484,7 +590,10 @@ export const Profileuserregion = () => {
                                         <div className="card-body">
                                             <p className="card-text"> name: {x.name} </p>
                                             <p className="card-text"> resume: {x.resume} </p>
-                                            <p className="card-text"> type bussiness: {x.type_bussiness} </p>
+                                            <p className="card-text"> meeting point: {x.meeting_point} </p>
+                                            <p className="card-text"> time_open: {x.time_open} </p>
+                                            <p className="card-text"> contact: {x.contact} </p>
+                                            <p className="card-text"> type bussiness: turismo {x.type_bussiness} </p>
                                         </div>
                                         <div className="card-footer">
                                             <button className="btn btn-danger" onClick={() => deleteExperience(x.id)}>DEL</button>

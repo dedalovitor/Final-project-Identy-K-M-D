@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 from flask import Flask, request, jsonify, url_for, Blueprint, json
 
-from api.models import db, User, Region, Restoration, Accommodation, Experience, Patrimony , User_region , PatrimonyChoices
+from api.models import db, User, Region, Restoration, Accommodation, Experience, Patrimony , User_region , PatrimonyChoices, RestorationChoices, AccommodationChoices, ExperienceChoices
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
@@ -29,6 +29,21 @@ def handle_hello():
 def patrimony_choice():
     patrimony_choice = [str(e.value) for e in PatrimonyChoices]
     return jsonify({"results": patrimony_choice}), 200
+
+@api.route('/restoration_choice', methods=['GET'])
+def restoration_choice():
+    restoration_choice = [str(e.value) for e in RestorationChoices]
+    return jsonify({"results": restoration_choice}), 200
+
+@api.route('/accommodation_choice', methods=['GET'])
+def accommodation_choice():
+    accommodation_choice = [str(e.value) for e in AccommodationChoices]
+    return jsonify({"results": accommodation_choice}), 200
+
+@api.route('/experience_choice', methods=['GET'])
+def experience_choice():
+    experience_choice = [str(e.value) for e in ExperienceChoices]
+    return jsonify({"results": experience_choice}), 200
 
 
 @api.route('/login', methods=['POST'])
@@ -275,13 +290,21 @@ def delete_patrimony(region_id):
 @jwt_required()
 def create_restoration():
     region_id = get_jwt_identity()
-    body_name = request.json.get("name")
-    body_resume = request.json.get("resume")
-    body_photo = request.json.get("photo")
-    body_logo = request.json.get("logo")
-    body_type_bussiness = request.json.get("type_bussiness")
+    body = json.loads(request.form["restoration"])
+    body_name = body["name"]
+    body_resume = body["resume"]
+    body_time_open = body["time_open"]
+    body_location = body["location"]
+    body_latitud = body["latitud"]
+    body_longitud = body["longitud"]
+    body_contact = body["contact"]
+    body_photo = cloudinary.uploader.upload(request.files['photo'])
+    body_logo = cloudinary.uploader.upload(request.files['logo'])
+    body_cart = cloudinary.uploader.upload(request.files['cart'])
+    body_type_bussiness = body["type_bussiness"]
+    
   
-    new_restoration = Restoration(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, type_bussiness=body_type_bussiness, region_id=region_id)
+    new_restoration = Restoration(name=body_name, resume=body_resume, location = body_location, time_open = body_time_open, latitud = body_latitud, longitud = body_longitud, contact = body_contact, type_bussiness=RestorationChoices(body_type_bussiness), photo=body_photo['secure_url'], logo=body_logo['secure_url'], cart=body_cart['secure_url'], region_id=region_id)
     db.session.add(new_restoration)
     db.session.commit()
     return jsonify({"response": "Restoration registered successfully"}), 200
@@ -309,13 +332,20 @@ def delete_restoration(region_id):
 @jwt_required()
 def create_accommodation():
     region_id = get_jwt_identity()
-    body_name = request.json.get("name")
-    body_resume = request.json.get("resume")
-    body_photo = request.json.get("photo")
-    body_logo = request.json.get("logo")
-    body_type_bussiness = request.json.get("type_bussiness")
+    body = json.loads(request.form["accommodation"])
+    body_name = body["name"]
+    body_resume = body["resume"]
+    body_time_open = body["time_open"]
+    body_location = body["location"]
+    body_latitud = body["latitud"]
+    body_longitud = body["longitud"]
+    body_contact = body["contact"]
+    body_photo = cloudinary.uploader.upload(request.files['photo'])
+    body_logo = cloudinary.uploader.upload(request.files['logo'])
+    body_type_bussiness = body["type_bussiness"]
+    
   
-    new_accommodation = Accommodation(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, type_bussiness=body_type_bussiness, region_id=region_id)
+    new_accommodation = Accommodation(name=body_name, resume=body_resume, location = body_location, time_open = body_time_open, latitud = body_latitud, longitud = body_longitud, contact = body_contact, type_bussiness=AccommodationChoices(body_type_bussiness), photo=body_photo['secure_url'], logo=body_logo['secure_url'], region_id=region_id)
     db.session.add(new_accommodation)
     db.session.commit()
     return jsonify({"response": "Accommodation registered successfully"}), 200
@@ -343,13 +373,20 @@ def delete_accommodation(region_id):
 @jwt_required()
 def create_experience():
     region_id = get_jwt_identity()
-    body_name = request.json.get("name")
-    body_resume = request.json.get("resume")
-    body_photo = request.json.get("photo")
-    body_logo = request.json.get("logo")
-    body_type_bussiness = request.json.get("type_bussiness")
+    body = json.loads(request.form["experience"])
+    body_name = body["name"]
+    body_resume = body["resume"]
+    body_time_open = body["time_open"]
+    body_meeting_point = body["meeting_point"]
+    body_latitud = body["latitud"]
+    body_longitud = body["longitud"]
+    body_contact = body["contact"]
+    body_photo = cloudinary.uploader.upload(request.files['photo'])
+    body_logo = cloudinary.uploader.upload(request.files['logo'])
+    body_type_bussiness = body["type_bussiness"]
+    
   
-    new_experience = Experience(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, type_bussiness=body_type_bussiness, region_id=region_id)
+    new_experience = Experience(name=body_name, resume=body_resume, meeting_point = body_meeting_point, time_open = body_time_open, latitud = body_latitud, longitud = body_longitud, contact = body_contact, type_bussiness=ExperienceChoices(body_type_bussiness), photo=body_photo['secure_url'], logo=body_logo['secure_url'], region_id=region_id)
     db.session.add(new_experience)
     db.session.commit()
     return jsonify({"response": "Experience registered successfully"}), 200
