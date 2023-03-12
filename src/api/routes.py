@@ -1,9 +1,10 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint, json
 
-from api.models import db, User, Region, Restoration, Accommodation, Experience, Patrimony , User_region , PatrimonyChoices, RestorationChoices, AccommodationChoices, ExperienceChoices
+from flask import Flask, request, jsonify, url_for, Blueprint, json
+from api.models import db, User, Region, Restoration, Accommodation, Experience, Patrimony , Comments, User_region , PatrimonyChoices, RestorationChoices, AccommodationChoices, ExperienceChoices
+
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
@@ -96,11 +97,45 @@ def get_regions():
     regions = Region.query.all()
     return jsonify({"result": [x.serialize()for x in regions]}), 200
 
-# @api.route('/regions/<int:region_id>', methods=['GET'])
-# def get_regions_by_id(region_id):
-#     regions = Region.query.filter_by(region_id=region_id)
-#     return jsonify({"result": [x.serialize()for x in regions]}), 200
+@api.route('/regions/<int:region_id>', methods=['GET'])
+def get_regions_by_id(region_id):
+    region = Region.query.filter_by(id=region_id).first()
+    return jsonify({"result": region.inforegion()}), 200
 
+@api.route('/patrimonys/<int:patrimony_id>', methods=['GET'])
+def get_patrimonys_by_id(patrimony_id):
+    patrimony = Patrimony.query.filter_by(id=patrimony_id).first()
+    return jsonify({"result": patrimony.serialize()}), 200
+
+@api.route('/restorations/<int:restoration_id>', methods=['GET'])
+def get_restorations_by_id(restoration_id):
+    restoration = Restoration.query.filter_by(id=restoration_id).first()
+    return jsonify({"result": restoration.serialize()}), 200
+
+@api.route('/accommodations/<int:accommodation_id>', methods=['GET'])
+def get_accommodations_by_id(accommodation_id):
+    accommodation = Accommodation.query.filter_by(id=accommodation_id).first()
+    return jsonify({"result": accommodation.serialize()}), 200
+
+@api.route('/experiences/<int:experience_id>', methods=['GET'])
+def get_experiences_by_id(experience_id):
+    experience = Experience.query.filter_by(id=experience_id).first()
+    return jsonify({"result": experience.serialize()}), 200
+
+
+@api.route('/comments/<int:id>', methods=['GET'])
+def comments_restoration(id):
+    comments = Comments.query.filter_by(restoration_id=id).all()
+    result = [comments.serialize() for comments in comments]
+    return jsonify(result), 200
+
+@api.route('/addcomments/<int:id>', methods=['POST'])
+def addcomments_restoration(id):
+    request_data = request.get_json()
+    result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), restoration_id=request_data.get("params"))    
+    db.session.add(result)
+    db.session.commit()
+    return "success", 200
 
 @api.route('/regions_with_patrimony', methods=['GET'])
 def get_regions_with_patrimony():

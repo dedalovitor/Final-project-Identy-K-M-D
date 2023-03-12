@@ -17,6 +17,7 @@ export const Navbar = () => {
               height="65"
             ></img>
           </span>
+
         </Link>
         <div className="ml-auto">
           {store.dataUser ? (
@@ -40,6 +41,7 @@ export const Navbar = () => {
               </Link>
             </>
           )}
+          
         </div>
       </div>
     </nav>

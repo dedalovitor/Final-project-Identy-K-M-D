@@ -99,50 +99,46 @@ export const Home = () => {
           backgroundSize: "cover",
         }}
       >
-        <div>
-          <button type="button" className="btn btn-outline-primary m-2">
-            Alojamientos
-          </button>
-          <button type="button" className="btn btn-outline-dark m-2">
-            Cosas que hacer
-          </button>
-          <button type="button" className="btn btn-outline-success m-2">
-            Restaurantes/Gastronomia
-          </button>
-          <button type="button" className="btn btn-outline-danger m-2">
-            Lugares que Visitar/Patrimonio
-          </button>
-          <button type="button" className="btn btn-outline-warning m-2">
-            Visitas Guiadas
-          </button>
+        <div className="container h-25 d-flex justify-content-center align-items-center p-4">
+          <div>
+            <button type="button" className="button1 btn btn-outline-danger m-2 ">
+              <a href="#scrollspyHeading1">Lugares que Visitar/Patrimonio<img src="https://cdn-icons-png.flaticon.com/512/1009/1009921.png" className="img-patrimony" alt="Responsive image"></img></a>
+            </button>
+            <button type="button" className="button1 btn btn-outline-success m-2">
+              <a href="#scrollspyHeading2"> Restaurantes/Gastronomia<img src="https://cdn-icons-png.flaticon.com/128/1980/1980788.png" className="img-restoration" alt="Responsive image"></img></a>
+            </button>
+            <button type="button" className="button1 btn btn-outline-primary m-2">
+              <a href="#scrollspyHeading3">Alojamientos<img src="https://cdn-icons-png.flaticon.com/128/2933/2933772.png" className="img-accommodation" alt="Responsive image"></img></a>
+            </button>
+            <button type="button" className="button1 btn btn-outline-warning m-2">
+              <a href="#scrollspyHeading4">Visitas Guiadas<img src="https://w7.pngwing.com/pngs/337/767/png-transparent-location-marker-path-road-navigation-and-mapping-icon.png" className="img-route" alt="Responsive image"></img></a>
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="row mx-5 p-4">
-        <Search />
       </div>
       <div className="row mx-5 p-4">
         <Discover />
       </div>
-      <div className="text-center">
+      <div className="text-center p-4">
         <h3>Ciudades con encanto</h3>
       </div>
-      <div className="row mx-5 p-4 card-row">
+      <div className="row mx-5 p-4 card-row justify-content-center align-items-center">
         {indexRegions[0] > 0 ? (
           <button
-            className="btn btn-primary previousRegion"
+            className="btn btn-outline-danger previousRegion"
             onClick={() => {
               const newIndexRegion = [...indexRegions];
               setIndexRegions(newIndexRegion.map((x) => x - 1));
             }}
           >
-            <h2>←</h2>
+              <h2 style={{marginTop: '-3px'}}>←</h2>
           </button>
         ) : null}
         {indexRegions.map((indexRegion) => {
           return (
             <div
               key={regions[indexRegion].id}
-              className="col-2 col-sm-6 col-md-4 col-lg-3"
+              className="col-2 col-sm-6 col-md-4 col-lg-2"
             >
               <div className="card">
                 <img
@@ -152,14 +148,14 @@ export const Home = () => {
                   alt={regions[indexRegion].name}
                 />
                 <div className="card-body">
-                  <h5 className="card-title text-center">
+                  <h5 className="namecard card-title text-center">
                     {regions[indexRegion].name}
                   </h5>
                   <div className="card-text text-center">
-                    <img src={regions[indexRegion].logo} height="100px"></img>
+                    <img src={regions[indexRegion].logo} height="60px"></img>
                     <div>
-                      <Link to={`/${regions[indexRegion].name}`}>
-                        <button className="btn btn-primary mt-4">
+                      <Link to={`/ciudad/${regions[indexRegion].id}`}>
+                        <button className="btn btn-outline-danger mt-4">
                           Ver lugar
                         </button>
                       </Link>
@@ -172,37 +168,37 @@ export const Home = () => {
         })}
         {indexRegions[indexRegions.length - 1] < regions.length - 1 ? (
           <button
-            className="btn btn-primary nextRegion"
+            className="btn btn-outline-danger nextRegion"
             onClick={() => {
               const newIndexRegion = [...indexRegions];
               setIndexRegions(newIndexRegion.map((x) => x + 1));
             }}
           >
-            <h2>→</h2>
+            <h2 style={{marginTop: '-3px'}}>→</h2>
           </button>
         ) : null}
       </div>
-      <div className="text-center">
+      <div className="text-center" id="scrollspyHeading1">
         <h3>Patrimonio natural, arquitectónico, histórico que descubrir</h3>
       </div>
 
-      <div className="row mx-5 p-4 card-row">
+      <div className="row mx-5 p-4 card-row justify-content-center align-items-center">
         {indexPatrimonys[0] > 0 ? (
           <button
-            className="btn btn-primary previousPatrimony"
+            className="btn btn-outline-danger previousPatrimony"
             onClick={() => {
               const newIndexPatrimony = [...indexPatrimonys];
               setIndexPatrimonys(newIndexPatrimony.map((x) => x - 1));
             }}
           >
-            <h2>←</h2>
+            <h2 style={{marginTop: '-3px'}}>←</h2>
           </button>
         ) : null}
         {indexPatrimonys.map((indexPatrimony) => {
           return (
             <div
               key={patrimonys[indexPatrimony].id}
-              className="col-2 col-sm-6 col-md-4 col-lg-3"
+              className="col-2 col-sm-6 col-md-4 col-lg-2"
             >
               <div className="card">
                 <img
@@ -212,7 +208,7 @@ export const Home = () => {
                   alt={patrimonys[indexPatrimony].name}
                 />
                 <div className="card-body">
-                  <h5 className="card-title text-center">
+                  <h5 className="namecard card-title text-center">
                     {patrimonys[indexPatrimony].name}
                   </h5>
                   <div className="card-text text-center">
@@ -221,8 +217,8 @@ export const Home = () => {
                       height="100px"
                     ></img>
                     <div>
-                      <Link to={`/${patrimonys[indexPatrimony].name}`}>
-                        <button className="btn btn-primary mt-4">
+                      <Link to={`/patrimonio/${patrimonys[indexPatrimony].id}`}>
+                        <button className="btn btn-outline-danger mt-4">
                           Ver lugar
                         </button>
                       </Link>
@@ -235,38 +231,38 @@ export const Home = () => {
         })}
         {indexPatrimonys[indexPatrimonys.length - 1] < patrimonys.length - 1 ? (
           <button
-            className="btn btn-primary nextPatrimony"
+            className="btn btn-outline-danger nextPatrimony"
             onClick={() => {
               const newIndexPatrimony = [...indexPatrimonys];
               setIndexPatrimonys(newIndexPatrimony.map((x) => x + 1));
             }}
           >
-            <h2>→</h2>
+            <h2 style={{marginTop: '-3px'}}>→</h2>
           </button>
         ) : null}
       </div>
-
-      <div className="text-center">
+      <div className="text-center" id="scrollspyHeading2">
         <h3>Donde comer bien</h3>
       </div>
 
-      <div className="row mx-5 p-4 card-row">
+      <div className="row mx-5 p-4 card-row justify-content-center align-items-center">
+
         {indexRestorations[0] > 0 ? (
           <button
-            className="btn btn-primary previousRestoration"
+            className="btn btn-outline-danger previousRestoration"
             onClick={() => {
               const newIndexRestoration = [...indexRestorations];
               setIndexRestorations(newIndexRestoration.map((x) => x - 1));
             }}
           >
-            <h2>←</h2>
+            <h2 style={{marginTop: '-3px'}}>←</h2>
           </button>
         ) : null}
         {indexRestorations.map((indexRestoration) => {
           return (
             <div
               key={restorations[indexRestoration].id}
-              className="col-2 col-sm-6 col-md-4 col-lg-3"
+              className="col-2 col-sm-6 col-md-4 col-lg-2"
             >
               <div className="card">
                 <img
@@ -276,7 +272,7 @@ export const Home = () => {
                   alt={restorations[indexRestoration].name}
                 />
                 <div className="card-body">
-                  <h5 className="card-title text-center">
+                  <h5 className="namecard card-title text-center">
                     {restorations[indexRestoration].name}
                   </h5>
                   <p className="card-text text-center">
@@ -288,8 +284,10 @@ export const Home = () => {
                       height="100px"
                     ></img>
                     <div>
-                      <Link to={`/${restorations[indexRestoration].name}`}>
-                        <button className="btn btn-primary mt-4">
+                      <Link
+                        to={`/restoration/${restorations[indexRestoration].id}`}
+                      >
+                        <button className="btn btn-outline-danger mt-4">
                           Ver lugar
                         </button>
                       </Link>
@@ -301,39 +299,39 @@ export const Home = () => {
           );
         })}
         {indexRestorations[indexRestorations.length - 1] <
-          restorations.length - 1 ? (
+        restorations.length - 1 ? (
           <button
-            className="btn btn-primary nextRestoration"
+            className="btn btn-outline-danger nextRestoration"
             onClick={() => {
               const newIndexRestoration = [...indexRestorations];
               setIndexRestorations(newIndexRestoration.map((x) => x + 1));
             }}
           >
-            <h2>→</h2>
+            <h2 style={{marginTop: '-3px'}}>→</h2>
           </button>
         ) : null}
       </div>
-      <div className="text-center">
+      <div className="text-center" id="scrollspyHeading3">
         <h3>Alojamientos con encanto</h3>
       </div>
 
-      <div className="row mx-5 p-4 card-row">
+      <div className="row mx-5 p-4 card-row justify-content-center align-items-center">
         {indexAccommodations[0] > 0 ? (
           <button
-            className="btn btn-primary previousAccommodation"
+            className="btn btn-outline-danger previousAccommodation"
             onClick={() => {
               const newIndexAccommodation = [...indexAccommodations];
               setIndexAccommodations(newIndexAccommodation.map((x) => x - 1));
             }}
           >
-            <h2>←</h2>
+            <h2 style={{marginTop: '-3px'}}>←</h2>
           </button>
         ) : null}
         {indexAccommodations.map((indexAccommodation) => {
           return (
             <div
               key={accommodations[indexAccommodation].id}
-              className="col-2 col-sm-6 col-md-4 col-lg-3"
+              className="col-2 col-sm-6 col-md-4 col-lg-2"
             >
               <div className="card">
                 <img
@@ -343,7 +341,7 @@ export const Home = () => {
                   alt={accommodations[indexAccommodation].name}
                 />
                 <div className="card-body">
-                  <h5 className="card-title text-center">
+                  <h5 className="namecard card-title text-center">
                     {accommodations[indexAccommodation].name}
                   </h5>
                   <p className="card-text text-center">
@@ -355,8 +353,10 @@ export const Home = () => {
                       height="100px"
                     ></img>
                     <div>
-                      <Link to={`/${accommodations[indexAccommodation].name}`}>
-                        <button className="btn btn-primary mt-4">
+                      <Link
+                        to={`/accommodation/${accommodations[indexAccommodation].id}`}
+                      >
+                        <button className="btn btn-outline-danger mt-4">
                           Ver lugar
                         </button>
                       </Link>
@@ -368,26 +368,26 @@ export const Home = () => {
           );
         })}
         {indexAccommodations[indexAccommodations.length - 1] <
-          accommodations.length - 1 ? (
+        accommodations.length - 1 ? (
           <button
-            className="btn btn-primary nextAccommodation"
+            className="btn btn-outline-danger nextAccommodation"
             onClick={() => {
               const newIndexAccommodation = [...indexAccommodations];
               setIndexAccommodations(newIndexAccommodation.map((x) => x + 1));
             }}
           >
-            <h2>→</h2>
+            <h2 style={{marginTop: '-3px'}}>→</h2>
           </button>
         ) : null}
       </div>
-      <div className="text-center">
+      <div className="text-center" id="scrollspyHeading4">
         <h3>Visitas / Experiencias Guiadas</h3>
       </div>
 
-      <div className="row mx-5 p-4 card-row">
+      <div className="row mx-5 p-4 card-row justify-content-center align-items-center">
         {indexExperiences[0] > 0 ? (
           <button
-            className="btn btn-primary previousExperience"
+            className="btn btn-outline-danger previousExperience"
             onClick={() => {
               const newIndexExperience = [...indexExperiences];
               setIndexExperiences(newIndexExperience.map((x) => x - 1));
@@ -400,7 +400,7 @@ export const Home = () => {
           return (
             <div
               key={experiences[indexExperience].id}
-              className="col-2 col-sm-6 col-md-4 col-lg-3"
+              className="col-2 col-sm-6 col-md-4 col-lg-2"
             >
               <div className="card">
                 <img
@@ -410,7 +410,7 @@ export const Home = () => {
                   alt={experiences[indexExperience].name}
                 />
                 <div className="card-body">
-                  <h5 className="card-title text-center">
+                  <h5 className="namecard card-title text-center">
                     {experiences[indexExperience].name}
                   </h5>
                   <div className="card-text text-center">
@@ -419,8 +419,10 @@ export const Home = () => {
                       height="100px"
                     ></img>
                     <div>
-                      <Link to={`/${experiences[indexExperience].name}`}>
-                        <button className="btn btn-primary mt-4">
+                      <Link
+                        to={`/experience/${experiences[indexExperience].id}`}
+                      >
+                        <button className="btn btn-outline-danger mt-4">
                           Ver lugar
                         </button>
                       </Link>
@@ -432,15 +434,16 @@ export const Home = () => {
           );
         })}
         {indexExperiences[indexExperiences.length - 1] <
-          experiences.length - 1 ? (
+        experiences.length - 1 ? (
+
           <button
-            className="btn btn-primary nextExperience"
+            className="btn btn-outline-danger nextExperience"
             onClick={() => {
               const newIndexExperience = [...indexExperiences];
               setIndexExperiences(newIndexExperience.map((x) => x + 1));
             }}
           >
-            <h2>→</h2>
+            <h2 style={{marginTop: '-3px'}}>→</h2>
           </button>
         ) : null}
       </div>

@@ -218,6 +218,7 @@ class Experience(db.Model):
             "latitud": self.latitud,
             "contact": self.contact,
             "type_bussiness": self.type_bussiness.name
+
             
             # do not serialize the password, its a security breach
             }
@@ -260,6 +261,7 @@ class Patrimony(db.Model):
             "contact": self.contact,
             "type_bussiness": self.type_bussiness.name
             
+
             # do not serialize the password, its a security breach
             }
     def __repr__(self):
@@ -303,3 +305,13 @@ class Comments(db.Model):
     accommodation = db.relationship('Accommodation')
     patrimony_id = db.Column(db.Integer, db.ForeignKey('patrimony.id'))
     patrimony = db.relationship('Patrimony')
+
+    def serialize(self):
+        return {
+            "user_id": self.user_id,
+            "user_region": self.user_region,
+            "text": self.text,
+            # do not serialize the password, its a security breach
+        }
+    def __repr__(self):
+        return f'{self.name}'

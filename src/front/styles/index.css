@@ -1,85 +1,95 @@
 .nextRegion {
-  position: absolute;
+  position: inherit;
   top: 50%;
   right: 0;
   z-index: 1000;
-  width: 90px;
-  height: 90px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
 }
 
 .previousRegion {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  z-index: 1000;
-  width: 90px;
-  height: 90px;
-}
-.nextPatrimony {
-  position: absolute;
+  position: inherit;
   top: 50%;
   right: 0;
   z-index: 1000;
-  width: 90px;
-  height: 90px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+.nextPatrimony {
+  position: inherit;
+  top: 50%;
+  right: 0;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
 }
 
 .previousPatrimony {
-  position: absolute;
+  position: inherit;
   top: 50%;
-  left: 0;
+  right: 0;
   z-index: 1000;
-  width: 90px;
-  height: 90px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
 }
 
 .nextRestoration {
-  position: absolute;
+  position: inherit;
   top: 50%;
   right: 0;
   z-index: 1000;
-  width: 90px;
-  height: 90px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
 }
 .previousRestoration {
-  position: absolute;
+  position: inherit;
   top: 50%;
-  left: 0;
+  right: 0;
   z-index: 1000;
-  width: 90px;
-  height: 90px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
 }
 .nextAccommodation {
-  position: absolute;
+  position: inherit;
   top: 50%;
   right: 0;
   z-index: 1000;
-  width: 90px;
-  height: 90px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
 }
 .previousAccommodation {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  z-index: 1000;
-  width: 90px;
-  height: 90px;
-}
-.nextExperience {
-  position: absolute;
+  position: inherit;
   top: 50%;
   right: 0;
   z-index: 1000;
-  width: 90px;
-  height: 90px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+.nextExperience {
+  position: inherit;
+  top: 50%;
+  right: 0;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
 }
 .previousExperience {
-  position: absolute;
+  position: inherit;
   top: 50%;
-  left: 0;
+  right: 0;
   z-index: 1000;
-  width: 90px;
-  height: 90px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
 }
 
 .custom-search {
@@ -104,22 +114,50 @@
 .card-row {
   position: relative;
 }
-
-.imageValencia {
-  position: relative;
-  z-index: -1;
-  height: auto;
-  width: auto;
+a {
+  text-decoration: none;
+  color: black;
 }
 
-.imageLogo {
-  position: absolute;
-  width: 291px;
-  height: 100px;
-  left: 582x;
-  top: 303px;
+.img-accommodation {
+  float: right;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
 }
 
-.navbarFooter {
-  height: 800;
+.img-restoration {
+  float: right;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.img-patrimony {
+  float: right;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+}
+.img-route {
+  float: right;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+}
+.button1 {
+  font-size: 1.3em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.a:hover {
+  color: #000000;
+}
+.card-img-top {
+  object-fit: cover;
+}
+.namecard {
+  font-size: 0.9em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
 }
