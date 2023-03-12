@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { MyComponent } from "../component/mycomponent";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export const Login = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", data.user);
       const userType = await actions.getCurrentUser();
-      userType == "user" ? navigate("/") : userType == "region" ? navigate("/") : navigate("/login")
+      userType == "user" ? navigate("/") : userType == "region" ? navigate("/profileuserregion") : navigate("/login")
 
     } else {
       setError(true);

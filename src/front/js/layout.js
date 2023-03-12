@@ -1,14 +1,15 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ScrollToTop from "./component/scrollToTop";
-
 import { Home } from "./pages/home";
 import { Login } from "./pages/login";
 import { DiscoRegion } from "./pages/discoregion";
 import injectContext from "./store/appContext";
 import { Register } from "./pages/register";
 import { Regionregister } from "./pages/regionregister";
+import { Profileuserregion } from "./pages/profileuserregion";
 import { Navbar } from "./component/navbar";
+import { MyComponent } from "./component/mycomponent";
 import { Footer } from "./component/footer";
 import { CityDetail } from "./pages/detail";
 import { PatrimonyDetail } from "./pages/detailpatrimonio";
@@ -20,6 +21,7 @@ import { CardRegion } from "./component/cardregion";
 import { CardRestoration } from "./component/cardrestoration.js";
 import { CardPatrimony } from "./component/cardpatrimony.js";
 import { CardAccommodation } from "./component/cardaccommodation.js";
+
 
 
 //create your first component
@@ -44,6 +46,7 @@ const Layout = () => {
             <Route element={<RestorationDetail />} path="/restoration/:id" />
             <Route element={<AccommodationDetail />} path="/accommodation/:id" />
             <Route element={<ExperienceDetail />} path="/experience/:id" />
+            <Route element={<Profileuserregion />} path="/profileuserregion" />
             <Route element={<h1>Not found!</h1>} />
             <Route element={<Footer />} path="/" />
           </Routes>

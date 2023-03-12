@@ -1,14 +1,18 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User, Region, Restoration, Accommodation, Experience, Patrimony , User_region , Comments
+
+from flask import Flask, request, jsonify, url_for, Blueprint, json
+from api.models import db, User, Region, Restoration, Accommodation, Experience, Patrimony , Comments, User_region , PatrimonyChoices, RestorationChoices, AccommodationChoices, ExperienceChoices
+
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import get_jwt_identity
 from sqlalchemy import exc
 
+import cloudinary
+import cloudinary.uploader
 
 api = Blueprint('api', __name__)
 
@@ -21,6 +25,26 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@api.route('/patrimony_choice', methods=['GET'])
+def patrimony_choice():
+    patrimony_choice = [str(e.value) for e in PatrimonyChoices]
+    return jsonify({"results": patrimony_choice}), 200
+
+@api.route('/restoration_choice', methods=['GET'])
+def restoration_choice():
+    restoration_choice = [str(e.value) for e in RestorationChoices]
+    return jsonify({"results": restoration_choice}), 200
+
+@api.route('/accommodation_choice', methods=['GET'])
+def accommodation_choice():
+    accommodation_choice = [str(e.value) for e in AccommodationChoices]
+    return jsonify({"results": accommodation_choice}), 200
+
+@api.route('/experience_choice', methods=['GET'])
+def experience_choice():
+    experience_choice = [str(e.value) for e in ExperienceChoices]
+    return jsonify({"results": experience_choice}), 200
 
 
 @api.route('/login', methods=['POST'])
@@ -51,6 +75,7 @@ def current_user():
         user = User_region.query.get(user_id)
         return jsonify({"data":user.serialize(), "user":"region"}), 200
     return jsonify({"error": True}), 400
+
 
 
 @api.route('/regions', methods=['POST'])
@@ -219,3 +244,203 @@ def user_region_login():
      token = create_access_token(identity=user.id)
      
      return jsonify({"response": "hola", "token": token}), 200
+
+@api.route('/region', methods=['POST'])
+@jwt_required()
+def create_region():
+    user_id = get_jwt_identity()
+    body = json.loads(request.form["region"])
+    body_name = body["name"]
+    body_resume = body["resume"]
+    body_photo = cloudinary.uploader.upload(request.files['photo'])
+    body_logo = cloudinary.uploader.upload(request.files['logo'])
+  
+    new_region = Region(name=body_name, resume=body_resume, photo=body_photo['secure_url'], logo=body_logo['secure_url'], user_region_id=user_id)
+    db.session.add(new_region)
+    db.session.commit()
+    return jsonify({"response": "Region registered successfully"}), 200
+
+
+@api.route('/regions_user', methods=['GET'])
+@jwt_required()
+def get_all_current_user_regions():
+    user_id = get_jwt_identity()
+    regions = Region.query.filter_by(user_region_id= user_id)
+    return jsonify({ "results": [x.serialize() for x in regions ]}), 200
+
+@api.route('/region/<int:region_id>', methods=['DELETE'])
+@jwt_required()
+def delete_region(region_id):
+    user_id = get_jwt_identity()
+    region = Region.query.get(region_id)
+    if user_id == user_id: 
+     db.session.delete(region)
+     db.session.commit()
+     return jsonify({ "response": "Region deleted correctly"}), 200
+     return jsonify({ "response": "Region not deleted"}), 400
+
+
+@api.route('/patrimony', methods=['POST'])
+@jwt_required()
+def create_patrimony():
+    region_id = get_jwt_identity()
+    body = json.loads(request.form["patrimony"])
+    body_name = body["name"]
+    body_resume = body["resume"]
+    body_time_open = body["time_open"]
+    body_location = body["location"]
+    body_latitud = body["latitud"]
+    body_longitud = body["longitud"]
+    body_contact = body["contact"]
+    body_photo = cloudinary.uploader.upload(request.files['photo'])
+    body_logo = cloudinary.uploader.upload(request.files['logo'])
+    body_type_bussiness = body["type_bussiness"]
+    
+  
+    new_patrimony = Patrimony(name=body_name, resume=body_resume, location = body_location, time_open = body_time_open, latitud = body_latitud, longitud = body_longitud, contact = body_contact, type_bussiness=PatrimonyChoices(body_type_bussiness), photo=body_photo['secure_url'], logo=body_logo['secure_url'], region_id=region_id)
+    db.session.add(new_patrimony)
+    db.session.commit()
+    return jsonify({"response": "Patrimony registered successfully"}), 200
+
+@api.route('/patrimonys_user', methods=['GET'])
+@jwt_required()
+def get_current_region_patrimonys():
+    region_id = get_jwt_identity()
+    patrimonys = Patrimony.query.filter_by(region_id= region_id)
+    return jsonify({ "results": [x.serialize() for x in patrimonys ]}), 200
+
+@api.route('/patrimony/<int:region_id>', methods=['DELETE'])
+@jwt_required()
+def delete_patrimony(region_id):
+    user_id = get_jwt_identity()
+    patrimony = Patrimony.query.get(region_id)
+    if user_id == user_id: 
+     db.session.delete(patrimony)
+     db.session.commit()
+     return jsonify({ "response": "Patrimony deleted correctly"}), 200
+     return jsonify({ "response": "Patrimony not deleted"}), 400
+
+
+@api.route('/restoration', methods=['POST'])
+@jwt_required()
+def create_restoration():
+    region_id = get_jwt_identity()
+    body = json.loads(request.form["restoration"])
+    body_name = body["name"]
+    body_resume = body["resume"]
+    body_time_open = body["time_open"]
+    body_location = body["location"]
+    body_latitud = body["latitud"]
+    body_longitud = body["longitud"]
+    body_contact = body["contact"]
+    body_photo = cloudinary.uploader.upload(request.files['photo'])
+    body_logo = cloudinary.uploader.upload(request.files['logo'])
+    body_cart = cloudinary.uploader.upload(request.files['cart'])
+    body_type_bussiness = body["type_bussiness"]
+    
+  
+    new_restoration = Restoration(name=body_name, resume=body_resume, location = body_location, time_open = body_time_open, latitud = body_latitud, longitud = body_longitud, contact = body_contact, type_bussiness=RestorationChoices(body_type_bussiness), photo=body_photo['secure_url'], logo=body_logo['secure_url'], cart=body_cart['secure_url'], region_id=region_id)
+    db.session.add(new_restoration)
+    db.session.commit()
+    return jsonify({"response": "Restoration registered successfully"}), 200
+
+
+@api.route('/restorations_user', methods=['GET'])
+@jwt_required()
+def get_current_region_restorations():
+    region_id = get_jwt_identity()
+    restorations = Restoration.query.filter_by(region_id= region_id)
+    return jsonify({ "results": [x.serialize() for x in restorations ]}), 200
+
+@api.route('/restoration/<int:region_id>', methods=['DELETE'])
+@jwt_required()
+def delete_restoration(region_id):
+    user_id = get_jwt_identity()
+    restoration = Restoration.query.get(region_id)
+    if user_id == user_id: 
+     db.session.delete(restoration)
+     db.session.commit()
+     return jsonify({ "response": "Restoration deleted correctly"}), 200
+     return jsonify({ "response": "Restoration not deleted"}), 400
+
+@api.route('/accommodation', methods=['POST'])
+@jwt_required()
+def create_accommodation():
+    region_id = get_jwt_identity()
+    body = json.loads(request.form["accommodation"])
+    body_name = body["name"]
+    body_resume = body["resume"]
+    body_time_open = body["time_open"]
+    body_location = body["location"]
+    body_latitud = body["latitud"]
+    body_longitud = body["longitud"]
+    body_contact = body["contact"]
+    body_photo = cloudinary.uploader.upload(request.files['photo'])
+    body_logo = cloudinary.uploader.upload(request.files['logo'])
+    body_type_bussiness = body["type_bussiness"]
+    
+  
+    new_accommodation = Accommodation(name=body_name, resume=body_resume, location = body_location, time_open = body_time_open, latitud = body_latitud, longitud = body_longitud, contact = body_contact, type_bussiness=AccommodationChoices(body_type_bussiness), photo=body_photo['secure_url'], logo=body_logo['secure_url'], region_id=region_id)
+    db.session.add(new_accommodation)
+    db.session.commit()
+    return jsonify({"response": "Accommodation registered successfully"}), 200
+
+
+@api.route('/accommodations_user', methods=['GET'])
+@jwt_required()
+def get_current_region_accommodations():
+    region_id = get_jwt_identity()
+    accommodations = Accommodation.query.filter_by(region_id= region_id)
+    return jsonify({ "results": [x.serialize() for x in accommodations]}), 200
+
+@api.route('/accommodation/<int:region_id>', methods=['DELETE'])
+@jwt_required()
+def delete_accommodation(region_id):
+    user_id = get_jwt_identity()
+    accommodation = Accommodation.query.get(region_id)
+    if user_id == user_id: 
+     db.session.delete(accommodation)
+     db.session.commit()
+     return jsonify({ "response": "Accommodation deleted correctly"}), 200
+     return jsonify({ "response": "Accommodation not deleted"}), 400
+
+@api.route('/experience', methods=['POST'])
+@jwt_required()
+def create_experience():
+    region_id = get_jwt_identity()
+    body = json.loads(request.form["experience"])
+    body_name = body["name"]
+    body_resume = body["resume"]
+    body_time_open = body["time_open"]
+    body_meeting_point = body["meeting_point"]
+    body_latitud = body["latitud"]
+    body_longitud = body["longitud"]
+    body_contact = body["contact"]
+    body_photo = cloudinary.uploader.upload(request.files['photo'])
+    body_logo = cloudinary.uploader.upload(request.files['logo'])
+    body_type_bussiness = body["type_bussiness"]
+    
+  
+    new_experience = Experience(name=body_name, resume=body_resume, meeting_point = body_meeting_point, time_open = body_time_open, latitud = body_latitud, longitud = body_longitud, contact = body_contact, type_bussiness=ExperienceChoices(body_type_bussiness), photo=body_photo['secure_url'], logo=body_logo['secure_url'], region_id=region_id)
+    db.session.add(new_experience)
+    db.session.commit()
+    return jsonify({"response": "Experience registered successfully"}), 200
+
+
+@api.route('/experiences_user', methods=['GET'])
+@jwt_required()
+def get_current_region_experiences():
+    region_id = get_jwt_identity()
+    experiences = Experience.query.filter_by(region_id= region_id)
+    return jsonify({ "results": [x.serialize() for x in experiences]}), 200
+
+@api.route('/experience/<int:region_id>', methods=['DELETE'])
+@jwt_required()
+def delete_experience(region_id):
+    user_id = get_jwt_identity()
+    experience = Experience.query.get(region_id)
+    if user_id == user_id: 
+     db.session.delete(experience)
+     db.session.commit()
+     return jsonify({ "response": "Experience deleted correctly"}), 200
+     return jsonify({ "response": "Experience not deleted"}), 400

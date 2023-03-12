@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { Search } from "../component/search";
 import { Discover } from "../component/discoverregions";
+import { NewFile } from "../component/newfile";
 import { CardRegion } from "../component/cardregion";
 import { CardRestoration } from "../component/cardrestoration";
 import { CardPatrimony } from "../component/cardpatrimony";
@@ -91,11 +92,6 @@ export const Home = () => {
 
   return (
     <>
-      <div className="container">
-        {store.currentUserEmail
-          ? "Hola usuario" + store.currentUserEmail
-          : "Please register or login"}
-      </div>
       <div
         className="container h-25 d-flex justify-content-center align-items-center"
         style={{
@@ -245,12 +241,12 @@ export const Home = () => {
           </button>
         ) : null}
       </div>
-
       <div className="text-center" id="scrollspyHeading2">
         <h3>Donde comer bien</h3>
       </div>
 
       <div className="row mx-5 p-4 card-row justify-content-center align-items-center">
+
         {indexRestorations[0] > 0 ? (
           <button
             className="btn btn-outline-danger previousRestoration"
@@ -439,6 +435,7 @@ export const Home = () => {
         })}
         {indexExperiences[indexExperiences.length - 1] <
         experiences.length - 1 ? (
+
           <button
             className="btn btn-outline-danger nextExperience"
             onClick={() => {
