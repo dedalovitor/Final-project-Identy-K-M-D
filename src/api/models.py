@@ -110,7 +110,7 @@ class Restoration(db.Model):
     name = db.Column(db.String(100),  nullable=False)
     resume = db.Column(db.Text, unique=False, nullable=False)
     photo = db.Column(db.String(255), nullable=False)
-    logo = db.Column(db.String(255), nullable=False)
+    logo = db.Column(db.String(255), nullable=False)    
     type_bussiness = db.Column(db.Enum(RestorationChoices), nullable=False, server_default="bar")
     region_id = db.Column(db.Integer, db.ForeignKey('region.id'))
     
@@ -175,7 +175,7 @@ class Experience(db.Model):
             "name": self.name,
             "resume": self.resume,
             "photo": self.photo,
-            "logo": self.logo,
+            "logo": self.logo
             
             # do not serialize the password, its a security breach
             }
@@ -199,11 +199,12 @@ class Patrimony(db.Model):
             "resume": self.resume,
             "photo": self.photo,
             "logo": self.logo,
-            
+                      
             # do not serialize the password, its a security breach
             }
     def __repr__(self):
         return f'{self.name}'
+
 class Favorites(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id')) 
@@ -232,3 +233,13 @@ class Comments(db.Model):
     accommodation = db.relationship('Accommodation')
     patrimony_id = db.Column(db.Integer, db.ForeignKey('patrimony.id'))
     patrimony = db.relationship('Patrimony')
+
+    def serialize(self):
+        return {
+            "user_id": self.user_id,
+            "user_region": self.user_region,
+            "text": self.text,
+            # do not serialize the password, its a security breach
+        }
+    def __repr__(self):
+        return f'{self.name}'
