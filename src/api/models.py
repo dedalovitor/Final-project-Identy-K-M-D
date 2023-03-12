@@ -133,7 +133,8 @@ class Restoration(db.Model):
             "time_open": self.time_open,
             "cart": self.cart,
             "location": self.location,
-            "coordinates": self.coordinates,
+            "longitud": self.longitud,
+            "latitud": self.latitud,
             "contact": self.contact,
             "type_bussiness": self.type_bussiness.name
             # do not serialize the password, its a security breach
@@ -172,7 +173,8 @@ class Accommodation(db.Model):
             "logo": self.logo,
             "time_open": self.time_open,
             "location": self.location,
-            "coordinates": self.coordinates,
+            "longitud": self.longitud,
+            "latitud": self.latitud,
             "contact": self.contact,
             "type_bussiness": self.type_bussiness.name
 
@@ -212,7 +214,8 @@ class Experience(db.Model):
             "logo": self.logo,
             "time_open": self.time_open,
             "meeting_point": self.meeting_point,
-            "coordinates": self.coordinates,
+            "longitud": self.longitud,
+            "latitud": self.latitud,
             "contact": self.contact,
             "type_bussiness": self.type_bussiness.name
             
