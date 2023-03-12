@@ -1,3 +1,163 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
+.nextRegion {
+  position: inherit;
+  top: 50%;
+  right: 0;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+.previousRegion {
+  position: inherit;
+  top: 50%;
+  right: 0;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+.nextPatrimony {
+  position: inherit;
+  top: 50%;
+  right: 0;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+.previousPatrimony {
+  position: inherit;
+  top: 50%;
+  right: 0;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+.nextRestoration {
+  position: inherit;
+  top: 50%;
+  right: 0;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+.previousRestoration {
+  position: inherit;
+  top: 50%;
+  right: 0;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+.nextAccommodation {
+  position: inherit;
+  top: 50%;
+  right: 0;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+.previousAccommodation {
+  position: inherit;
+  top: 50%;
+  right: 0;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+.nextExperience {
+  position: inherit;
+  top: 50%;
+  right: 0;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+.previousExperience {
+  position: inherit;
+  top: 50%;
+  right: 0;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+.custom-search {
+  background-image: url("https://images.freeimages.com/images/large-previews/d18/nice-landscape-1058202.jpg");
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 600px;
+}
+
+.small-search-input {
+  width: 800px;
+  text-align: center;
+}
+.custom-discover {
+  background-image: url("https://www.turismodeobservacion.com/media/fotografias/barriopalacio-paisaje-rural-en-valdeolea-44617-xl.jpg");
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 600px;
+}
+.card-row {
+  position: relative;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.img-accommodation {
+  float: right;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.img-restoration {
+  float: right;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+}
+
+.img-patrimony {
+  float: right;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+}
+.img-route {
+  float: right;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+}
+.button1 {
+  font-size: 1.3em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.a:hover {
+  color: #000000;
+}
+.card-img-top {
+  object-fit: cover;
+}
+.namecard {
+  font-size: 0.9em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+}

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
+import { MyComponent } from "../component/mycomponent";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -23,8 +24,10 @@ export const Login = () => {
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem("token", data.token);
-      await actions.getCurrentUserEmail();
-      navigate("/");
+      localStorage.setItem("user", data.user);
+      const userType = await actions.getCurrentUser();
+      userType == "user" ? navigate("/") : userType == "region" ? navigate("/profileuserregion") : navigate("/login")
+
     } else {
       setError(true);
     }

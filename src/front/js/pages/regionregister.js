@@ -39,7 +39,7 @@ export const Regionregister = () => {
     );
     const data = await response.json();
     if (response.ok) {
-      navigate("/loginregion");
+      navigate("/login");
     } else {
       setError(data.response);
     }
