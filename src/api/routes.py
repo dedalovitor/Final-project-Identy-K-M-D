@@ -375,7 +375,7 @@ def get_favorites():
     return jsonify(favorites_list), 200
 
 
-@api.route('/addfavorite', methods=['POST'])
+@api.route('/addfavorite/<int:id>', methods=['POST'])
 @jwt_required
 def add_favorite():
     user_id = get_jwt_identity()

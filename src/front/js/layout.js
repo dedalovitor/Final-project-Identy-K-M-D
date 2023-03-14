@@ -12,7 +12,7 @@ import { Profileuserregion } from "./pages/profileuserregion";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { CityDetail } from "./pages/detail";
-import Favorites from "./pages/favorites";
+import { Favorites } from "./pages/favorites";
 
 //create your first component
 const Layout = () => {
@@ -33,7 +33,7 @@ const Layout = () => {
             <Route element={<Regionregister />} path="/regionregister" />
             <Route element={<Profileuserregion />} path="/profileuserregion" />
             <Route element={<CityDetail />} path="/detail/:city" />
-            <Route element={<Favorites />} path="/favorites" />
+            <Route element={<Favorites />} path="/favorites/:id" />
             <Route element={<h1>Not found!</h1>} />
             <Route element={<Footer />} path="/" />
           </Routes>
