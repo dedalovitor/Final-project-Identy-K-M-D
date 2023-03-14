@@ -2,14 +2,14 @@ import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
 
-export const Commentbox = (props) => {
+export const Commentbox2 = (props) => {
   const { store, actions } = useContext(Context);
   const [comment, setComment] = useState("");
-  const [successComment, setSuccessComment] = useState(false);
+  const [successComment, setsuccessComment] = useState(false);
   const params = useParams();
-  const createCommentRestoration = async () => {
+  const createCommentPatrimony = async () => {
     const response = await fetch(
-      process.env.BACKEND_URL + "/api/addcommentsrestoration/" + params.id,
+      process.env.BACKEND_URL + "/api/addcommentspatrimony/" + params.id,
       {
         method: "POST",
         headers: {
@@ -20,12 +20,11 @@ export const Commentbox = (props) => {
           comment: comment,
           user_id: props.user_id,
           user_region_id: props.user_region_id,
-          restoration_id: props.restoration_id,
+          patrimony_id: props.patrimony_id,
         }),
       }
     );
-    setSuccessComment(true);
-    
+    setsuccessComment(true);
   };
 
   return (
@@ -42,7 +41,7 @@ export const Commentbox = (props) => {
       {successComment ? (
         <p>Su mensaje ha sido enviado con éxito</p>
       ) : (
-        <button className="btn btn-success" onClick={createCommentRestoration}>
+        <button className="btn btn-success" onClick={createCommentPatrimony}>
           Enviar Comentario
         </button>
       )}
@@ -50,4 +49,4 @@ export const Commentbox = (props) => {
   );
 };
 
-export default Commentbox;
+export default Commentbox2;

@@ -101,17 +101,58 @@ export const Home = () => {
       >
         <div className="container h-25 d-flex justify-content-center align-items-center p-4">
           <div>
-            <button type="button" className="button1 btn btn-outline-danger m-2 ">
-              <a href="#scrollspyHeading1">Lugares que Visitar/Patrimonio<img src="https://cdn-icons-png.flaticon.com/512/1009/1009921.png" className="img-patrimony" alt="Responsive image"></img></a>
+            <button
+              type="button"
+              className="buttonhome btn btn-outline-danger m-2 "
+            >
+              <a href="#scrollspyHeading1">
+                Lugares que Visitar/Patrimonio
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/1009/1009921.png"
+                  className="img-patrimony"
+                  alt="Responsive image"
+                ></img>
+              </a>
             </button>
-            <button type="button" className="button1 btn btn-outline-success m-2">
-              <a href="#scrollspyHeading2"> Restaurantes/Gastronomia<img src="https://cdn-icons-png.flaticon.com/128/1980/1980788.png" className="img-restoration" alt="Responsive image"></img></a>
+            <button
+              type="button"
+              className="buttonhome btn btn-outline-success m-2"
+            >
+              <a href="#scrollspyHeading2">
+                {" "}
+                Restaurantes/Gastronomia
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1980/1980788.png"
+                  className="img-restoration"
+                  alt="Responsive image"
+                ></img>
+              </a>
             </button>
-            <button type="button" className="button1 btn btn-outline-primary m-2">
-              <a href="#scrollspyHeading3">Alojamientos<img src="https://cdn-icons-png.flaticon.com/128/2933/2933772.png" className="img-accommodation" alt="Responsive image"></img></a>
+            <button
+              type="button"
+              className="buttonhome btn btn-outline-primary m-2"
+            >
+              <a href="#scrollspyHeading3">
+                Alojamientos
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/2933/2933772.png"
+                  className="img-accommodation"
+                  alt="Responsive image"
+                ></img>
+              </a>
             </button>
-            <button type="button" className="button1 btn btn-outline-warning m-2">
-              <a href="#scrollspyHeading4">Visitas Guiadas<img src="https://w7.pngwing.com/pngs/337/767/png-transparent-location-marker-path-road-navigation-and-mapping-icon.png" className="img-route" alt="Responsive image"></img></a>
+            <button
+              type="button"
+              className="buttonhome btn btn-outline-warning m-2"
+            >
+              <a href="#scrollspyHeading4">
+                Visitas Guiadas
+                <img
+                  src="https://w7.pngwing.com/pngs/337/767/png-transparent-location-marker-path-road-navigation-and-mapping-icon.png"
+                  className="img-route"
+                  alt="Responsive image"
+                ></img>
+              </a>
             </button>
           </div>
         </div>
@@ -131,7 +172,7 @@ export const Home = () => {
               setIndexRegions(newIndexRegion.map((x) => x - 1));
             }}
           >
-              <h2 style={{marginTop: '-3px'}}>←</h2>
+            <h2 style={{ marginTop: "-3px" }}>←</h2>
           </button>
         ) : null}
         {indexRegions.map((indexRegion) => {
@@ -141,18 +182,20 @@ export const Home = () => {
               className="col-2 col-sm-6 col-md-4 col-lg-2"
             >
               <div className="card">
+                <div className="card-logo">
+                  <img src={regions[indexRegion].logo} height="30px"></img>
+                </div>
                 <img
                   src={regions[indexRegion].photo}
-                  height="300px"
+                  height="200px"
                   className="card-img-top"
-                  alt={regions[indexRegion].name}
+                  alt={regions[indexRegion].photo}
                 />
-                <div className="card-body">
-                  <h5 className="namecard card-title text-center">
-                    {regions[indexRegion].name}
-                  </h5>
-                  <div className="card-text text-center">
-                    <img src={regions[indexRegion].logo} height="60px"></img>
+                <div className="card-text text-center">
+                  <div className="card-body">
+                    <h5 className="namecard card-title text-center">
+                      {regions[indexRegion].name}
+                    </h5>
                     <div>
                       <Link to={`/ciudad/${regions[indexRegion].id}`}>
                         <button className="btn btn-outline-danger mt-4">
@@ -174,7 +217,7 @@ export const Home = () => {
               setIndexRegions(newIndexRegion.map((x) => x + 1));
             }}
           >
-            <h2 style={{marginTop: '-3px'}}>→</h2>
+            <h2 style={{ marginTop: "-3px" }}>→</h2>
           </button>
         ) : null}
       </div>
@@ -191,7 +234,7 @@ export const Home = () => {
               setIndexPatrimonys(newIndexPatrimony.map((x) => x - 1));
             }}
           >
-            <h2 style={{marginTop: '-3px'}}>←</h2>
+            <h2 style={{ marginTop: "-3px" }}>←</h2>
           </button>
         ) : null}
         {indexPatrimonys.map((indexPatrimony) => {
@@ -203,7 +246,7 @@ export const Home = () => {
               <div className="card">
                 <img
                   src={patrimonys[indexPatrimony].photo}
-                  height="300px"
+                  height="200px"
                   className="card-img-top"
                   alt={patrimonys[indexPatrimony].name}
                 />
@@ -214,7 +257,7 @@ export const Home = () => {
                   <div className="card-text text-center">
                     <img
                       src={patrimonys[indexPatrimony].logo}
-                      height="100px"
+                      height="30px"
                     ></img>
                     <div>
                       <Link to={`/patrimonio/${patrimonys[indexPatrimony].id}`}>
@@ -237,7 +280,7 @@ export const Home = () => {
               setIndexPatrimonys(newIndexPatrimony.map((x) => x + 1));
             }}
           >
-            <h2 style={{marginTop: '-3px'}}>→</h2>
+            <h2 style={{ marginTop: "-3px" }}>→</h2>
           </button>
         ) : null}
       </div>
@@ -246,7 +289,6 @@ export const Home = () => {
       </div>
 
       <div className="row mx-5 p-4 card-row justify-content-center align-items-center">
-
         {indexRestorations[0] > 0 ? (
           <button
             className="btn btn-outline-danger previousRestoration"
@@ -255,7 +297,7 @@ export const Home = () => {
               setIndexRestorations(newIndexRestoration.map((x) => x - 1));
             }}
           >
-            <h2 style={{marginTop: '-3px'}}>←</h2>
+            <h2 style={{ marginTop: "-3px" }}>←</h2>
           </button>
         ) : null}
         {indexRestorations.map((indexRestoration) => {
@@ -267,7 +309,7 @@ export const Home = () => {
               <div className="card">
                 <img
                   src={restorations[indexRestoration].photo}
-                  height="300px"
+                  height="200px"
                   className="card-img-top"
                   alt={restorations[indexRestoration].name}
                 />
@@ -281,7 +323,7 @@ export const Home = () => {
                   <div className="card-text text-center">
                     <img
                       src={restorations[indexRestoration].logo}
-                      height="100px"
+                      height="30px"
                     ></img>
                     <div>
                       <Link
@@ -307,7 +349,7 @@ export const Home = () => {
               setIndexRestorations(newIndexRestoration.map((x) => x + 1));
             }}
           >
-            <h2 style={{marginTop: '-3px'}}>→</h2>
+            <h2 style={{ marginTop: "-3px" }}>→</h2>
           </button>
         ) : null}
       </div>
@@ -324,7 +366,7 @@ export const Home = () => {
               setIndexAccommodations(newIndexAccommodation.map((x) => x - 1));
             }}
           >
-            <h2 style={{marginTop: '-3px'}}>←</h2>
+            <h2 style={{ marginTop: "-3px" }}>←</h2>
           </button>
         ) : null}
         {indexAccommodations.map((indexAccommodation) => {
@@ -336,7 +378,7 @@ export const Home = () => {
               <div className="card">
                 <img
                   src={accommodations[indexAccommodation].photo}
-                  height="300px"
+                  height="200px"
                   className="card-img-top"
                   alt={accommodations[indexAccommodation].name}
                 />
@@ -347,10 +389,10 @@ export const Home = () => {
                   <p className="card-text text-center">
                     {accommodations[indexAccommodation].type_bussiness}
                   </p>
-                  <div className="card-text text-center">
+                  <div className="logocard card-text text-center">
                     <img
                       src={accommodations[indexAccommodation].logo}
-                      height="100px"
+                      height="30px"
                     ></img>
                     <div>
                       <Link
@@ -376,7 +418,7 @@ export const Home = () => {
               setIndexAccommodations(newIndexAccommodation.map((x) => x + 1));
             }}
           >
-            <h2 style={{marginTop: '-3px'}}>→</h2>
+            <h2 style={{ marginTop: "-3px" }}>→</h2>
           </button>
         ) : null}
       </div>
@@ -405,7 +447,7 @@ export const Home = () => {
               <div className="card">
                 <img
                   src={experiences[indexExperience].photo}
-                  height="300px"
+                  height="200px"
                   className="card-img-top"
                   alt={experiences[indexExperience].name}
                 />
@@ -416,7 +458,7 @@ export const Home = () => {
                   <div className="card-text text-center">
                     <img
                       src={experiences[indexExperience].logo}
-                      height="100px"
+                      height="30px"
                     ></img>
                     <div>
                       <Link
@@ -435,7 +477,6 @@ export const Home = () => {
         })}
         {indexExperiences[indexExperiences.length - 1] <
         experiences.length - 1 ? (
-
           <button
             className="btn btn-outline-danger nextExperience"
             onClick={() => {
@@ -443,7 +484,7 @@ export const Home = () => {
               setIndexExperiences(newIndexExperience.map((x) => x + 1));
             }}
           >
-            <h2 style={{marginTop: '-3px'}}>→</h2>
+            <h2 style={{ marginTop: "-3px" }}>→</h2>
           </button>
         ) : null}
       </div>

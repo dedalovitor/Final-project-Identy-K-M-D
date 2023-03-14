@@ -25,6 +25,7 @@ export const CityDetail = () => {
     const data = await response.json();
     if (response.ok) {
       setRegion(data.result);
+      setPatrimonys(data.result);
       setIndexPatrimonys([0, 1, 2, 3]);
       setIndexAccommodations([0, 1, 2, 3]);
       setIndexRestorations([0, 1, 2, 3]);
@@ -34,24 +35,72 @@ export const CityDetail = () => {
 
   return (
     <>
-      <div className="container h-25 d-flex justify-content-center align-items-center p-4">
+      <div
+        className="container h-25 d-flex justify-content-center align-items-center"
+        style={{
+          backgroundImage: "https://images4.alphacoders.com/975/97548.jpg",
+          backgroundSize: "cover",
+        }}
+      >
+        <div className="container h-25 d-flex justify-content-center align-items-center p-4">
           <div>
-            <button type="button" className="button1 btn btn-outline-danger m-2 ">
-              <a href="#scrollspyHeading1">Lugares que Visitar/Patrimonio<img src="https://cdn-icons-png.flaticon.com/512/1009/1009921.png" className="img-patrimony" alt="Responsive image"></img></a>
+            <button
+              type="button"
+              className="buttonhome btn btn-outline-danger m-2 "
+            >
+              <a href="#scrollspyHeading1">
+                Lugares que Visitar/Patrimonio
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/1009/1009921.png"
+                  className="img-patrimony"
+                  alt="Responsive image"
+                ></img>
+              </a>
             </button>
-            <button type="button" className="button1 btn btn-outline-success m-2">
-              <a href="#scrollspyHeading2"> Restaurantes/Gastronomia<img src="https://cdn-icons-png.flaticon.com/128/1980/1980788.png" className="img-restoration" alt="Responsive image"></img></a>
+            <button
+              type="button"
+              className="buttonhome btn btn-outline-success m-2"
+            >
+              <a href="#scrollspyHeading2">
+                {" "}
+                Restaurantes/Gastronomia
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1980/1980788.png"
+                  className="img-restoration"
+                  alt="Responsive image"
+                ></img>
+              </a>
             </button>
-            <button type="button" className="button1 btn btn-outline-primary m-2">
-              <a href="#scrollspyHeading3">Alojamientos<img src="https://cdn-icons-png.flaticon.com/128/2933/2933772.png" className="img-accommodation" alt="Responsive image"></img></a>
+            <button
+              type="button"
+              className="buttonhome btn btn-outline-primary m-2"
+            >
+              <a href="#scrollspyHeading3">
+                Alojamientos
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/2933/2933772.png"
+                  className="img-accommodation"
+                  alt="Responsive image"
+                ></img>
+              </a>
             </button>
-            <button type="button" className="button1 btn btn-outline-warning m-2">
-              <a href="#scrollspyHeading4">Visitas Guiadas<img src="https://w7.pngwing.com/pngs/337/767/png-transparent-location-marker-path-road-navigation-and-mapping-icon.png" className="img-route" alt="Responsive image"></img></a>
+            <button
+              type="button"
+              className="buttonhome btn btn-outline-warning m-2"
+            >
+              <a href="#scrollspyHeading4">
+                Visitas Guiadas
+                <img
+                  src="https://w7.pngwing.com/pngs/337/767/png-transparent-location-marker-path-road-navigation-and-mapping-icon.png"
+                  className="img-route"
+                  alt="Responsive image"
+                ></img>
+              </a>
             </button>
           </div>
         </div>
-      
-        <div class="container">
+      </div>
+      <div class="container">
         <div class="row">
           <div class="col p-4 region-image">
             <div className="text-bg-dark text-center">
@@ -64,12 +113,11 @@ export const CityDetail = () => {
             </div>
           </div>
           <div class="col p-4 region-resume">
-          <div className="text-bg-dark text-center">
-          <h1>{region.name}</h1>                     
+            <div className="text-bg-dark text-center">
+              <h1>{region.name}</h1>
             </div>
-          <div className="text-bg-dark text-left p-2">
+            <div className="text-bg-dark text-left p-2">
               <p>{region.resume}</p>
-                          
             </div>
           </div>
         </div>
@@ -82,7 +130,6 @@ export const CityDetail = () => {
       </div>
 
       <div className="row mx-5 p-4 card-row justify-content-center align-items-center">
-      
         {indexPatrimonys.map((indexPatrimony) => {
           return (
             <div
@@ -90,24 +137,25 @@ export const CityDetail = () => {
               className="col-2 col-sm-6 col-md-4 col-lg-2"
             >
               <div className="card">
+                <div className="card-logo">
+                  <img src={region.logo} height="30px"></img>
+                </div>
                 <img
                   src={region.patrimonies[indexPatrimony].photo}
-                  height="300px"
+                  height="200px"
                   className="card-img-top"
                   alt={region.patrimonies[indexPatrimony].name}
                 />
                 <div className="card-body">
-                  <h3 className="card-title text-center">
+                  <h5 className="namecard card-title text-center">
                     {region.patrimonies[indexPatrimony].name}
-                  </h3>
+                  </h5>
                   <div className="card-text text-center">
-                    <img
-                      src={region.patrimonies[indexPatrimony].logo}
-                      height="100px"
-                    ></img>
                     <div>
-                      <Link to={`/patrimonio/${region.patrimonies[indexPatrimony].id}`}>
-                      <button className="btn btn-outline-danger mt-4">
+                      <Link
+                        to={`/patrimonio/${region.patrimonies[indexPatrimony].id}`}
+                      >
+                        <button className="btn btn-outline-danger mt-4">
                           Ver lugar
                         </button>
                       </Link>
@@ -118,7 +166,17 @@ export const CityDetail = () => {
             </div>
           );
         })}
-       
+        {indexPatrimonys[indexPatrimonys.length - 1] < patrimonys.length - 1 ? (
+          <button
+            className="btn btn-outline-danger nextPatrimony"
+            onClick={() => {
+              const newIndexPatrimony = [...indexPatrimonys];
+              setIndexPatrimonys(newIndexPatrimony.map((x) => x + 1));
+            }}
+          >
+            <h2 style={{ marginTop: "-3px" }}>→</h2>
+          </button>
+        ) : null}
       </div>
       <div className="text-center p-4" id="scrollspyHeading2">
         <h3>Donde comer bien en {region.name}</h3>
@@ -167,7 +225,6 @@ export const CityDetail = () => {
       </div>
 
       <div className="row mx-5 p-4 card-row justify-content-center align-items-center">
-        
         {indexAccommodations.map((indexAccommodation) => {
           return (
             <div
@@ -205,9 +262,8 @@ export const CityDetail = () => {
             </div>
           );
         })}
-        
       </div>
-      
+
       <div className="text-center p-4" id="scrollspyHeading4">
         <h3>Visitas / Experiencias Guiadas en {region.name}</h3>
       </div>
@@ -235,8 +291,10 @@ export const CityDetail = () => {
                       height="100px"
                     ></img>
                     <div>
-                      <Link to={`/experience/${region.experiences[indexExperience].id}`}>
-                      <button className="btn btn-outline-danger mt-4">
+                      <Link
+                        to={`/experience/${region.experiences[indexExperience].id}`}
+                      >
+                        <button className="btn btn-outline-danger mt-4">
                           Ver lugar
                         </button>
                       </Link>

@@ -64,6 +64,7 @@ class Region(db.Model):
     resume = db.Column(db.Text, unique=False, nullable=False)
     photo = db.Column(db.String(255), nullable=False)
     logo = db.Column(db.String(255), nullable=False)
+    coordinates = db.Column(db.String(255), nullable=True)
     user_region_id = db.Column(db.Integer, db.ForeignKey('user_region.id'), unique=True)
     restorations = db.relationship('Restoration' ,backref='region')
     accomodation = db.relationship('Accommodation', backref='region')
@@ -76,7 +77,8 @@ class Region(db.Model):
             "name": self.name,
             "resume": self.resume,
             "photo": self.photo,
-            "logo": self.logo
+            "logo": self.logo,
+            "coordinates": self.coordinates,
 
             # do not serialize the password, its a security breach
         }
@@ -91,6 +93,7 @@ class Region(db.Model):
             "resume": self.resume,
             "photo": self.photo,
             "logo": self.logo,
+            "coordinates": self.coordinates,
             "restorations": [x.serialize()for x in self.restorations],
             "accomodation": [x.serialize()for x in self.accomodation],
             "experiences": [x.serialize()for x in self.experiences],
@@ -115,6 +118,7 @@ class Restoration(db.Model):
     time_open = db.Column(db.String(255), nullable=True)
     cart = db.Column(db.String(255), nullable=True)
     location = db.Column(db.String(255), nullable=True)
+    coordinates = db.Column(db.String(255), nullable=True)
     longitud = db.Column(db.Float(), nullable=True)
     latitud = db.Column(db.Float(), nullable=True)
     contact = db.Column(db.String(255), nullable=True)
@@ -133,6 +137,7 @@ class Restoration(db.Model):
             "time_open": self.time_open,
             "cart": self.cart,
             "location": self.location,
+            "coordinates": self.coordinates,
             "longitud": self.longitud,
             "latitud": self.latitud,
             "contact": self.contact,
@@ -157,6 +162,7 @@ class Accommodation(db.Model):
     logo = db.Column(db.String(255), nullable=True)
     time_open = db.Column(db.String(255), nullable=True)
     location = db.Column(db.String(255), nullable=True)
+    coordinates = db.Column(db.String(255), nullable=True)
     longitud = db.Column(db.Float(), nullable=True)
     latitud = db.Column(db.Float(), nullable=True)
     contact = db.Column(db.String(255), nullable=True)
@@ -173,6 +179,7 @@ class Accommodation(db.Model):
             "logo": self.logo,
             "time_open": self.time_open,
             "location": self.location,
+            "coordinates": self.coordinates,
             "longitud": self.longitud,
             "latitud": self.latitud,
             "contact": self.contact,
@@ -197,6 +204,7 @@ class Experience(db.Model):
     logo = db.Column(db.String(255), nullable=True)
     time_open = db.Column(db.String(255), nullable=True)
     meeting_point = db.Column(db.String(255), nullable=True)
+    coordinates = db.Column(db.String(255), nullable=True)
     longitud = db.Column(db.Float(), nullable=True)
     latitud = db.Column(db.Float(), nullable=True)
     contact = db.Column(db.String(255), nullable=True)
@@ -214,6 +222,7 @@ class Experience(db.Model):
             "logo": self.logo,
             "time_open": self.time_open,
             "meeting_point": self.meeting_point,
+            "coordinates": self.coordinates,
             "longitud": self.longitud,
             "latitud": self.latitud,
             "contact": self.contact,
@@ -240,6 +249,7 @@ class Patrimony(db.Model):
     logo = db.Column(db.String(255), nullable=False)
     time_open = db.Column(db.String(255), nullable=True)
     location = db.Column(db.String(255), nullable=True)
+    coordinates = db.Column(db.String(255), nullable=True)
     longitud = db.Column(db.Float(), nullable=True)
     latitud = db.Column(db.Float(), nullable=True)
     contact = db.Column(db.String(255), nullable=True)
@@ -256,6 +266,7 @@ class Patrimony(db.Model):
             "logo": self.logo,
             "time_open": self.time_open,
             "location": self.location,
+            "coordinates": self.coordinates,
             "longitud": self.longitud,
             "latitud": self.latitud,
             "contact": self.contact,
@@ -305,6 +316,8 @@ class Comments(db.Model):
     accommodation = db.relationship('Accommodation')
     patrimony_id = db.Column(db.Integer, db.ForeignKey('patrimony.id'))
     patrimony = db.relationship('Patrimony')
+    experience_id = db.Column(db.Integer, db.ForeignKey('experience.id'))
+    experience = db.relationship('Experience')
 
     def serialize(self):
         return {
@@ -313,5 +326,4 @@ class Comments(db.Model):
             "text": self.text,
             # do not serialize the password, its a security breach
         }
-    def __repr__(self):
-        return f'{self.name}'
+    
