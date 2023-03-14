@@ -1,14 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Commentbox } from "../component/commentbox";
+import { Commentbox3 } from "../component/commentbox3";
 import { Context } from "../store/appContext";
 import { useParams, Link } from "react-router-dom";
 
 export const AccommodationDetail = () => {
   const { store, actions } = useContext(Context);
   const [accommodations, setAccommodations] = useState({});
+  const [comments, setComments] = useState({});
   const params = useParams();
   useEffect(() => {
     getCurrentAccommodation();
+    getCurrentCommentsAccommodation();
+
   }, []);
   const getCurrentAccommodation = async () => {
     const response = await fetch(
@@ -17,6 +20,16 @@ export const AccommodationDetail = () => {
     const data = await response.json();
     if (response.ok) {
       setAccommodations(data.result);
+    }
+  };
+  const getCurrentCommentsAccommodation = async () => {
+    const response = await fetch(
+      process.env.BACKEND_URL + "/api/commentsaccommodation/" + params.id
+    );
+    const data = await response.json();
+    if (response.ok) {
+      console.log(data);
+      
     }
   };
   return (
@@ -60,7 +73,7 @@ export const AccommodationDetail = () => {
       </div>
       {store.userInfo ? (
         <div className="col-sm-12 text-center m-5">
-          <Commentbox />
+          <Commentbox3 user_id={store.userInfo.id} accommodation_id={params.id}/>
         </div>
       ) : (
         ""

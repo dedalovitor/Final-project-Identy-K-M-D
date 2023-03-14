@@ -7,13 +7,13 @@ export const RestorationDetail = () => {
   const { store, actions } = useContext(Context);
   const [restorations, setRestorations] = useState({});
   const [comments, setComments] = useState({});
+  const [indexComments, setIndexComments] = useState([]);
   const params = useParams();
   useEffect(() => {
     getCurrentRestoration();
     getCurrentCommentsRestoration();
-    // getCurrentUserComment();
-    
-  }, []);
+    console.log(setComments);
+  }, [setComments]);
   const getCurrentRestoration = async () => {
     const response = await fetch(
       process.env.BACKEND_URL + "/api/restorations/" + params.id
@@ -25,7 +25,7 @@ export const RestorationDetail = () => {
   };
   const getCurrentCommentsRestoration = async () => {
     const response = await fetch(
-      process.env.BACKEND_URL + "/api/comments/" + params.id
+      process.env.BACKEND_URL + "/api/commentsrestoration/" + params.id
     );
     const data = await response.json();
     if (response.ok) {
@@ -33,18 +33,7 @@ export const RestorationDetail = () => {
       setComments(data.result);
     }
   };
-  const createCommentRestoration = async () => {
-      const response = await fetch(process.env.BACKEND_URL + "/api/addcomments/" + params.id,{
-        method: "POST",
-        headers: {
-            "content-Type": "application/json",
-            "Authorization": "Bearer " + localStorage.getItem("token")
-        },
-        body: JSON.stringify(restorations)
-    }); 
-      if (response.ok) getCurrentUserComment();
-  }
-
+  console.log(comments);
   return (
     <>
       <div className="container h-25 d-flex justify-content-center align-items-center p-4">
@@ -86,9 +75,20 @@ export const RestorationDetail = () => {
           </div>
         </div>
       </div>
+
+      {/* {comments.map((indexComment) => {
+        return (
+          <div className="">
+            <h5 className="text-center">{comments[indexComment].user}</h5>
+            <div className="">
+              <h5 className="text-center">{comments[indexComment].text}</h5>
+            </div>
+          </div>
+        );
+      })} */}
       {store.userInfo ? (
         <div className="col-sm-12 text-center m-5">
-          <Commentbox user_id={store.userInfo.id} restoration_id={params.id}/>
+          <Commentbox user_id={store.userInfo.id} restoration_id={params.id} />
         </div>
       ) : (
         ""

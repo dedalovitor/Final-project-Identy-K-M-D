@@ -123,19 +123,62 @@ def get_experiences_by_id(experience_id):
     return jsonify({"result": experience.serialize()}), 200
 
 
-@api.route('/comments/<int:id>', methods=['GET'])
+@api.route('/commentsrestoration/<int:id>', methods=['GET'])
 def comments_restoration(id):
     comments = Comments.query.filter_by(restoration_id=id).all()
     result = [comments.serialize() for comments in comments]
     return jsonify(result), 200
 
-@api.route('/addcomments/<int:id>', methods=['POST'])
+@api.route('/commentsaccommodation/<int:id>', methods=['GET'])
+def comments_accommodation(id):
+    comments = Comments.query.filter_by(accommodation_id=id).all()
+    result = [comments.serialize() for comments in comments]
+    print(result)
+    return jsonify(result), 200
+
+@api.route('/commentspatrimony/<int:id>', methods=['GET'])
+def comments_patrimony(id):
+    comments = Comments.query.filter_by(patrimony_id=id).all()
+    result = [comments.serialize() for comments in comments]
+    print(result)
+    return jsonify(result), 200
+
+
+@api.route('/addcommentsrestoration/<int:id>', methods=['POST'])
 def addcomments_restoration(id):
     request_data = request.get_json()
-    result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), restoration_id=request_data.get("params"))    
+    result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), restoration_id=request_data.get("restoration_id"))   
+    print(result)
     db.session.add(result)
     db.session.commit()
     return "success", 200
+
+@api.route('/addcommentspatrimony/<int:id>', methods=['POST'])
+def addcomments_patrimony(id):
+    request_data = request.get_json()
+    result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), patrimony_id=request_data.get("patrimony_id"))   
+    print(result)
+    db.session.add(result)
+    db.session.commit()
+    return "success", 200
+
+@api.route('/addcommentsaccommodation/<int:id>', methods=['POST'])
+def addcomments_accommodation(id):
+    request_data = request.get_json()
+    result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), accommodation_id=request_data.get("accommodation_id"))
+    print(result)   
+    db.session.add(result)
+    db.session.commit()
+    return "success", 200
+
+@api.route('/addcomments/<int:id>', methods=['POST'])
+def addcomments_region(id):
+    request_data = request.get_json()
+    result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), region_id=request_data.get("region_id"))   
+    db.session.add(result)
+    db.session.commit()
+    return "success", 200
+
 
 @api.route('/regions_with_patrimony', methods=['GET'])
 def get_regions_with_patrimony():

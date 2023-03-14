@@ -53,22 +53,7 @@ export const DiscoRegion = () => {
           backgroundSize: "cover",
         }}
       ></div>
-      <div className="container h-25 d-flex justify-content-center align-items-center p-4">
-        <div>
-          <button type="button" className="btn btn-outline-danger m-2">
-            Lugares que Visitar/Patrimonio
-          </button>
-          <button type="button" className="btn btn-outline-success m-2">
-            Restaurantes/Gastronomia
-          </button>
-          <button type="button" className="btn btn-outline-primary m-2">
-            Alojamientos
-          </button>
-          <button type="button" className="btn btn-outline-warning m-2">
-            Visitas Guiadas
-          </button>
-        </div>
-      </div>
+      
       <div className="text-center p-4">
         <h3>Ciudades con encanto</h3>
       </div>
@@ -122,18 +107,7 @@ export const DiscoRegion = () => {
                       </div>
                     );
                   })}
-                  {indexPatrimonys[indexPatrimonys.length - 1] <
-                  patrimonys.length - 1 ? (
-                    <button
-                      className="btn btn-outline-danger nextPatrimony"
-                      onClick={() => {
-                        const newIndexPatrimony = [...indexPatrimonys];
-                        setIndexPatrimonys(newIndexPatrimony.map((x) => x + 1));
-                      }}
-                    >
-                      <h2 style={{ marginTop: "-3px" }}>→</h2>
-                    </button>
-                  ) : null}
+                 
                 </div>
               </div>
             </div>

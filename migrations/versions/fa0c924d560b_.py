@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 21f5fdcc603d
+Revision ID: fa0c924d560b
 Revises: 
-Create Date: 2023-03-12 09:56:52.553432
+Create Date: 2023-03-13 22:53:21.541123
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '21f5fdcc603d'
+revision = 'fa0c924d560b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -51,10 +51,12 @@ def upgrade():
     sa.Column('resume', sa.Text(), nullable=False),
     sa.Column('photo', sa.String(length=255), nullable=False),
     sa.Column('logo', sa.String(length=255), nullable=False),
+    sa.Column('coordinates', sa.String(length=255), nullable=True),
     sa.Column('user_region_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_region_id'], ['user_region.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name')
+    sa.UniqueConstraint('name'),
+    sa.UniqueConstraint('user_region_id')
     )
     op.create_table('accommodation',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -64,6 +66,7 @@ def upgrade():
     sa.Column('logo', sa.String(length=255), nullable=True),
     sa.Column('time_open', sa.String(length=255), nullable=True),
     sa.Column('location', sa.String(length=255), nullable=True),
+    sa.Column('coordinates', sa.String(length=255), nullable=True),
     sa.Column('longitud', sa.Float(), nullable=True),
     sa.Column('latitud', sa.Float(), nullable=True),
     sa.Column('contact', sa.String(length=255), nullable=True),
@@ -81,6 +84,7 @@ def upgrade():
     sa.Column('logo', sa.String(length=255), nullable=True),
     sa.Column('time_open', sa.String(length=255), nullable=True),
     sa.Column('meeting_point', sa.String(length=255), nullable=True),
+    sa.Column('coordinates', sa.String(length=255), nullable=True),
     sa.Column('longitud', sa.Float(), nullable=True),
     sa.Column('latitud', sa.Float(), nullable=True),
     sa.Column('contact', sa.String(length=255), nullable=True),
@@ -98,6 +102,7 @@ def upgrade():
     sa.Column('logo', sa.String(length=255), nullable=False),
     sa.Column('time_open', sa.String(length=255), nullable=True),
     sa.Column('location', sa.String(length=255), nullable=True),
+    sa.Column('coordinates', sa.String(length=255), nullable=True),
     sa.Column('longitud', sa.Float(), nullable=True),
     sa.Column('latitud', sa.Float(), nullable=True),
     sa.Column('contact', sa.String(length=255), nullable=True),
@@ -116,6 +121,7 @@ def upgrade():
     sa.Column('time_open', sa.String(length=255), nullable=True),
     sa.Column('cart', sa.String(length=255), nullable=True),
     sa.Column('location', sa.String(length=255), nullable=True),
+    sa.Column('coordinates', sa.String(length=255), nullable=True),
     sa.Column('longitud', sa.Float(), nullable=True),
     sa.Column('latitud', sa.Float(), nullable=True),
     sa.Column('contact', sa.String(length=255), nullable=True),
@@ -134,7 +140,9 @@ def upgrade():
     sa.Column('restoration_id', sa.Integer(), nullable=True),
     sa.Column('accommodation_id', sa.Integer(), nullable=True),
     sa.Column('patrimony_id', sa.Integer(), nullable=True),
+    sa.Column('experience_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['accommodation_id'], ['accommodation.id'], ),
+    sa.ForeignKeyConstraint(['experience_id'], ['experience.id'], ),
     sa.ForeignKeyConstraint(['patrimony_id'], ['patrimony.id'], ),
     sa.ForeignKeyConstraint(['region_id'], ['region.id'], ),
     sa.ForeignKeyConstraint(['restoration_id'], ['restoration.id'], ),
