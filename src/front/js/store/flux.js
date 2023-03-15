@@ -3,25 +3,10 @@ const getState = ({ getStore, getActions, setStore }) => {
     store: {
       dataUser: null,
       userInfo: null,
-      favorites: [],
     },
 
     actions: {
-      getFavorites: async (id) => {
-        const response = fetch(`${process.env.BACKEND_URL}/favorite/${id}`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        });
-        const data = await response.json();
-        if (response.ok) {
-          setStore({
-            favorites: data.data,
-          });
-          return data.data;
-        }
-      },
-      addFavorite: async (id) => {
+      addFavorite: (id) => {
         fetch(`/addfavorite?id=${id}`, { method: "POST" })
           .then((response) => response.json())
           .then((data) => {

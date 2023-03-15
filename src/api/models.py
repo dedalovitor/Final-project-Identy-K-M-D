@@ -13,7 +13,8 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
-            "name": self.name
+            "name": self.name,
+            "favorites": [favorite.serialize()for favorite in self.favorites]
             # do not serialize the password, its a security breach
         }
     def __repr__(self):
@@ -230,6 +231,16 @@ class Favorites(db.Model):
     accommodation = db.relationship('Accommodation')
     patrimony_id = db.Column(db.Integer, db.ForeignKey('patrimony.id'))
     patrimony = db.relationship('Patrimony')
+
+    def serialize(self):
+
+        return{
+            "id": self.id,
+            "region_id": self.region_id,
+            "restoration_id": self.restoration_id,
+            "accommodation_id": self.accommodation_id,
+            "patrimony_id": self.patrimony_id,            
+        }
 
 class Comments(db.Model):
     id = db.Column(db.Integer, primary_key=True)

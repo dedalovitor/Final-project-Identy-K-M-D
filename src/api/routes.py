@@ -376,8 +376,8 @@ def get_favorites():
 
 
 @api.route('/addfavorite/<int:id>', methods=['POST'])
-@jwt_required
-def add_favorite():
+@jwt_required()
+def add_favorite(id):
     user_id = get_jwt_identity()
     data = request.json
     favorite = Favorites(user_id=user_id)

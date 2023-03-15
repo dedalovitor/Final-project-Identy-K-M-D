@@ -159,7 +159,9 @@ export const Home = () => {
                       </Link>
                       <button
                         className="btn btn-outline-danger mt-4"
-                        onClick={handleAddFavorite}
+                        onClick={() =>
+                          actions.addFavorite(regions[indexRegion].id)
+                        }
                       >
                         ❤
                       </button>
@@ -228,7 +230,9 @@ export const Home = () => {
                       </Link>
                       <button
                         className="btn btn-outline-danger mt-4"
-                        onClick={handleAddFavorite}
+                        onClick={() =>
+                          actions.addFavorite(patrimonys[indexPatrimony].id)
+                        }
                       >
                         ❤
                       </button>
@@ -301,7 +305,9 @@ export const Home = () => {
                       </Link>
                       <button
                         className="btn btn-outline-danger mt-4"
-                        onClick={handleAddFavorite}
+                        onClick={() =>
+                          actions.addFavorite(restorations[indexRestoration].id)
+                        }
                       >
                         ❤
                       </button>
@@ -374,7 +380,11 @@ export const Home = () => {
                       </Link>
                       <button
                         className="btn btn-outline-danger mt-4"
-                        onClick={handleAddFavorite}
+                        onClick={() =>
+                          actions.addFavorite(
+                            accommodations[indexAccommodations].id
+                          )
+                        }
                       >
                         ❤
                       </button>
@@ -444,7 +454,9 @@ export const Home = () => {
                       </Link>
                       <button
                         className="btn btn-outline-danger mt-4"
-                        onClick={handleAddFavorite}
+                        onClick={() =>
+                          actions.addFavorite(experiences[indexExperience].id)
+                        }
                       >
                         ❤
                       </button>
