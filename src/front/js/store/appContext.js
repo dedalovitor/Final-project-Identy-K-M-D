@@ -17,6 +17,7 @@ const injectContext = (PassedComponent) => {
       })
     );
 
+    useEffect(() => { state.actions.getCurrentUser() }, [])
     return (
       <Context.Provider value={state}>
         <PassedComponent {...props} />

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { MyComponent } from "../component/mycomponent";
 import { useNavigate } from "react-router-dom";
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+//import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'; 
 
 
 export const Profileuserregion = () => {
@@ -64,29 +64,29 @@ export const Profileuserregion = () => {
         getCurrentAccommodationChoices();
     }, [])
 
-    const { isLoaded } = useJsApiLoader({
-        id: 'google-map-script',
-        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-    })
+    // const { isLoaded } = useJsApiLoader({
+    //     id: 'google-map-script',
+    //     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+    // })
 
-    const [map, setMap] = React.useState(null)
+    // const [map, setMap] = React.useState(null)
 
-    const center = {
-        lat: 39.45712255279278,
-        lng: -0.3541559016389045
-    }
+    // const center = {
+    //     lat: 39.45712255279278,
+    //     lng: -0.3541559016389045
+    // }
 
-    const onLoad = React.useCallback(function callback(map) {
-        // This is just an example of getting and using the map instance!!! don't just blindly copy!
-        const bounds = new window.google.maps.LatLngBounds(center);
-        map.fitBounds(bounds);
+    // const onLoad = React.useCallback(function callback(map) {
+    //     // This is just an example of getting and using the map instance!!! don't just blindly copy!
+    //     const bounds = new window.google.maps.LatLngBounds(center);
+    //     map.fitBounds(bounds);
 
-        setMap(map)
-    }, [])
+    //     setMap(map)
+    // }, [])
 
-    const onUnmount = React.useCallback(function callback(map) {
-        setMap(null)
-    }, [])
+    // const onUnmount = React.useCallback(function callback(map) {
+    //     setMap(null)
+    // }, [])
 
     const getCurrentUserRegions = async () => {
         const response = await fetch(process.env.BACKEND_URL + "/api/regions_user", {
@@ -328,25 +328,25 @@ export const Profileuserregion = () => {
         <>
 
             <nav id="navbar-example2" className="navbar bg-info px-3 mb-3 d-flex justify-content-center">
-                <ul class="nav nav-pills h4">
-                    <li class="nav-item">
-                        <a class="nav-link link-light" href="#scrollspyHeading1">Tu región</a>
+                <ul className="nav nav-pills h4">
+                    <li className="nav-item">
+                        <a className="nav-link link-light" href="#scrollspyHeading1">Tu región</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-light" href="#scrollspyHeading2">Patrimonio</a>
+                    <li className="nav-item">
+                        <a className="nav-link link-light" href="#scrollspyHeading2">Patrimonio</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-light" href="#scrollspyHeading3">Restauración</a>
+                    <li className="nav-item">
+                        <a className="nav-link link-light" href="#scrollspyHeading3">Restauración</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-light" href="#scrollspyHeading4">Hostelería</a>
+                    <li className="nav-item">
+                        <a className="nav-link link-light" href="#scrollspyHeading4">Hostelería</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link link-light" href="#scrollspyHeading5">Experiencias</a>
+                    <li className="nav-item">
+                        <a className="nav-link link-light" href="#scrollspyHeading5">Experiencias</a>
                     </li>
                 </ul>
             </nav>
-            <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2" tabindex="0">
+            <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" className="scrollspy-example bg-body-tertiary p-3 rounded-2" tabIndex="0">
                 <div className="container mt-5">
                     <p className="h2" id="scrollspyHeading1">Tu región</p>
                     <div className="row col-12">
@@ -396,7 +396,7 @@ export const Profileuserregion = () => {
                                 <input name="latitud" placeholder="latitud" value={patrimony.latitud} onChange={(e) => setPatrimony({ ...patrimony, "latitud": e.target.value })}></input>
                                 <input name="longitud" placeholder="longitud" value={patrimony.longitud} onChange={(e) => setPatrimony({ ...patrimony, "longitud": e.target.value })}></input>
                                 <input name="contact" placeholder="contact" value={patrimony.contact} onChange={(e) => setPatrimony({ ...patrimony, "contact": e.target.value })}></input>
-                                <select class="form-select" aria-label="Default select example" onChange={(e) => setPatrimony({ ...patrimony, "type_bussiness": e.target.value })}>
+                                <select className="form-select" aria-label="Default select example" onChange={(e) => setPatrimony({ ...patrimony, "type_bussiness": e.target.value })}>
                                     <option disabled>tipo de patrimonio</option>
                                     {patrimonyChoice.map((x) => {
                                         return <option key={x} value={x} >{x}</option>
@@ -404,9 +404,15 @@ export const Profileuserregion = () => {
 
                                 </select>
                                 <p>Sube la foto</p>
-                                <input type="file" onChange={e => setPhoto(e.target.files)} />
+                                <input style={{ display: "none" }} type="file" onChange={e => setPhoto(e.target.files)} />
+                                <div className="row">
+                                    <button className="col-2" onClick={() => document.querySelector('input[type="file"]').click()}>icono</button>
+                                    {photo ? photo[0].name : null}
+                                </div>
+
                                 <p>Sube el logo</p>
                                 <input type="file" onChange={e => setLogo(e.target.files)} />
+
 
                                 <button className="btn btn-success" onClick={() => createPatrimony()}>CREATE PATRIMONY</button>
                             </div>
@@ -424,7 +430,7 @@ export const Profileuserregion = () => {
                                             <p className="card-text"> time_open: {x.time_open} </p>
                                             <p className="card-text"> contact: {x.contact} </p>
                                             <p className="card-text"> type bussiness: patrimonio {x.type_bussiness} </p>
-                                            <GoogleMap
+                                            {/* <GoogleMap
                                                 mapContainerStyle={{
                                                     width: '400px',
                                                     height: '400px'
@@ -435,9 +441,9 @@ export const Profileuserregion = () => {
                                                 onLoad={onLoad}
                                                 onUnmount={onUnmount}
                                             >
-                                                { /* Child components, such as markers, info windows, etc. */}
+                                        
                                                 <></>
-                                            </GoogleMap>
+                                            </GoogleMap> */}
                                         </div>
                                         <div className="card-footer">
                                             <button className="btn btn-danger" onClick={() => deletePatrimony(x.id)}>DEL</button>
@@ -460,7 +466,7 @@ export const Profileuserregion = () => {
                                 <input name="latitud" placeholder="latitud" value={restoration.latitud} onChange={(e) => setRestoration({ ...restoration, "latitud": e.target.value })}></input>
                                 <input name="longitud" placeholder="longitud" value={restoration.longitud} onChange={(e) => setRestoration({ ...restoration, "longitud": e.target.value })}></input>
                                 <input name="contact" placeholder="contact" value={restoration.contact} onChange={(e) => setRestoration({ ...restoration, "contact": e.target.value })}></input>
-                                <select class="form-select" aria-label="Default select example" onChange={(e) => setRestoration({ ...restoration, "type_bussiness": e.target.value })}>
+                                <select className="form-select" aria-label="Default select example" onChange={(e) => setRestoration({ ...restoration, "type_bussiness": e.target.value })}>
                                     <option disabled>tipo de restauración</option>
                                     {restorationChoice.map((x) => {
                                         return <option key={x} value={x} >{x}</option>
@@ -513,7 +519,7 @@ export const Profileuserregion = () => {
                                 <input name="latitud" placeholder="latitud" value={accommodation.latitud} onChange={(e) => setAccommodation({ ...accommodation, "latitud": e.target.value })}></input>
                                 <input name="longitud" placeholder="longitud" value={accommodation.longitud} onChange={(e) => setAccommodation({ ...accommodation, "longitud": e.target.value })}></input>
                                 <input name="contact" placeholder="contact" value={accommodation.contact} onChange={(e) => setAccommodation({ ...accommodation, "contact": e.target.value })}></input>
-                                <select class="form-select" aria-label="Default select example" onChange={(e) => setAccommodation({ ...accommodation, "type_bussiness": e.target.value })}>
+                                <select className="form-select" aria-label="Default select example" onChange={(e) => setAccommodation({ ...accommodation, "type_bussiness": e.target.value })}>
                                     <option disabled>tipo de hostelería</option>
                                     {accommodationChoice.map((x) => {
                                         return <option key={x} value={x} >{x}</option>
@@ -566,7 +572,7 @@ export const Profileuserregion = () => {
                                 <input name="latitud" placeholder="latitud" value={experience.latitud} onChange={(e) => setExperience({ ...experience, "latitud": e.target.value })}></input>
                                 <input name="longitud" placeholder="longitud" value={experience.longitud} onChange={(e) => setExperience({ ...experience, "longitud": e.target.value })}></input>
                                 <input name="contact" placeholder="contact" value={experience.contact} onChange={(e) => setExperience({ ...experience, "contact": e.target.value })}></input>
-                                <select class="form-select" aria-label="Default select example" onChange={(e) => setExperience({ ...experience, "type_bussiness": e.target.value })}>
+                                <select className="form-select" aria-label="Default select example" onChange={(e) => setExperience({ ...experience, "type_bussiness": e.target.value })}>
                                     <option disabled>tipo de experiencia</option>
                                     {experienceChoice.map((x) => {
                                         return <option key={x} value={x} >{x}</option>
