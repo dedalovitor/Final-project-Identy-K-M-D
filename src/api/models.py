@@ -231,6 +231,8 @@ class Favorites(db.Model):
     accommodation = db.relationship('Accommodation')
     patrimony_id = db.Column(db.Integer, db.ForeignKey('patrimony.id'))
     patrimony = db.relationship('Patrimony')
+    experience_id = db.Column(db.Integer, db.ForeignKey('experience.id'))
+    experience = db.relationship('Experience')
 
     def serialize(self):
 

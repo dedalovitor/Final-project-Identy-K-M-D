@@ -2,17 +2,25 @@ const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
       dataUser: null,
-      userInfo: null,
+      userInfo: { favorites: [] },
     },
 
     actions: {
-      addFavorite: (id) => {
-        fetch(`/addfavorite?id=${id}`, { method: "POST" })
+      addFavorite: (id, type) => {
+        fetch(process.env.BACKEND_URL + `/api/addfavorite`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify({
+            id: id,
+            type: type,
+          }),
+        })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data.message);
-            const element = elements.find((e) => e.id === id);
-            setFavorites((favorites) => [...favorites, element]);
+            getActions().getCurrentUser();
           })
           .catch((error) => {
             console.error("Error:", error);

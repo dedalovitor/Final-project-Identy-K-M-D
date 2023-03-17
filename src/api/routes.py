@@ -3,7 +3,7 @@ This module takes care of starting the API Server, Loading the DB and Adding the
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
 
-from api.models import db, User, Region, Restoration, Accommodation, Experience, Patrimony , User_region 
+from api.models import db, User, Region, Restoration, Accommodation, Experience, Patrimony , User_region, Favorites 
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
@@ -357,50 +357,61 @@ def delete_experience(region_id):
      return jsonify({ "response": "Experience not deleted"}), 400
 
 
-@api.route('/favorites', methods=['GET'])
-@jwt_required()
-def get_favorites():
-    user_id = get_jwt_identity()
-    favorites = Favorites.query.filter_by(user_id=user_id).all()
-    favorites_list = []
-    for favorite in favorites:
-        favorite_data = {}
-        favorite_data['id'] = favorite.id
-        favorite_data['user_id'] = favorite.user_id
-        favorite_data['region_id'] = favorite.region_id
-        favorite_data['restoration_id'] = favorite.restoration_id
-        favorite_data['accommodation_id'] = favorite.accommodation_id
-        favorite_data['patrimony_id'] = favorite.patrimony_id
-        favorites_list.append(favorite_data)
-    return jsonify(favorites_list), 200
 
-
-@api.route('/addfavorite/<int:id>', methods=['POST'])
+@api.route('/addfavorite', methods=['POST'])
 @jwt_required()
-def add_favorite(id):
+def add_favorite():
     user_id = get_jwt_identity()
     data = request.json
-    favorite = Favorites(user_id=user_id)
-    if 'region_id' in data:
-        favorite.region_id = data['region_id']
-    if 'restoration_id' in data:
-        favorite.restoration_id = data['restoration_id']
-    if 'accommodation_id' in data:
-        favorite.accommodation_id = data['accommodation_id']
-    if 'patrimony_id' in data:
-        favorite.patrimony_id = data['patrimony_id']
-    db.session.add(favorite)
-    db.session.commit()
+    print(data["id"], data["type"])
+    if data["type"] == "region":
+        favorite = Favorites.query.filter_by(user_id=user_id, region_id = data["id"]).first()
+        if favorite:
+            db.session.delete(favorite)
+            db.session.commit()
+        else: 
+            new_favorite = Favorites(user_id = user_id, region_id = data["id"])
+            print(new_favorite)
+            db.session.add(new_favorite)
+            db.session.commit()
+    if data["type"] == "restoration":
+        favorite = Favorites.query.filter_by(user_id=user_id, restoration_id = data["id"]).first()
+        if favorite:
+            db.session.delete(favorite)
+            db.session.commit()
+        else: 
+            new_favorite = Favorites(user_id = user_id, restoration_id = data["id"])
+            print(new_favorite)
+            db.session.add(new_favorite)
+            db.session.commit()
+    if data["type"] == "accommodation":
+        favorite = Favorites.query.filter_by(user_id=user_id, accommodation_id = data["id"]).first()
+        if favorite:
+            db.session.delete(favorite)
+            db.session.commit()
+        else: 
+            new_favorite = Favorites(user_id = user_id, accommodation_id = data["id"])
+            print(new_favorite)
+            db.session.add(new_favorite)
+            db.session.commit()
+    if data["type"] == "patrimony":
+        favorite = Favorites.query.filter_by(user_id=user_id, patrimony_id = data["id"]).first()
+        if favorite:
+            db.session.delete(favorite)
+            db.session.commit()
+        else: 
+            new_favorite = Favorites(user_id = user_id, patrimony_id = data["id"])
+            print(new_favorite)
+            db.session.add(new_favorite)
+            db.session.commit()
+    if data["type"] == "experience":
+        favorite = Favorites.query.filter_by(user_id=user_id, experience_id = data["id"]).first()
+        if favorite:
+            db.session.delete(favorite)
+            db.session.commit()
+        else: 
+            new_favorite = Favorites(user_id = user_id, experience_id = data["id"])
+            print(new_favorite)
+            db.session.add(new_favorite)
+            db.session.commit()
     return jsonify({'message': 'Favorite added successfully'}), 201
-
-@api.route('/deletefavorites/<int:id>', methods=['DELETE'])
-@jwt_required()
-def delete_favorite(id):
-    user_id = get_jwt_identity()
-    favorite = Favorites.query.filter_by(id=id, user_id=user_id).first()
-    if not favorite:
-        return jsonify({'message': 'Favorite not found'}), 404
-    db.session.delete(favorite)
-    db.session.commit()
-    return jsonify({'message': 'Favorite deleted successfully'}), 200
-
