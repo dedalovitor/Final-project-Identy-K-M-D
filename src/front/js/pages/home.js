@@ -202,6 +202,21 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
+                      <button
+                        className={
+                          store.userInfo.favorites.length > 0 &&
+                          store.userInfo.favorites
+                            .map((favorite) => favorite.region_id)
+                            .includes(regions[indexRegion].id)
+                            ? "btn btn-outline-danger text-danger bg-white mt-4"
+                            : "btn btn-outline-secondary text-secondary bg-white mt-4"
+                        }
+                        onClick={() =>
+                          actions.addFavorite(regions[indexRegion].id, "region")
+                        }
+                      >
+                        <i class="fa-solid fa-heart"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -265,6 +280,24 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
+                      <button
+                        className={
+                          store.userInfo.favorites.length > 0 &&
+                          store.userInfo.favorites
+                            .map((favorite) => favorite.patrimony_id)
+                            .includes(patrimonys[indexPatrimony].id)
+                            ? "btn btn-outline-danger text-danger bg-white mt-4"
+                            : "btn btn-outline-secondary text-secondary bg-white mt-4"
+                        }
+                        onClick={() =>
+                          actions.addFavorite(
+                            patrimonys[indexPatrimony].id,
+                            "patrimony"
+                          )
+                        }
+                      >
+                        <i class="fa-solid fa-heart"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -333,6 +366,24 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
+                      <button
+                        className={
+                          store.userInfo.favorites.length > 0 &&
+                          store.userInfo.favorites
+                            .map((favorite) => favorite.restoration_id)
+                            .includes(restorations[indexRestoration].id)
+                            ? "btn btn-outline-danger text-danger bg-white mt-4"
+                            : "btn btn-outline-secondary text-secondary bg-white mt-4"
+                        }
+                        onClick={() =>
+                          actions.addFavorite(
+                            restorations[indexRestoration].id,
+                            "restoration"
+                          )
+                        }
+                      >
+                        <i class="fa-solid fa-heart"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -402,6 +453,24 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
+                      <button
+                        className={
+                          store.userInfo.favorites.length > 0 &&
+                          store.userInfo.favorites
+                            .map((favorite) => favorite.accommodation_id)
+                            .includes(accommodations[indexAccommodation].id)
+                            ? "btn btn-outline-danger text-danger bg-white mt-4"
+                            : "btn btn-outline-secondary text-secondary bg-white mt-4"
+                        }
+                        onClick={() =>
+                          actions.addFavorite(
+                            accommodations[indexAccommodation].id,
+                            "accommodation"
+                          )
+                        }
+                      >
+                        <i class="fa-solid fa-heart"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -468,6 +537,24 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
+                      <button
+                        className={
+                          store.userInfo.favorites.length > 0 &&
+                          store.userInfo.favorites
+                            .map((favorite) => favorite.experience_id)
+                            .includes(experiences[indexExperience].id)
+                            ? "btn btn-outline-danger text-danger bg-white mt-4"
+                            : "btn btn-outline-secondary text-secondary bg-white mt-4"
+                        }
+                        onClick={() =>
+                          actions.addFavorite(
+                            experiences[indexExperience].id,
+                            "experience"
+                          )
+                        }
+                      >
+                        <i class="fa-solid fa-heart"></i>
+                      </button>
                     </div>
                   </div>
                 </div>

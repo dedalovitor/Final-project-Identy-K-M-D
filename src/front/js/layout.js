@@ -22,8 +22,6 @@ import { CardRestoration } from "./component/cardrestoration.js";
 import { CardPatrimony } from "./component/cardpatrimony.js";
 import { CardAccommodation } from "./component/cardaccommodation.js";
 
-
-
 //create your first component
 const Layout = () => {
   //the basename is used when your project is published in a subdirectory and not in the root of the domain
