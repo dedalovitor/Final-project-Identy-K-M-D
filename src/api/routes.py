@@ -1,15 +1,18 @@
 """
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
-from flask import Flask, request, jsonify, url_for, Blueprint
 
-from api.models import db, User, Region, Restoration, Accommodation, Experience, Patrimony , User_region, Favorites 
+
+from flask import Flask, request, jsonify, url_for, Blueprint, json
+from api.models import db, User, Region, Restoration, Accommodation, Experience, Patrimony , Comments, User_region , PatrimonyChoices, RestorationChoices, AccommodationChoices, ExperienceChoices, Favorites
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import get_jwt_identity
 from sqlalchemy import exc
 
+import cloudinary
+import cloudinary.uploader
 
 api = Blueprint('api', __name__)
 
@@ -22,6 +25,26 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@api.route('/patrimony_choice', methods=['GET'])
+def patrimony_choice():
+    patrimony_choice = [str(e.value) for e in PatrimonyChoices]
+    return jsonify({"results": patrimony_choice}), 200
+
+@api.route('/restoration_choice', methods=['GET'])
+def restoration_choice():
+    restoration_choice = [str(e.value) for e in RestorationChoices]
+    return jsonify({"results": restoration_choice}), 200
+
+@api.route('/accommodation_choice', methods=['GET'])
+def accommodation_choice():
+    accommodation_choice = [str(e.value) for e in AccommodationChoices]
+    return jsonify({"results": accommodation_choice}), 200
+
+@api.route('/experience_choice', methods=['GET'])
+def experience_choice():
+    experience_choice = [str(e.value) for e in ExperienceChoices]
+    return jsonify({"results": experience_choice}), 200
 
 
 @api.route('/login', methods=['POST'])
@@ -74,10 +97,87 @@ def get_regions():
     regions = Region.query.all()
     return jsonify({"result": [x.serialize()for x in regions]}), 200
 
-# @api.route('/regions/<int:region_id>', methods=['GET'])
-# def get_regions_by_id(region_id):
-#     regions = Region.query.filter_by(region_id=region_id)
-#     return jsonify({"result": [x.serialize()for x in regions]}), 200
+@api.route('/regions/<int:region_id>', methods=['GET'])
+def get_regions_by_id(region_id):
+    region = Region.query.filter_by(id=region_id).first()
+    return jsonify({"result": region.inforegion()}), 200
+
+@api.route('/patrimonys/<int:patrimony_id>', methods=['GET'])
+def get_patrimonys_by_id(patrimony_id):
+    patrimony = Patrimony.query.filter_by(id=patrimony_id).first()
+    return jsonify({"result": patrimony.serialize()}), 200
+
+@api.route('/restorations/<int:restoration_id>', methods=['GET'])
+def get_restorations_by_id(restoration_id):
+    restoration = Restoration.query.filter_by(id=restoration_id).first()
+    return jsonify({"result": restoration.serialize()}), 200
+
+@api.route('/accommodations/<int:accommodation_id>', methods=['GET'])
+def get_accommodations_by_id(accommodation_id):
+    accommodation = Accommodation.query.filter_by(id=accommodation_id).first()
+    return jsonify({"result": accommodation.serialize()}), 200
+
+@api.route('/experiences/<int:experience_id>', methods=['GET'])
+def get_experiences_by_id(experience_id):
+    experience = Experience.query.filter_by(id=experience_id).first()
+    return jsonify({"result": experience.serialize()}), 200
+
+
+@api.route('/commentsrestoration/<int:id>', methods=['GET'])
+def comments_restoration(id):
+    comments = Comments.query.filter_by(restoration_id=id).all()
+    result = [comments.serialize() for comments in comments]
+    return jsonify(result), 200
+
+@api.route('/commentsaccommodation/<int:id>', methods=['GET'])
+def comments_accommodation(id):
+    comments = Comments.query.filter_by(accommodation_id=id).all()
+    result = [comments.serialize() for comments in comments]
+    print(result)
+    return jsonify(result), 200
+
+@api.route('/commentspatrimony/<int:id>', methods=['GET'])
+def comments_patrimony(id):
+    comments = Comments.query.filter_by(patrimony_id=id).all()
+    result = [comments.serialize() for comments in comments]
+    print(result)
+    return jsonify(result), 200
+
+
+@api.route('/addcommentsrestoration/<int:id>', methods=['POST'])
+def addcomments_restoration(id):
+    request_data = request.get_json()
+    result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), restoration_id=request_data.get("restoration_id"))   
+    print(result)
+    db.session.add(result)
+    db.session.commit()
+    return "success", 200
+
+@api.route('/addcommentspatrimony/<int:id>', methods=['POST'])
+def addcomments_patrimony(id):
+    request_data = request.get_json()
+    result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), patrimony_id=request_data.get("patrimony_id"))   
+    print(result)
+    db.session.add(result)
+    db.session.commit()
+    return "success", 200
+
+@api.route('/addcommentsaccommodation/<int:id>', methods=['POST'])
+def addcomments_accommodation(id):
+    request_data = request.get_json()
+    result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), accommodation_id=request_data.get("accommodation_id"))
+    print(result)   
+    db.session.add(result)
+    db.session.commit()
+    return "success", 200
+
+@api.route('/addcomments/<int:id>', methods=['POST'])
+def addcomments_region(id):
+    request_data = request.get_json()
+    result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), region_id=request_data.get("region_id"))   
+    db.session.add(result)
+    db.session.commit()
+    return "success", 200
 
 
 @api.route('/regions_with_patrimony', methods=['GET'])
@@ -192,12 +292,13 @@ def user_region_login():
 @jwt_required()
 def create_region():
     user_id = get_jwt_identity()
-    body_name = request.json.get("name")
-    body_resume = request.json.get("resume")
-    body_photo = request.json.get("photo")
-    body_logo = request.json.get("logo")
+    body = json.loads(request.form["region"])
+    body_name = body["name"]
+    body_resume = body["resume"]
+    body_photo = cloudinary.uploader.upload(request.files['photo'])
+    body_logo = cloudinary.uploader.upload(request.files['logo'])
   
-    new_region = Region(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, user_region_id=user_id)
+    new_region = Region(name=body_name, resume=body_resume, photo=body_photo['secure_url'], logo=body_logo['secure_url'], user_region_id=user_id)
     db.session.add(new_region)
     db.session.commit()
     return jsonify({"response": "Region registered successfully"}), 200
@@ -226,17 +327,25 @@ def delete_region(region_id):
 @jwt_required()
 def create_patrimony():
     region_id = get_jwt_identity()
-    body_name = request.json.get("name")
-    body_resume = request.json.get("resume")
-    body_photo = request.json.get("photo")
-    body_logo = request.json.get("logo")
+    body = json.loads(request.form["patrimony"])
+    body_name = body["name"]
+    body_resume = body["resume"]
+    body_time_open = body["time_open"]
+    body_location = body["location"]
+    body_latitud = body["latitud"]
+    body_longitud = body["longitud"]
+    body_contact = body["contact"]
+    body_photo = cloudinary.uploader.upload(request.files['photo'])
+    body_logo = cloudinary.uploader.upload(request.files['logo'])
+    body_type_bussiness = body["type_bussiness"]
+    
   
-    new_patrimony = Patrimony(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, region_id=region_id)
+    new_patrimony = Patrimony(name=body_name, resume=body_resume, location = body_location, time_open = body_time_open, latitud = body_latitud, longitud = body_longitud, contact = body_contact, type_bussiness=PatrimonyChoices(body_type_bussiness), photo=body_photo['secure_url'], logo=body_logo['secure_url'], region_id=region_id)
     db.session.add(new_patrimony)
     db.session.commit()
     return jsonify({"response": "Patrimony registered successfully"}), 200
 
-@api.route('/patrimonys', methods=['GET'])
+@api.route('/patrimonys_user', methods=['GET'])
 @jwt_required()
 def get_current_region_patrimonys():
     region_id = get_jwt_identity()
@@ -259,19 +368,27 @@ def delete_patrimony(region_id):
 @jwt_required()
 def create_restoration():
     region_id = get_jwt_identity()
-    body_name = request.json.get("name")
-    body_resume = request.json.get("resume")
-    body_photo = request.json.get("photo")
-    body_logo = request.json.get("logo")
-    body_type_bussiness = request.json.get("type_bussiness")
+    body = json.loads(request.form["restoration"])
+    body_name = body["name"]
+    body_resume = body["resume"]
+    body_time_open = body["time_open"]
+    body_location = body["location"]
+    body_latitud = body["latitud"]
+    body_longitud = body["longitud"]
+    body_contact = body["contact"]
+    body_photo = cloudinary.uploader.upload(request.files['photo'])
+    body_logo = cloudinary.uploader.upload(request.files['logo'])
+    body_cart = cloudinary.uploader.upload(request.files['cart'])
+    body_type_bussiness = body["type_bussiness"]
+    
   
-    new_restoration = Restoration(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, type_bussiness=body_type_bussiness, region_id=region_id)
+    new_restoration = Restoration(name=body_name, resume=body_resume, location = body_location, time_open = body_time_open, latitud = body_latitud, longitud = body_longitud, contact = body_contact, type_bussiness=RestorationChoices(body_type_bussiness), photo=body_photo['secure_url'], logo=body_logo['secure_url'], cart=body_cart['secure_url'], region_id=region_id)
     db.session.add(new_restoration)
     db.session.commit()
     return jsonify({"response": "Restoration registered successfully"}), 200
 
 
-@api.route('/restorations', methods=['GET'])
+@api.route('/restorations_user', methods=['GET'])
 @jwt_required()
 def get_current_region_restorations():
     region_id = get_jwt_identity()
@@ -293,19 +410,26 @@ def delete_restoration(region_id):
 @jwt_required()
 def create_accommodation():
     region_id = get_jwt_identity()
-    body_name = request.json.get("name")
-    body_resume = request.json.get("resume")
-    body_photo = request.json.get("photo")
-    body_logo = request.json.get("logo")
-    body_type_bussiness = request.json.get("type_bussiness")
+    body = json.loads(request.form["accommodation"])
+    body_name = body["name"]
+    body_resume = body["resume"]
+    body_time_open = body["time_open"]
+    body_location = body["location"]
+    body_latitud = body["latitud"]
+    body_longitud = body["longitud"]
+    body_contact = body["contact"]
+    body_photo = cloudinary.uploader.upload(request.files['photo'])
+    body_logo = cloudinary.uploader.upload(request.files['logo'])
+    body_type_bussiness = body["type_bussiness"]
+    
   
-    new_accommodation = Accommodation(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, type_bussiness=body_type_bussiness, region_id=region_id)
+    new_accommodation = Accommodation(name=body_name, resume=body_resume, location = body_location, time_open = body_time_open, latitud = body_latitud, longitud = body_longitud, contact = body_contact, type_bussiness=AccommodationChoices(body_type_bussiness), photo=body_photo['secure_url'], logo=body_logo['secure_url'], region_id=region_id)
     db.session.add(new_accommodation)
     db.session.commit()
     return jsonify({"response": "Accommodation registered successfully"}), 200
 
 
-@api.route('/accommodations', methods=['GET'])
+@api.route('/accommodations_user', methods=['GET'])
 @jwt_required()
 def get_current_region_accommodations():
     region_id = get_jwt_identity()
@@ -327,12 +451,20 @@ def delete_accommodation(region_id):
 @jwt_required()
 def create_experience():
     region_id = get_jwt_identity()
-    body_name = request.json.get("name")
-    body_resume = request.json.get("resume")
-    body_photo = request.json.get("photo")
-    body_logo = request.json.get("logo")
+    body = json.loads(request.form["experience"])
+    body_name = body["name"]
+    body_resume = body["resume"]
+    body_time_open = body["time_open"]
+    body_meeting_point = body["meeting_point"]
+    body_latitud = body["latitud"]
+    body_longitud = body["longitud"]
+    body_contact = body["contact"]
+    body_photo = cloudinary.uploader.upload(request.files['photo'])
+    body_logo = cloudinary.uploader.upload(request.files['logo'])
+    body_type_bussiness = body["type_bussiness"]
+    
   
-    new_experience = Experience(name=body_name, resume=body_resume, photo=body_photo, logo=body_logo, region_id=region_id)
+    new_experience = Experience(name=body_name, resume=body_resume, meeting_point = body_meeting_point, time_open = body_time_open, latitud = body_latitud, longitud = body_longitud, contact = body_contact, type_bussiness=ExperienceChoices(body_type_bussiness), photo=body_photo['secure_url'], logo=body_logo['secure_url'], region_id=region_id)
     db.session.add(new_experience)
     db.session.commit()
     return jsonify({"response": "Experience registered successfully"}), 200

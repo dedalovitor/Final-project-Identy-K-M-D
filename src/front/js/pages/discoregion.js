@@ -33,7 +33,7 @@ export const DiscoRegion = () => {
     const data = await response.json();
     if (response.ok) {
       setPatrimonys(data.result);
-      setIndexPatrimonys([0, 1, 2, 3, 4]);
+      setIndexPatrimonys([0, 1, 2, 3]);
     }
   };
 
@@ -51,24 +51,8 @@ export const DiscoRegion = () => {
           backgroundSize: "cover",
         }}
       ></div>
-      <div className="container h-25 d-flex justify-content-center align-items-center">
-        <button type="button" className="btn btn-outline-primary m-2">
-          Alojamientos
-        </button>
-        <button type="button" className="btn btn-outline-dark m-2">
-          Cosas que hacer
-        </button>
-        <button type="button" className="btn btn-outline-success m-2">
-          Restaurantes/Gastronomia
-        </button>
-        <button type="button" className="btn btn-outline-danger m-2">
-          Lugares que Visitar/Patrimonio
-        </button>
-        <button type="button" className="btn btn-outline-warning m-2">
-          Visitas Guiadas
-        </button>
-      </div>
-      <div className="text-center">
+      
+      <div className="text-center p-4">
         <h3>Ciudades con encanto</h3>
       </div>
       <div className="mx-5 p-4 ">
@@ -91,21 +75,10 @@ export const DiscoRegion = () => {
                 </div>
               </div>
               <div className="col p-4">
-                <div className="row">
-                  {indexPatrimonys[0] > 0 ? (
-                    <button
-                      className="btn btn-primary previousPatrimony"
-                      onClick={() => {
-                        const newIndexPatrimony = [...indexPatrimonys];
-                        setIndexPatrimonys(newIndexPatrimony.map((x) => x - 1));
-                      }}
-                    >
-                      <h2>←</h2>
-                    </button>
-                  ) : null}
+                <div className="row mx-5 p-4 card-row">
                   {regions[indexRegion].patrimonys.map((patrimony) => {
                     return (
-                      <div className="col-3">
+                      <div className="col-2 col-sm-6 col-md-4 col-lg-3">
                         <div className="card">
                           <img
                             src={patrimony.photo}
@@ -120,8 +93,8 @@ export const DiscoRegion = () => {
 
                             <div className="card-text text-center">
                               <div>
-                                <Link to={`/${patrimony.name}`}>
-                                  <button className="btn btn-primary mt-4">
+                                <Link to={`/patrimonio/${patrimony.id}`}>
+                                  <button className="btn btn-outline-danger mt-4">
                                     Ver lugar
                                   </button>
                                 </Link>
@@ -132,22 +105,12 @@ export const DiscoRegion = () => {
                       </div>
                     );
                   })}
+                 
                 </div>
               </div>
             </div>
           );
         })}
-        {indexPatrimonys[indexPatrimonys.length - 1] < patrimonys.length - 1 ? (
-          <button
-            className="btn btn-primary nextPatrimony"
-            onClick={() => {
-              const newIndexPatrimony = [...indexPatrimonys];
-              setIndexPatrimonys(newIndexPatrimony.map((x) => x + 1));
-            }}
-          >
-            <h2>→</h2>
-          </button>
-        ) : null}
       </div>
     </>
   );
