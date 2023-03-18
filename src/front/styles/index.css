@@ -199,14 +199,21 @@
 .file-select input[type="file"] {
   opacity: 0;
   width: 200px;
-  height: 32px;
+  height: 120px;
   display: inline-block;
 }
 
 #src-file1::before {
   background: url(https://cdn-icons-png.flaticon.com/512/56/56887.png?w=740&t=st=1679138165~exp=1679138765~hmac=e2ff16c4074447de6e1b49b8081d6fd492b6f64a51d48137b4ac48a4303a06ea)
-    center left no-repeat;
+    center center no-repeat;
   background-size: 60px;
+  border-style: dashed;
+  border-color: #e62848;
+  padding: 30px;
+}
+
+#src-file1:hover {
+  background-color: #e62848;
 }
 
 #src-file2::before {
@@ -214,5 +221,5 @@
 }
 
 .profileuserregionlogo {
-  margin: 0px 0px -10px 10px;
+  margin: 75px 0px -10px 10px;
 }
