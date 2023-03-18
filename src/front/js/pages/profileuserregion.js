@@ -20,6 +20,15 @@ export const Profileuserregion = () => {
     const [experiences, setExperiences] = useState([]);
     const [photo, setPhoto] = useState(null);
     const [logo, setLogo] = useState(null);
+    const [photopatrimony, setPhotoPatrimony] = useState(null);
+    const [logopatrimony, setLogoPatrimony] = useState(null);
+    const [photorestoration, setPhotoRestoration] = useState(null);
+    const [logorestoration, setLogoRestoration] = useState(null);
+    const [photoaccommodation, setPhotoAccommodation] = useState(null);
+    const [logoaccommodation, setLogoAccommodation] = useState(null);
+    const [photoexperience, setPhotoExperience] = useState(null);
+    const [logoexperience, setLogoExperience] = useState(null);
+
     const [cart, setCart] = useState(null);
     const [patrimonyChoice, setPatrimonyChoice] = useState([]);
     const [restorationChoice, setRestorationChoice] = useState([]);
@@ -348,7 +357,7 @@ export const Profileuserregion = () => {
             </nav>
             <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" className="scrollspy-example bg-body-tertiary p-3 rounded-2" tabIndex="0">
                 <div className="container mt-5">
-                    <p className="h2" id="scrollspyHeading1">Tu región</p>
+                    <p className="h2 title-pur-sec" id="scrollspyHeading1">Tu región</p>
                     <div className="row col-12">
                         <div className="col-4">
                             <div className="card">
@@ -356,20 +365,21 @@ export const Profileuserregion = () => {
                                 <input name="name" placeholder="nombre de la región" value={region.name} onChange={(e) => setRegion({ ...region, "name": e.target.value })}></input>
                                 <p class="mb-n1">Añade la descripción de tu región</p>
                                 <input name="resume" placeholder="descripción de la región" value={region.resume} onChange={(e) => setRegion({ ...region, "resume": e.target.value })}></input>
-                                <p class="mb-n1">Sube la foto destacada de tu región</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setPhoto(e.target.files)} />
-                                <div className="row">
-                                    <button className="col-4 p-4 button-pur" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
-                                    {photo ? photo[0].name : null}
+
+                                <div>
+                                    <p class="mb-n1">Sube la foto destacada de tu región</p>
+
+
+                                    <div class="file-select" id="src-file1" >
+                                        <input name="src-file1" aria-label="Archivo" type="file" onChange={e => setPhoto(e.target.files)} />
+                                    </div>
                                 </div>
 
-                                <p class="mb-n1">Sube el logo de tu región</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setLogo(e.target.files)} />
-                                <div className="row">
-                                    <button className="col-4 p-4 button-pur mb-4" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
-                                    {logo ? logo[0].name : null}
-                                </div>
 
+
+
+                                <p>Sube el logo</p>
+                                <input type="file" onChange={e => setLogo(e.target.files)} />
 
                                 <button className="btn btn-success" onClick={() => createRegion()}>CREAR REGIÓN</button>
                             </div>
@@ -420,14 +430,14 @@ export const Profileuserregion = () => {
 
                                 </select>
                                 <p class="mb-n1">Sube la foto destacada de tu patrimonio</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setPhoto(e.target.files)} />
+                                <input style={{ display: "none" }} type="file" onChange={e => setPhotoPatrimony(e.target.files)} />
                                 <div className="row">
                                     <button className="col-4 p-4 button-pur" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
                                     {photo ? photo[0].name : null}
                                 </div>
 
                                 <p class="mb-n1">Sube el logo de tu patrimonio</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setLogo(e.target.files)} />
+                                <input style={{ display: "none" }} type="file" onChange={e => setLogoPatrimony(e.target.files)} />
                                 <div className="row">
                                     <button className="col-4 p-4 button-pur mb-4" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
                                     {logo ? logo[0].name : null}
@@ -486,14 +496,14 @@ export const Profileuserregion = () => {
 
                                 </select>
                                 <p class="mb-n1">Sube la foto destacada de tu establecimiento de restauración</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setPhoto(e.target.files)} />
+                                <input style={{ display: "none" }} type="file" onChange={e => setPhotoRestoration(e.target.files)} />
                                 <div className="row">
                                     <button className="col-4 p-4 button-pur" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
                                     {photo ? photo[0].name : null}
                                 </div>
 
                                 <p class="mb-n1">Sube el logo de tu establecimiento de restauración</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setLogo(e.target.files)} />
+                                <input style={{ display: "none" }} type="file" onChange={e => setLogoRestoration(e.target.files)} />
                                 <div className="row">
                                     <button className="col-4 p-4 button-pur mb-4" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
                                     {logo ? logo[0].name : null}
@@ -553,14 +563,14 @@ export const Profileuserregion = () => {
 
                                 </select>
                                 <p class="mb-n1">Sube la foto destacada de tu establecimiento hostelero</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setPhoto(e.target.files)} />
+                                <input style={{ display: "none" }} type="file" onChange={e => setPhotoAccommodation(e.target.files)} />
                                 <div className="row">
                                     <button className="col-4 p-4 button-pur" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
                                     {photo ? photo[0].name : null}
                                 </div>
 
                                 <p class="mb-n1">Sube el logo de tu establecimiento hostelero</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setLogo(e.target.files)} />
+                                <input style={{ display: "none" }} type="file" onChange={e => setLogoAccommodation(e.target.files)} />
                                 <div className="row">
                                     <button className="col-4 p-4 button-pur mb-4" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
                                     {logo ? logo[0].name : null}
@@ -621,14 +631,14 @@ export const Profileuserregion = () => {
 
                                 </select>
                                 <p class="mb-n1">Sube la foto destacada de tu experiencia</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setPhoto(e.target.files)} />
+                                <input style={{ display: "none" }} type="file" onChange={e => setPhotoExperience(e.target.files)} />
                                 <div className="row">
                                     <button className="col-4 p-4 button-pur" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
                                     {photo ? photo[0].name : null}
                                 </div>
 
                                 <p class="mb-n1">Sube el logo de tu experiencia</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setLogo(e.target.files)} />
+                                <input style={{ display: "none" }} type="file" onChange={e => setLogoExperience(e.target.files)} />
                                 <div className="row">
                                     <button className="col-4 p-4 button-pur mb-4" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
                                     {logo ? logo[0].name : null}
