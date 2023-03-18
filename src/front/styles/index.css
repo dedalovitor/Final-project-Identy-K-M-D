@@ -91,6 +91,12 @@
   height: 50px;
   border-radius: 50px;
 }
+.card-logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
 .logo-card {
   position: absolute;
   top: 10px;
@@ -205,4 +211,8 @@
 
 #src-file2::before {
   content: "Seleccionar Archivo 2";
+}
+
+.profileuserregionlogo {
+  margin: 0px 0px -10px 10px;
 }

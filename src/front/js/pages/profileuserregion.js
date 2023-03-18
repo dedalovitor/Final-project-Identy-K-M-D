@@ -20,15 +20,6 @@ export const Profileuserregion = () => {
     const [experiences, setExperiences] = useState([]);
     const [photo, setPhoto] = useState(null);
     const [logo, setLogo] = useState(null);
-    const [photopatrimony, setPhotoPatrimony] = useState(null);
-    const [logopatrimony, setLogoPatrimony] = useState(null);
-    const [photorestoration, setPhotoRestoration] = useState(null);
-    const [logorestoration, setLogoRestoration] = useState(null);
-    const [photoaccommodation, setPhotoAccommodation] = useState(null);
-    const [logoaccommodation, setLogoAccommodation] = useState(null);
-    const [photoexperience, setPhotoExperience] = useState(null);
-    const [logoexperience, setLogoExperience] = useState(null);
-
     const [cart, setCart] = useState(null);
     const [patrimonyChoice, setPatrimonyChoice] = useState([]);
     const [restorationChoice, setRestorationChoice] = useState([]);
@@ -259,7 +250,6 @@ export const Profileuserregion = () => {
         let body = new FormData();
         body.append("photo", photo[0]);
         body.append("logo", logo[0]);
-        body.append("cart", cart[0]);
         body.append("restoration", JSON.stringify(restoration));
         const response = await fetch(process.env.BACKEND_URL + "/api/restoration", {
             method: "POST",
@@ -368,18 +358,16 @@ export const Profileuserregion = () => {
 
                                 <div>
                                     <p class="mb-n1">Sube la foto destacada de tu región</p>
-
-
                                     <div class="file-select" id="src-file1" >
                                         <input name="src-file1" aria-label="Archivo" type="file" onChange={e => setPhoto(e.target.files)} />
                                     </div>
                                 </div>
-
-
-
-
-                                <p>Sube el logo</p>
-                                <input type="file" onChange={e => setLogo(e.target.files)} />
+                                <div>
+                                    <p class="mb-n1">Sube el logo de tu región</p>
+                                    <div class="file-select" id="src-file1" >
+                                        <input name="src-file1" aria-label="Archivo" type="file" onChange={e => setLogo(e.target.files)} />
+                                    </div>
+                                </div>
 
                                 <button className="btn btn-success" onClick={() => createRegion()}>CREAR REGIÓN</button>
                             </div>
@@ -387,15 +375,26 @@ export const Profileuserregion = () => {
                         <div className="col-8">
                             <div className="row">
                                 {regions.map((x) => {
-                                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
-                                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
-                                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
-                                        <div className="card-body">
-                                            <p className="card-text"> name: {x.name} </p>
-                                            <p className="card-text"> resume: {x.resume} </p>
+                                    return <div key={x.id} className="card p-2" style={{ width: "18rem" }}>
+                                        <div className="card-logo">
+                                            <img className="profileuserregionlogo" src={x.logo} height="30px"></img>
                                         </div>
-                                        <div className="card-footer">
-                                            <button className="btn btn-danger" onClick={() => deleteRegion(x.id)}>DEL</button>
+                                        <img
+                                            src={x.photo}
+                                            height="200px"
+                                            className="card-img-top"
+                                            alt={x.photo}
+                                        />
+                                        <div className="card-body">
+                                            <p className="card-text"> Región: {x.name} </p>
+                                        </div>
+                                        <div className="card-footer d-flex justify-content-between">
+                                            <button className="btn btn-danger mt-2 mb-2" onClick={() => deleteRegion(x.id)}>Eliminar</button>
+                                            <Link to={`/ciudad/${x.id}`}>
+                                                <button className="btn btn-outline-danger mt-2">
+                                                    Ver página
+                                                </button>
+                                            </Link>
                                         </div>
                                     </div>
                                 })}
@@ -429,18 +428,17 @@ export const Profileuserregion = () => {
                                     })}
 
                                 </select>
-                                <p class="mb-n1">Sube la foto destacada de tu patrimonio</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setPhotoPatrimony(e.target.files)} />
-                                <div className="row">
-                                    <button className="col-4 p-4 button-pur" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
-                                    {photo ? photo[0].name : null}
+                                <div>
+                                    <p class="mb-n1">Sube la foto destacada de tu patrimonio</p>
+                                    <div class="file-select" id="src-file1" >
+                                        <input name="src-file1" aria-label="Archivo" type="file" onChange={e => setPhoto(e.target.files)} />
+                                    </div>
                                 </div>
-
-                                <p class="mb-n1">Sube el logo de tu patrimonio</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setLogoPatrimony(e.target.files)} />
-                                <div className="row">
-                                    <button className="col-4 p-4 button-pur mb-4" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
-                                    {logo ? logo[0].name : null}
+                                <div>
+                                    <p class="mb-n1">Sube el logo de tu patrimonio</p>
+                                    <div class="file-select" id="src-file1" >
+                                        <input name="src-file1" aria-label="Archivo" type="file" onChange={e => setLogo(e.target.files)} />
+                                    </div>
                                 </div>
 
 
@@ -450,19 +448,27 @@ export const Profileuserregion = () => {
                         <div className="col-8">
                             <div className="row">
                                 {patrimonys.map((x) => {
-                                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
-                                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
-                                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
-                                        <div className="card-body">
-                                            <p className="card-text"> name: {x.name} </p>
-                                            <p className="card-text"> resume: {x.resume} </p>
-                                            <p className="card-text"> location: {x.location} </p>
-                                            <p className="card-text"> time_open: {x.time_open} </p>
-                                            <p className="card-text"> contact: {x.contact} </p>
-                                            <p className="card-text"> type bussiness: patrimonio {x.type_bussiness} </p>
+                                    return <div key={x.id} className="card p-2" style={{ width: "18rem" }}>
+                                        <div className="card-logo">
+                                            <img className="profileuserregionlogo" src={x.logo} height="30px"></img>
                                         </div>
-                                        <div className="card-footer">
-                                            <button className="btn btn-danger" onClick={() => deletePatrimony(x.id)}>DEL</button>
+                                        <img
+                                            src={x.photo}
+                                            height="200px"
+                                            className="card-img-top"
+                                            alt={x.photo}
+                                        />
+                                        <div className="card-body">
+                                            <p className="card-text"> Nombre: {x.name} </p>
+                                            <p className="card-text"> Tipo: patrimonio {x.type_bussiness} </p>
+                                        </div>
+                                        <div className="card-footer d-flex justify-content-between">
+                                            <button className="btn btn-danger mt-2 mb-2" onClick={() => deletePatrimony(x.id)}>Eliminar</button>
+                                            <Link to={`/patrimonio/${x.id}`}>
+                                                <button className="btn btn-outline-danger mt-2">
+                                                    Ver página
+                                                </button>
+                                            </Link>
                                         </div>
                                     </div>
                                 })}
@@ -495,18 +501,17 @@ export const Profileuserregion = () => {
                                     })}
 
                                 </select>
-                                <p class="mb-n1">Sube la foto destacada de tu establecimiento de restauración</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setPhotoRestoration(e.target.files)} />
-                                <div className="row">
-                                    <button className="col-4 p-4 button-pur" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
-                                    {photo ? photo[0].name : null}
+                                <div>
+                                    <p class="mb-n1">Sube la foto destacada de tu establecimiento de restauración</p>
+                                    <div class="file-select" id="src-file1" >
+                                        <input name="src-file1" aria-label="Archivo" type="file" onChange={e => setPhoto(e.target.files)} />
+                                    </div>
                                 </div>
-
-                                <p class="mb-n1">Sube el logo de tu establecimiento de restauración</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setLogoRestoration(e.target.files)} />
-                                <div className="row">
-                                    <button className="col-4 p-4 button-pur mb-4" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
-                                    {logo ? logo[0].name : null}
+                                <div>
+                                    <p class="mb-n1">Sube el logo de tu establecimiento de restauración</p>
+                                    <div class="file-select" id="src-file1" >
+                                        <input name="src-file1" aria-label="Archivo" type="file" onChange={e => setLogo(e.target.files)} />
+                                    </div>
                                 </div>
 
                                 <button className="btn btn-success" onClick={() => createRestoration()}>CREAR RESTAURACIÓN</button>
@@ -515,20 +520,27 @@ export const Profileuserregion = () => {
                         <div className="col-8">
                             <div className="row">
                                 {restorations.map((x) => {
-                                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
-                                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
-                                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
-                                        <div className="card-body">
-                                            <p className="card-text"> name: {x.name} </p>
-                                            <p className="card-text"> resume: {x.resume} </p>
-                                            <p className="card-text"> location: {x.location} </p>
-                                            <p className="card-text"> time_open: {x.time_open} </p>
-                                            <p className="card-text"> contact: {x.contact} </p>
-                                            <p className="card-text"> type bussiness: {x.type_bussiness} </p>
-                                            <a href={x.cart} download>ve la carta</a>
+                                    return <div key={x.id} className="card p-2" style={{ width: "18rem" }}>
+                                        <div className="card-logo">
+                                            <img className="profileuserregionlogo" src={x.logo} height="30px"></img>
                                         </div>
-                                        <div className="card-footer">
-                                            <button className="btn btn-danger" onClick={() => deleteRestoration(x.id)}>DEL</button>
+                                        <img
+                                            src={x.photo}
+                                            height="200px"
+                                            className="card-img-top"
+                                            alt={x.photo}
+                                        />
+                                        <div className="card-body">
+                                            <p className="card-text"> Nombre: {x.name} </p>
+                                            <p className="card-text"> Tipo: {x.type_bussiness} </p>
+                                        </div>
+                                        <div className="card-footer d-flex justify-content-between">
+                                            <button className="btn btn-danger mt-2 mb-2" onClick={() => deleteRestoration(x.id)}>Eliminar</button>
+                                            <Link to={`/restoration/${x.id}`}>
+                                                <button className="btn btn-outline-danger mt-2">
+                                                    Ver página
+                                                </button>
+                                            </Link>
                                         </div>
                                     </div>
                                 })}
@@ -562,18 +574,17 @@ export const Profileuserregion = () => {
                                     })}
 
                                 </select>
-                                <p class="mb-n1">Sube la foto destacada de tu establecimiento hostelero</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setPhotoAccommodation(e.target.files)} />
-                                <div className="row">
-                                    <button className="col-4 p-4 button-pur" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
-                                    {photo ? photo[0].name : null}
+                                <div>
+                                    <p class="mb-n1">Sube la foto destacada de tu establecimiento hostelero</p>
+                                    <div class="file-select" id="src-file1" >
+                                        <input name="src-file1" aria-label="Archivo" type="file" onChange={e => setPhoto(e.target.files)} />
+                                    </div>
                                 </div>
-
-                                <p class="mb-n1">Sube el logo de tu establecimiento hostelero</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setLogoAccommodation(e.target.files)} />
-                                <div className="row">
-                                    <button className="col-4 p-4 button-pur mb-4" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
-                                    {logo ? logo[0].name : null}
+                                <div>
+                                    <p class="mb-n1">Sube el logo de tu establecimiento hostelero</p>
+                                    <div class="file-select" id="src-file1" >
+                                        <input name="src-file1" aria-label="Archivo" type="file" onChange={e => setLogo(e.target.files)} />
+                                    </div>
                                 </div>
                                 <button className="btn btn-success" onClick={() => createAccommodation()}>CREAR HOSTELERÍA</button>
                             </div>
@@ -581,19 +592,27 @@ export const Profileuserregion = () => {
                         <div className="col-8">
                             <div className="row">
                                 {accommodations.map((x) => {
-                                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
-                                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
-                                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
-                                        <div className="card-body">
-                                            <p className="card-text"> name: {x.name} </p>
-                                            <p className="card-text"> resume: {x.resume} </p>
-                                            <p className="card-text"> location: {x.location} </p>
-                                            <p className="card-text"> time_open: {x.time_open} </p>
-                                            <p className="card-text"> contact: {x.contact} </p>
-                                            <p className="card-text"> type bussiness: {x.type_bussiness} </p>
+                                    return <div key={x.id} className="card p-2" style={{ width: "18rem" }}>
+                                        <div className="card-logo">
+                                            <img className="profileuserregionlogo" src={x.logo} height="30px"></img>
                                         </div>
-                                        <div className="card-footer">
-                                            <button className="btn btn-danger" onClick={() => deleteAccommodation(x.id)}>DEL</button>
+                                        <img
+                                            src={x.photo}
+                                            height="200px"
+                                            className="card-img-top"
+                                            alt={x.photo}
+                                        />
+                                        <div className="card-body">
+                                            <p className="card-text"> Nombre: {x.name} </p>
+                                            <p className="card-text"> Tipo: {x.type_bussiness} </p>
+                                        </div>
+                                        <div className="card-footer d-flex justify-content-between">
+                                            <button className="btn btn-danger mt-2 mb-2" onClick={() => deleteAccommodation(x.id)}>Eliminar</button>
+                                            <Link to={`/accommodation/${x.id}`}>
+                                                <button className="btn btn-outline-danger mt-2">
+                                                    Ver página
+                                                </button>
+                                            </Link>
                                         </div>
                                     </div>
 
@@ -630,18 +649,17 @@ export const Profileuserregion = () => {
                                     })}
 
                                 </select>
-                                <p class="mb-n1">Sube la foto destacada de tu experiencia</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setPhotoExperience(e.target.files)} />
-                                <div className="row">
-                                    <button className="col-4 p-4 button-pur" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
-                                    {photo ? photo[0].name : null}
+                                <div>
+                                    <p class="mb-n1">Sube la foto destacada de tu experiencia</p>
+                                    <div class="file-select" id="src-file1" >
+                                        <input name="src-file1" aria-label="Archivo" type="file" onChange={e => setPhoto(e.target.files)} />
+                                    </div>
                                 </div>
-
-                                <p class="mb-n1">Sube el logo de tu experiencia</p>
-                                <input style={{ display: "none" }} type="file" onChange={e => setLogoExperience(e.target.files)} />
-                                <div className="row">
-                                    <button className="col-4 p-4 button-pur mb-4" onClick={() => document.querySelector('input[type="file"]').click()}><i class="fa-solid fa-camera fa-3x"></i></button>
-                                    {logo ? logo[0].name : null}
+                                <div>
+                                    <p class="mb-n1">Sube el logo de tu experiencia</p>
+                                    <div class="file-select" id="src-file1" >
+                                        <input name="src-file1" aria-label="Archivo" type="file" onChange={e => setLogo(e.target.files)} />
+                                    </div>
                                 </div>
 
                                 <button className="btn btn-success" onClick={() => createExperience()}>CREATE EXPERIENCE</button>
@@ -650,19 +668,27 @@ export const Profileuserregion = () => {
                         <div className="col-8">
                             <div className="row">
                                 {experiences.map((x) => {
-                                    return <div key={x.id} className="card" style={{ width: "18rem" }}>
-                                        <img className="card-img-top" src={x.photo} alt="Card image cap" />
-                                        <img className="card-img-top" src={x.logo} alt="Card image cap" />
-                                        <div className="card-body">
-                                            <p className="card-text"> name: {x.name} </p>
-                                            <p className="card-text"> resume: {x.resume} </p>
-                                            <p className="card-text"> meeting point: {x.meeting_point} </p>
-                                            <p className="card-text"> time_open: {x.time_open} </p>
-                                            <p className="card-text"> contact: {x.contact} </p>
-                                            <p className="card-text"> type bussiness: turismo {x.type_bussiness} </p>
+                                    return <div key={x.id} className="card p-2" style={{ width: "18rem" }}>
+                                        <div className="card-logo">
+                                            <img className="profileuserregionlogo" src={x.logo} height="30px"></img>
                                         </div>
-                                        <div className="card-footer">
-                                            <button className="btn btn-danger" onClick={() => deleteExperience(x.id)}>DEL</button>
+                                        <img
+                                            src={x.photo}
+                                            height="200px"
+                                            className="card-img-top"
+                                            alt={x.photo}
+                                        />
+                                        <div className="card-body">
+                                            <p className="card-text"> Nombre: {x.name} </p>
+                                            <p className="card-text"> tipo: turismo {x.type_bussiness} </p>
+                                        </div>
+                                        <div className="card-footer d-flex justify-content-between">
+                                            <button className="btn btn-danger mt-2 mb-2" onClick={() => deleteExperience(x.id)}>Eliminar</button>
+                                            <Link to={`/experience/${x.id}`}>
+                                                <button className="btn btn-outline-danger mt-2">
+                                                    Ver página
+                                                </button>
+                                            </Link>
                                         </div>
                                     </div>
 
