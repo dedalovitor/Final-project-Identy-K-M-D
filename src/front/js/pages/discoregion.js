@@ -32,7 +32,7 @@ export const DiscoRegion = () => {
       <div className="container">
         {store.currentUserEmail
           ? "Hola usuario" + store.currentUserEmail
-          : "Please register or login"}
+          : ""}
       </div>
       <div
         className="container h-25 d-flex justify-content-center align-items-center"
@@ -60,7 +60,7 @@ export const DiscoRegion = () => {
               <div className="col p-4">
                 <div className="row mx-5 p-4 card-row">
                   {Object.keys(newIndexPatrimonys).length > 0 &&
-                  newIndexPatrimonys[region.id][0] > 0 ? (
+                    newIndexPatrimonys[region.id][0] > 0 ? (
                     <button
                       className="btn btn-outline-danger previousPatrimonyRegion"
                       onClick={() => {
@@ -110,9 +110,9 @@ export const DiscoRegion = () => {
                       }
                     })}
                   {Object.keys(newIndexPatrimonys).length > 0 &&
-                  newIndexPatrimonys[region.id][
+                    newIndexPatrimonys[region.id][
                     newIndexPatrimonys[region.id].length - 1
-                  ] <
+                    ] <
                     region.patrimonys.length - 1 ? (
                     <button
                       className="btn btn-outline-danger nextPatrimonyRegion"
