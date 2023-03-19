@@ -141,6 +141,11 @@ def comments_patrimony(id):
     result = [comment.serialize() for comment in comments]
     return jsonify(result), 200
 
+@api.route('/commentsexperience/<int:id>', methods=['GET'])
+def comments_experience(id):
+    comments = Comments.query.filter_by(experience_id=id).all()
+    result = [comment.serialize() for comment in comments]
+    return jsonify(result), 200
 
 @api.route('/addcommentsrestoration/<int:id>', methods=['POST'])
 def addcomments_restoration(id):

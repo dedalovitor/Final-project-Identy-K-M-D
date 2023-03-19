@@ -59,6 +59,11 @@ export const RestorationDetail = () => {
               </div>
               <div className="col-12">
                 <div className="text-bg-dark text-left p-2">
+                  <p>Tipo de negocio: {restorations.type_bussiness}</p>
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="text-bg-dark text-left p-2">
                   <p>Teléfono de contacto: {restorations.contact}</p>
                 </div>
               </div>

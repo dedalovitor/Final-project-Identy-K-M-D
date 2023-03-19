@@ -59,49 +59,57 @@ export const DiscoRegion = () => {
               </div>
               <div className="col p-4">
                 <div className="row mx-5 p-4 card-row">
-                  {Object.keys(newIndexPatrimonys).length >0 && newIndexPatrimonys[region.id][0] > 0 ? (
+                  {Object.keys(newIndexPatrimonys).length > 0 &&
+                  newIndexPatrimonys[region.id][0] > 0 ? (
                     <button
                       className="btn btn-outline-danger previousPatrimonyRegion"
                       onClick={() => {
-                        const newIndexPatrimony = [...newIndexPatrimonys[region.id]].map((x) => x - 1);
-                        setnewIndexPatrimonys({...newIndexPatrimonys,[region.id]: newIndexPatrimony});
+                        const newIndexPatrimony = [
+                          ...newIndexPatrimonys[region.id],
+                        ].map((x) => x - 1);
+                        setnewIndexPatrimonys({
+                          ...newIndexPatrimonys,
+                          [region.id]: newIndexPatrimony,
+                        });
                       }}
                     >
                       <h2 style={{ marginTop: "-3px" }}>←</h2>
                     </button>
                   ) : null}
-                  {Object.keys(newIndexPatrimonys).length >0 && newIndexPatrimonys[region.id].map((patrimony) => {
-                    if (patrimony<=region.patrimonys.length-1){
-                      return (
-                        <div className="carddisco col-2 col-sm-6 col-md-4 col-lg-3">
-                          <img
-                            src={region.patrimonys[patrimony].photo}
-                            height="200px"
-                            className="card-img-top"
-                            alt={region.patrimonys[patrimony].name}
-                          />
-                          <div className="card-body row">
-                            <div className="col-6 d-flex align-items-center">
-                              <h5 className="namecard card-title m-0 ">
-                                {region.patrimonys[patrimony].name}
-                              </h5>
-                            </div>
-                            <div className="col-6">
-                              <div className="text-end ">
-                                <Link to={`/patrimonio/${region.patrimonys[patrimony].id}`}>
-                                  <button className="btn btn-outline-danger">
-                                    Ver lugar
-                                  </button>
-                                </Link>
+                  {Object.keys(newIndexPatrimonys).length > 0 &&
+                    newIndexPatrimonys[region.id].map((patrimony) => {
+                      if (patrimony <= region.patrimonys.length - 1) {
+                        return (
+                          <div className="carddisco col-2 col-sm-6 col-md-4 col-lg-3">
+                            <img
+                              src={region.patrimonys[patrimony].photo}
+                              height="200px"
+                              className="card-img-top"
+                              alt={region.patrimonys[patrimony].photo}
+                            />
+                            <div className="card-body row">
+                              <div className="col-6 d-flex align-items-center">
+                                <h5 className="namecard card-title m-0 ">
+                                  {region.patrimonys[patrimony].name}
+                                </h5>
+                              </div>
+                              <div className="col-6">
+                                <div className="text-end ">
+                                  <Link
+                                    to={`/patrimonio/${region.patrimonys[patrimony].id}`}
+                                  >
+                                    <button className="btn btn-outline-danger">
+                                      Ver lugar
+                                    </button>
+                                  </Link>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    }
-                   
-                  })}
-                  {Object.keys(newIndexPatrimonys).length >0 &&
+                        );
+                      }
+                    })}
+                  {Object.keys(newIndexPatrimonys).length > 0 &&
                   newIndexPatrimonys[region.id][
                     newIndexPatrimonys[region.id].length - 1
                   ] <
@@ -109,8 +117,13 @@ export const DiscoRegion = () => {
                     <button
                       className="btn btn-outline-danger nextPatrimonyRegion"
                       onClick={() => {
-                        const newIndexPatrimony = [...newIndexPatrimonys[region.id]].map((x) => x + 1);
-                        setnewIndexPatrimonys({...newIndexPatrimonys,[region.id]: newIndexPatrimony});
+                        const newIndexPatrimony = [
+                          ...newIndexPatrimonys[region.id],
+                        ].map((x) => x + 1);
+                        setnewIndexPatrimonys({
+                          ...newIndexPatrimonys,
+                          [region.id]: newIndexPatrimony,
+                        });
                       }}
                     >
                       <h2 style={{ marginTop: "-3px" }}>→</h2>

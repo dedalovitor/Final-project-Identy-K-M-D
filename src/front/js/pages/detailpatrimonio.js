@@ -6,7 +6,7 @@ import { useParams, Link } from "react-router-dom";
 export const PatrimonyDetail = () => {
   const { store, actions } = useContext(Context);
   const [patrimonys, setPatrimonys] = useState({});
-  const [comments, setComments] = useState({});
+  const [comments, setComments] = useState([]);
   const [indexComments, setIndexComments] = useState([]);
   const params = useParams();
   useEffect(() => {
@@ -59,6 +59,10 @@ export const PatrimonyDetail = () => {
                 </div>
               </div>
               <div className="col-12">
+              <div className="text-bg-dark text-left p-2">
+                  <p>Tipo de patrimonio: {patrimonys.type_bussiness}</p>
+              </div>
+              <div className="col-12">
                 <div className="text-bg-dark text-left p-2">
                   <p>Teléfono de contacto: {patrimonys.contact}</p>
                 </div>
@@ -83,13 +87,13 @@ export const PatrimonyDetail = () => {
             </div>
           </div>
         </div>
-        
+        </div>
       </div>
       <div className="container justify-content-between">
         <div className="row">
           <div className="col p-4 restoration-image">
             <div className="text-bg-dark text-left">
-            {/* {comments &&
+            {comments &&
               comments.map((comentarios) => {
                 return (
                   <div
@@ -107,7 +111,7 @@ export const PatrimonyDetail = () => {
                     </div>
                   </div>
                 );
-              })} */}
+              })}
             </div>
           </div>
           <div className="col p-4 ">
