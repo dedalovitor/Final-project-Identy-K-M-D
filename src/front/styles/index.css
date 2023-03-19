@@ -312,3 +312,11 @@
   height: 50px;
   border-radius: 50px;
 }
+
+.bottomView {
+  position: absolute;
+  bottom: 0;
+  align-items: center;
+  justify-self: center;
+  margin-left: 10%;
+}
