@@ -185,19 +185,19 @@ export const Home = () => {
                 <div className="card-logo">
                   <img src={regions[indexRegion].logo} height="30px"></img>
                 </div>
-                <i
+                {store.userData == "user" ? <i
                   className={
                     store.userInfo.favorites.length > 0 &&
-                    store.userInfo.favorites
-                      .map((favorite) => favorite.region_id)
-                      .includes(regions[indexRegion].id)
+                      store.userInfo.favorites
+                        .map((favorite) => favorite.region_id)
+                        .includes(regions[indexRegion].id)
                       ? "card-fav fa-solid fa-heart text-danger"
                       : "card-fav fa-solid fa-heart text-secondary"
                   }
                   onClick={() =>
                     actions.addFavorite(regions[indexRegion].id, "ciudad")
                   }
-                ></i>
+                ></i> : null}
                 <img
                   src={regions[indexRegion].photo}
                   height="200px"
@@ -265,12 +265,12 @@ export const Home = () => {
                     height="30px"
                   ></img>
                 </div>
-                <i
+                {store.userData == "user" ? <i
                   className={
                     store.userInfo.favorites.length > 0 &&
-                    store.userInfo.favorites
-                      .map((favorite) => favorite.patrimony_id)
-                      .includes(regions[indexPatrimony].id)
+                      store.userInfo.favorites
+                        .map((favorite) => favorite.patrimony_id)
+                        .includes(regions[indexPatrimony].id)
                       ? "card-fav fa-solid fa-heart text-danger"
                       : "card-fav fa-solid fa-heart text-secondary"
                   }
@@ -280,7 +280,7 @@ export const Home = () => {
                       "patrimonio"
                     )
                   }
-                ></i>
+                ></i> : null}
                 <img
                   src={patrimonys[indexPatrimony].photo}
                   height="200px"
@@ -348,12 +348,12 @@ export const Home = () => {
                     height="30px"
                   ></img>
                 </div>
-                <i
+                {store.userData == "user" ? <i
                   className={
                     store.userInfo.favorites.length > 0 &&
-                    store.userInfo.favorites
-                      .map((favorite) => favorite.restoration_id)
-                      .includes(regions[indexRestoration].id)
+                      store.userInfo.favorites
+                        .map((favorite) => favorite.restoration_id)
+                        .includes(regions[indexRestoration].id)
                       ? "card-fav fa-solid fa-heart text-danger"
                       : "card-fav fa-solid fa-heart text-secondary"
                   }
@@ -363,7 +363,7 @@ export const Home = () => {
                       "restoration"
                     )
                   }
-                ></i>
+                ></i> : null}
                 <img
                   src={restorations[indexRestoration].photo}
                   height="200px"
@@ -434,12 +434,12 @@ export const Home = () => {
                     height="30px"
                   ></img>
                 </div>
-                <i
+                {store.userData == "user" ? <i
                   className={
                     store.userInfo.favorites.length > 0 &&
-                    store.userInfo.favorites
-                      .map((favorite) => favorite.accommodation_id)
-                      .includes(regions[indexAccommodation].id)
+                      store.userInfo.favorites
+                        .map((favorite) => favorite.accommodation_id)
+                        .includes(regions[indexAccommodation].id)
                       ? "card-fav fa-solid fa-heart text-danger"
                       : "card-fav fa-solid fa-heart text-secondary"
                   }
@@ -449,7 +449,7 @@ export const Home = () => {
                       "accommodation"
                     )
                   }
-                ></i>
+                ></i> : null}
                 <img
                   src={accommodations[indexAccommodation].photo}
                   height="200px"
@@ -520,12 +520,12 @@ export const Home = () => {
                     height="30px"
                   ></img>
                 </div>
-                <i
+                {store.userData == "user" ? <i
                   className={
                     store.userInfo.favorites.length > 0 &&
-                    store.userInfo.favorites
-                      .map((favorite) => favorite.experience_id)
-                      .includes(regions[indexExperience].id)
+                      store.userInfo.favorites
+                        .map((favorite) => favorite.experience_id)
+                        .includes(regions[indexExperience].id)
                       ? "card-fav fa-solid fa-heart text-danger"
                       : "card-fav fa-solid fa-heart text-secondary"
                   }
@@ -535,7 +535,7 @@ export const Home = () => {
                       "experience"
                     )
                   }
-                ></i>
+                ></i> : null}
                 <img
                   src={experiences[indexExperience].photo}
                   height="200px"

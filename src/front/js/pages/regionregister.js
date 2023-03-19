@@ -72,6 +72,7 @@ export const Regionregister = () => {
                 <input
                   className="col-12"
                   name="email"
+                  type="email"
                   placeholder="email"
                   value={email}
                   onChange={(e) => {
@@ -85,6 +86,7 @@ export const Regionregister = () => {
                 <input
                   className="col-12"
                   name="password"
+                  type="password"
                   placeholder="debe de contener 6 caracteres alfanuméricos"
                   value={password}
                   onChange={(e) => {

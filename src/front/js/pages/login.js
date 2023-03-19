@@ -51,6 +51,7 @@ export const Login = () => {
                   name="email"
                   placeholder="email"
                   value={email}
+                  type="email"
                   onChange={(e) => {
                     setError(false);
                     setEmail(e.target.value);
@@ -62,6 +63,7 @@ export const Login = () => {
                 <input
                   className="col-12"
                   name="password"
+                  type="password"
                   placeholder="password"
                   value={password}
                   onChange={(e) => {

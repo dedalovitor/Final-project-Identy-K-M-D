@@ -175,7 +175,6 @@
   font-weight: bold;
 }
 
-
 .mb-n1 {
   margin: 20px 0px 0px 0px;
 }
@@ -240,7 +239,7 @@
 
 .profileuserregionlogo {
   margin: 75px 0px -10px 10px;
-
+}
 .boxcomment {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
@@ -312,5 +311,4 @@
   width: 50px;
   height: 50px;
   border-radius: 50px;
-
 }

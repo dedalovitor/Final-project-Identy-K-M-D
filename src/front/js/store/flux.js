@@ -37,6 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({ user: localStorage.getItem("user") }),
         });
         const data = await response.json();
+        console.log(data)
         if (response.ok) {
           setStore({
             dataUser: localStorage.getItem("user"),
