@@ -214,6 +214,8 @@
 
 #src-file1:hover {
   background-color: #e62848;
+  border-color: aliceblue;
+  border-style: dashed;
 }
 
 #src-file2::before {

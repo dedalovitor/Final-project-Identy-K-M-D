@@ -326,7 +326,9 @@ export const Profileuserregion = () => {
     return (
         <>
             <div id="myGroup">
+                <h4 className="text-center mt-3">Mi Perfil de Región</h4>
                 <div className="container h-25 d-flex justify-content-center align-items-center p-4">
+
                     <div>
                         <button
 
@@ -400,7 +402,7 @@ export const Profileuserregion = () => {
                                 {regions.map((x) => {
                                     return <div key={x.id} className="card p-2 m-2" style={{ width: "18rem" }}>
                                         <div className="card-body">
-                                            <p className="card-text h3"> Región: {x.name} </p>
+                                            <p className="card-text h3">{x.name} </p>
                                         </div>
                                         <div className="card-logo">
                                             <img className="profileuserregionlogo" src={x.logo} height="30px"></img>
@@ -431,7 +433,7 @@ export const Profileuserregion = () => {
                                 <p class="mb-n1">Pon el nombre de tu región (obligatorio)</p>
                                 <input name="name" placeholder="nombre de la región" value={region.name} onChange={(e) => setRegion({ ...region, "name": e.target.value })}></input>
                                 <p class="mb-n1">Añade la descripción de tu región</p>
-                                <input name="resume" placeholder="descripción de la región" value={region.resume} onChange={(e) => setRegion({ ...region, "resume": e.target.value })}></input>
+                                <textarea name="resume" placeholder="descripción de la región" value={region.resume} onChange={(e) => setRegion({ ...region, "resume": e.target.value })}></textarea >
 
                                 <div>
                                     <p class="mb-n1">Sube la foto destacada de tu región</p>
@@ -464,7 +466,7 @@ export const Profileuserregion = () => {
                                     </div>
                                     <button id="navbar-example2"
                                         type="button"
-                                        className="buttonhome btn btn-outline-danger m-2 col-2"
+                                        className="buttonhome btn btn-danger m-2 col-2"
                                     >
                                         <a href="#simple-list-item-1">
                                             Ver mi Patrimonio
@@ -478,7 +480,7 @@ export const Profileuserregion = () => {
                                     <p class="mb-n1">Pon el nombre de tu patrimonio (obligatorio)</p>
                                     <input name="name" placeholder="Nombre del patrimonio" value={patrimony.name} onChange={(e) => setPatrimony({ ...patrimony, "name": e.target.value })}></input>
                                     <p class="mb-n1">Añade la descripción de tu patrimonio</p>
-                                    <input name="resume" placeholder="Descripción del patrimonio" value={patrimony.resume} onChange={(e) => setPatrimony({ ...patrimony, "resume": e.target.value })}></input>
+                                    <textarea name="resume" placeholder="Descripción del patrimonio" value={patrimony.resume} onChange={(e) => setPatrimony({ ...patrimony, "resume": e.target.value })}></textarea>
                                     <p class="mb-n1">Facilita la dirección de tu patrimonio</p>
                                     <input name="location" placeholder="Dirección del patrimonio" value={patrimony.location} onChange={(e) => setPatrimony({ ...patrimony, "location": e.target.value })}></input>
                                     <p class="mb-n1">Indica los días y horarios de cierre y apertura de tu patrimonio</p>
@@ -556,7 +558,7 @@ export const Profileuserregion = () => {
                                     </div>
                                     <button id="navbar-example2"
                                         type="button"
-                                        className="buttonhome btn btn-outline-danger m-2 col-2"
+                                        className="buttonhome btn btn-danger m-2 col-2"
                                     >
                                         <a href="#simple-list-item-2">
                                             Ver mi Restauración
@@ -571,7 +573,7 @@ export const Profileuserregion = () => {
                                     <p class="mb-n1">Pon el nombre de tu establecimiento de restauración (obligatorio)</p>
                                     <input name="name" placeholder="Nombre del establecimiento de restauración" value={restoration.name} onChange={(e) => setRestoration({ ...restoration, "name": e.target.value })}></input>
                                     <p class="mb-n1">Añade la descripción de tu establecimiento de restauración</p >
-                                    <input name="resume" placeholder="Descripción del establecimiento de restauración" value={restoration.resume} onChange={(e) => setRestoration({ ...restoration, "resume": e.target.value })}></input>
+                                    <textarea name="resume" placeholder="Descripción del establecimiento de restauración" value={restoration.resume} onChange={(e) => setRestoration({ ...restoration, "resume": e.target.value })}></textarea>
                                     <p class="mb-n1">Facilita de dirección de tu establecimiento de restauración</p>
                                     <input name="location" placeholder="Dirección del establecimiento de restauración" value={restoration.location} onChange={(e) => setRestoration({ ...restoration, "location": e.target.value })}></input>
                                     <p class="mb-n1">Indica los días y horarios de cierre y apertura de tu establecimiento de restauración</p>
@@ -649,7 +651,7 @@ export const Profileuserregion = () => {
                                     </div>
                                     <button id="navbar-example2"
                                         type="button"
-                                        className="buttonhome btn btn-outline-danger m-2 col-2"
+                                        className="buttonhome btn btn-danger m-2 col-2"
                                     >
                                         <a href="#simple-list-item-3">
                                             Ver mi Hostelería
@@ -663,7 +665,7 @@ export const Profileuserregion = () => {
                                     <p class="mb-n1">Pon el nombre de tu establecimiento hostelero (obligatorio)</p>
                                     <input name="name" placeholder="Nombre del establecimiento hostelero" value={accommodation.name} onChange={(e) => setAccommodation({ ...accommodation, "name": e.target.value })}></input>
                                     <p class="mb-n1">Añade la descripción de tu establecimiento hostelero</p>
-                                    <input name="resume" placeholder="Descripción del establecimiento hostelero" value={accommodation.resume} onChange={(e) => setAccommodation({ ...accommodation, "resume": e.target.value })}></input>
+                                    <textarea name="resume" placeholder="Descripción del establecimiento hostelero" value={accommodation.resume} onChange={(e) => setAccommodation({ ...accommodation, "resume": e.target.value })}></textarea>
                                     <p class="mb-n1">Facilita de dirección de tu establecimiento hostelero</p>
                                     <input name="location" placeholder="Dirección del establecimiento hostelero" value={accommodation.location} onChange={(e) => setAccommodation({ ...accommodation, "location": e.target.value })}></input>
                                     <p class="mb-n1">Indica los días y horarios de cierre y apertura de tu establecimiento hostelero</p>
@@ -744,7 +746,7 @@ export const Profileuserregion = () => {
                                 </div>
                                 <button id="navbar-example2"
                                     type="button"
-                                    className="buttonhome btn btn-outline-danger m-2 col-2"
+                                    className="buttonhome btn btn-danger m-2 col-2"
                                 >
                                     <a href="#simple-list-item-4">
                                         Ver mis Experiencias
@@ -758,7 +760,7 @@ export const Profileuserregion = () => {
                                 <p class="mb-n1">Pon el nombre de tu experiencia (obligatorio)</p>
                                 <input name="name" placeholder="Nombre de la experiencia" value={experience.name} onChange={(e) => setExperience({ ...experience, "name": e.target.value })}></input>
                                 <p class="mb-n1">Añade la descripción de tu experiencia</p>
-                                <input name="resume" placeholder="Descripción de la experiencia" value={experience.resume} onChange={(e) => setExperience({ ...experience, "resume": e.target.value })}></input>
+                                <textarea name="resume" placeholder="Descripción de la experiencia" value={experience.resume} onChange={(e) => setExperience({ ...experience, "resume": e.target.value })}></textarea>
                                 <p class="mb-n1">Facilita de dirección del punto de inicio de tu experiencia</p>
                                 <input name="meeting point" placeholder="Dirección del punto de inicio de la experiencia" value={experience.meeting_point} onChange={(e) => setExperience({ ...experience, "meeting_point": e.target.value })}></input>
                                 <p class="mb-n1">Indica los días y horarios en los que se puede realizar tu experiencia</p>
