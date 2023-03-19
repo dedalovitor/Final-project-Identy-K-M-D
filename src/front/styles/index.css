@@ -146,10 +146,91 @@
   color: #000000;
 }
 .card-img-top {
-  object-fit: cover;
+  object-fit: cover; 
 }
+ 
+.card-logo{
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 1;
+}
+
 .namecard {
   font-size: 0.9em;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
+}
+.boxcomment {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.boxcomment h5 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.boxcomment h5 small {
+  font-size: 14px;
+  font-weight: normal;
+  margin-left: 10px;
+}
+
+.boxcomment h5 small::before {
+  content: '-';
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.boxcomment div {
+  margin-top: 10px;
+}
+
+.boxcomment div h5 {
+  font-size: 16px;
+  font-weight: normal;
+}
+.card-row {
+  margin-top: 100px; /* Ajusta esta cantidad para que el título quede centrado */
+}
+
+.text-center {
+  text-align: center;
+}
+
+
+.carddisco {
+  margin-top: -45px;
+}
+
+.detailcitycard {
+  margin-top: -40px;
+}
+
+.nextPatrimonyRegion {
+  position: absolute;
+  top: 50%;
+  right: -2vw;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+}
+
+.previousPatrimonyRegion {
+  position: absolute;
+  top: 50%;
+  left: -2vw;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
 }
