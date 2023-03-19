@@ -6,12 +6,12 @@ import { useParams, Link } from "react-router-dom";
 export const AccommodationDetail = () => {
   const { store, actions } = useContext(Context);
   const [accommodations, setAccommodations] = useState({});
-  const [comments, setComments] = useState({});
+  const [comments, setComments] = useState([]);
+  const [indexComments, setIndexComments] = useState([]);
   const params = useParams();
   useEffect(() => {
     getCurrentAccommodation();
     getCurrentCommentsAccommodation();
-
   }, []);
   const getCurrentAccommodation = async () => {
     const response = await fetch(
@@ -28,27 +28,11 @@ export const AccommodationDetail = () => {
     );
     const data = await response.json();
     if (response.ok) {
-      console.log(data);
-      
+      setComments(data);
     }
   };
   return (
     <>
-      <div className="buttons text-center m-5">
-        <button type="button" className="btn btn-outline-primary m-2">
-          Alojamientos
-        </button>
-        <button type="button" className="btn btn-outline-success m-2">
-          Restaurantes/gastronomías
-        </button>
-        <button type="button" className="btn btn-outline-danger m-2">
-          Lugares que visitar/patrimonio
-        </button>
-        <button type="button" className="btn btn-outline-warning m-2">
-          Visitas guiadas
-        </button>
-      </div>
-
       <div className="container">
         <div className="row">
           <div className="col p-4 accommodation-image">
@@ -58,22 +42,101 @@ export const AccommodationDetail = () => {
                 className="imageaccommodation"
                 height="500"
                 width="700"
-              ></img>
+              />
             </div>
           </div>
-          <div className="col p-4 accommodation-resume">
-            <div className="text-bg-dark text-center">
-              <h1>{accommodations.name}</h1>
-            </div>
-            <div className="text-bg-dark text-left p-2">
-              <p>{accommodations.resume}</p>
+          <div className="col p-4">
+            <div className="row">
+              <div className="col-12">
+                <div className="text-bg-dark text-center">
+                  <h1>{accommodations.name}</h1>
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="text-bg-dark text-left p-2">
+                  <p>{accommodations.resume}</p>
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="text-bg-dark text-left p-2">
+                  <p>Teléfono de contacto: {accommodations.contact}</p>
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="text-bg-dark text-left p-2">
+                  <p>Horarios de apertura: {accommodations.time_open}</p>
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="text-bg-dark text-left p-2">
+                  <p>Dirección: {accommodations.location}</p>
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="text-bg-dark text-left p-2">
+                  <a href="#scrollspyHeading1">Escribe tu comentario</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <div className="container justify-content-between">
+        <div className="row">
+          <div className="col p-4 accommodation-image">
+            <div className="text-bg-dark text-left">
+              {comments &&
+                comments.map((comentarios) => {
+                  console.log(comentarios);
+                  return (
+                    <div
+                      className="boxcomment mt-4"
+                      style={{ width: "115%" }}
+                      key={comentarios.id}
+                    >
+                      <h5 className="text-left">
+                        <h5 className="text-left">
+                          Comentario escrito por: {comentarios.user.name}
+                        </h5>
+                      </h5>
+                      <div className="">
+                        <h5 className="text-left">{comentarios.text}</h5>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+          <div className="col p-4 ">
+            <div className="row col-10 mx-auto p-4">
+              <iframe
+                src={accommodations.coordinates}
+                width="800"
+                height="400"
+                frameBorder="0"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                aria-hidden="false"
+                tabIndex="0"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="container ">
+        <div className="row col-12 ">
+          <div className="col-7 p-4">
+            <div className="col-3 p-4"></div>
+          </div>
+        </div>
+      </div>
+
       {store.userInfo ? (
         <div className="col-sm-12 text-center m-5">
-          <Commentbox3 user_id={store.userInfo.id} accommodation_id={params.id}/>
+          <Commentbox3
+            user_id={store.userInfo.id}
+            accommodation_id={params.id}
+          />
         </div>
       ) : (
         ""

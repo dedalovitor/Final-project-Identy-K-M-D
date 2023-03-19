@@ -126,21 +126,19 @@ def get_experiences_by_id(experience_id):
 @api.route('/commentsrestoration/<int:id>', methods=['GET'])
 def comments_restoration(id):
     comments = Comments.query.filter_by(restoration_id=id).all()
-    result = [comments.serialize() for comments in comments]
+    result = [comment.serialize() for comment in comments]
     return jsonify(result), 200
 
 @api.route('/commentsaccommodation/<int:id>', methods=['GET'])
 def comments_accommodation(id):
     comments = Comments.query.filter_by(accommodation_id=id).all()
-    result = [comments.serialize() for comments in comments]
-    print(result)
+    result = [comment.serialize() for comment in comments]
     return jsonify(result), 200
 
 @api.route('/commentspatrimony/<int:id>', methods=['GET'])
 def comments_patrimony(id):
     comments = Comments.query.filter_by(patrimony_id=id).all()
-    result = [comments.serialize() for comments in comments]
-    print(result)
+    result = [comment.serialize() for comment in comments]
     return jsonify(result), 200
 
 
@@ -148,7 +146,7 @@ def comments_patrimony(id):
 def addcomments_restoration(id):
     request_data = request.get_json()
     result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), restoration_id=request_data.get("restoration_id"))   
-    print(result)
+    # user_name=request_data.get ("user_name"), 
     db.session.add(result)
     db.session.commit()
     return "success", 200
@@ -157,7 +155,6 @@ def addcomments_restoration(id):
 def addcomments_patrimony(id):
     request_data = request.get_json()
     result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), patrimony_id=request_data.get("patrimony_id"))   
-    print(result)
     db.session.add(result)
     db.session.commit()
     return "success", 200
@@ -166,7 +163,14 @@ def addcomments_patrimony(id):
 def addcomments_accommodation(id):
     request_data = request.get_json()
     result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), accommodation_id=request_data.get("accommodation_id"))
-    print(result)   
+    db.session.add(result)
+    db.session.commit()
+    return "success", 200
+
+@api.route('/addcommentsexperience/<int:id>', methods=['POST'])
+def addcomments_experience(id):
+    request_data = request.get_json()
+    result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), experience_id=request_data.get("experience_id"))
     db.session.add(result)
     db.session.commit()
     return "success", 200
