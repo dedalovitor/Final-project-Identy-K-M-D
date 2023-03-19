@@ -240,6 +240,11 @@
 .profileuserregionlogo {
   margin: 75px 0px -10px 10px;
 }
+
+.profileuserregionlogo1 {
+  margin: 10px 0px -10px 10px;
+}
+
 .boxcomment {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
@@ -313,10 +318,6 @@
   border-radius: 50px;
 }
 
-.bottomView {
-  position: absolute;
-  bottom: 0;
-  align-items: center;
-  justify-self: center;
-  margin-left: 10%;
+.titulo {
+  text-shadow: 0px 5px 7px black;
 }
