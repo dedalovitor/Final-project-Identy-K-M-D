@@ -296,21 +296,27 @@ class Favorites(db.Model):
     experience = db.relationship('Experience')
 
     def serialize(self):
+        if self.region_id:
+            data = {"id": self.region.id, "logo": self.region.logo, "name": self.region.name, "photo": self.region.photo, "type": "ciudad"}
+        if self.restoration_id:
+            data = {"id": self.restoration.id, "logo": self.restoration.logo, "name": self.restoration.name, "photo": self.restoration.photo, "type": "restoration"}
+        if self.accommodation_id:
+            data = {"id": self.accommodation.id, "logo": self.accommodation.logo, "name": self.accommodation.name, "photo": self.accommodation.photo, "type": "accommodation"}
+        if self.patrimony_id:
+            data = {"id": self.patrimony.id, "logo": self.patrimony.logo, "name": self.patrimony.name, "photo": self.patrimony.photo, "type": "patrimonio"}
+        if self.experience_id:
+            data = {"id": self.experience.id, "logo": self.experience.logo, "name": self.experience.name, "photo": self.experience.photo, "type": "experience"}
 
         return{
             "id": self.id,
             "region_id": self.region_id,
             "restoration_id": self.restoration_id,
             "accommodation_id": self.accommodation_id,
-            "patrimony_id": self.patrimony_id,            
+            "patrimony_id": self.patrimony_id,
+            "experience_id": self.experience_id,
+            "data": data          
         }
 
-    def serialize(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            
-            }
     def __repr__(self):
         return f'{self.name}'
 

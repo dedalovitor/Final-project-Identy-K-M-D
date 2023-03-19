@@ -496,7 +496,7 @@ def add_favorite():
     user_id = get_jwt_identity()
     data = request.json
     print(data["id"], data["type"])
-    if data["type"] == "region":
+    if data["type"] == "ciudad":
         favorite = Favorites.query.filter_by(user_id=user_id, region_id = data["id"]).first()
         if favorite:
             db.session.delete(favorite)
@@ -526,7 +526,7 @@ def add_favorite():
             print(new_favorite)
             db.session.add(new_favorite)
             db.session.commit()
-    if data["type"] == "patrimony":
+    if data["type"] == "patrimonio":
         favorite = Favorites.query.filter_by(user_id=user_id, patrimony_id = data["id"]).first()
         if favorite:
             db.session.delete(favorite)

@@ -1,84 +1,56 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
-import { FavoritesButton } from "../component/favoritesbutton";
+import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const Favorites = () => {
   const { store, actions } = useContext(Context);
-  const [favorite, setFavorite] = useState(store.favorites);
-  const [elements, setElements] = useState([]);
-  const params = useParams();
+  const [card, setCard] = useState([]);
 
-  useEffect(() => {
-    actions.getFavorites(params.id);
-  }, []);
+  useEffect(() => {}, [store.userInfo.favorites]);
 
-  //añadir favorito
-  /*/ 
-  añades el favorito en el flux
-  y cada vez que se modifique, lo guardas en el back
-*/
-
-  const handleAddFavorite = (id) => {
-    addFavorite(id);
-    setFavorite(true);
-  };
-
-  const handleDeleteFavorite = (id) => {
-    setFavorite(favorite.filter((f) => f.id !== id)); //esconder
-    //eliminar como tal -> fetch(method)
-  };
-
-  const addFavorite = (id) => {
-    fetch(`${process.env.BACKEND_URL}/addfavorite/${id}`, { method: "POST" })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.message);
-        // const element = elements.find((e) => e.id === id);
-        // setFavorites((favorites) => [...favorites, element]);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  };
-
-  function FavoriteItem({ favorite, onDelete }) {
-    const handleDelete = () => {
-      fetch(`/deletefavorites/${favorite.id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data.message);
-          onDelete(favorite.id);
-        })
-        .catch((error) => console.error(error));
-    };
-
-    return (
-      <div>
-        <span>{name}</span>
-
-        {favorite ? (
-          <span>✔️</span>
-        ) : (
-          <button onClick={handleAddFavorite}>Agregar a favoritos</button>
-        )}
-        {favorite.map((favorite) => (
-          <div key={favorite.id}>
-            <div>
-              <h1>favorite={favorite}</h1>
-              <span className="" onClick={handleDeleteFavorite}>
-                X
-              </span>
+  return (
+    <div>
+      <h1>Mi lista de favoritos</h1>
+      {store.userInfo.favorites.map((favorite) => {
+        return (
+          <div key={favorite.id} className="col-2 col-sm-6 col-md-4 col-lg-2">
+            <div className="card">
+              <img
+                src={favorite.data.photo}
+                height="200px"
+                className="card-img-top"
+                alt={favorite.data.name}
+              />
+              <div className="card-body">
+                <h5 className="namecard card-title text-center">
+                  {favorite.data.name}
+                </h5>
+                <div className="card-text text-center">
+                  <img src={favorite.data.logo} height="30px"></img>
+                  <div>
+                    <Link to={`/${favorite.data.type}/${favorite.data.id}`}>
+                      <button className="btn btn-outline-danger mt-4">
+                        Ver lugar
+                      </button>
+                    </Link>
+                    <button
+                      className="btn btn-outline-danger text-danger bg-white mt-4"
+                      onClick={() =>
+                        actions.addFavorite(
+                          favorite.data.id,
+                          favorite.data.type
+                        )
+                      }
+                    >
+                      <i class="fa-solid fa-heart"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        ))}
-      </div>
-    );
-  }
+        );
+      })}
+    </div>
+  );
 };

@@ -212,7 +212,7 @@ export const Home = () => {
                             : "btn btn-outline-secondary text-secondary bg-white mt-4"
                         }
                         onClick={() =>
-                          actions.addFavorite(regions[indexRegion].id, "region")
+                          actions.addFavorite(regions[indexRegion].id, "ciudad")
                         }
                       >
                         <i class="fa-solid fa-heart"></i>
@@ -292,7 +292,7 @@ export const Home = () => {
                         onClick={() =>
                           actions.addFavorite(
                             patrimonys[indexPatrimony].id,
-                            "patrimony"
+                            "patrimonio"
                           )
                         }
                       >
