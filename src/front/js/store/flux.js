@@ -27,23 +27,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           });
       },
 
-      FavoriteItem: async ({ favorite, onDelete }) => {
-        const handleDelete = () => {
-          fetch(`/deletefavorites/${favorite.id}`, {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-            },
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log(data.message);
-              onDelete(favorite.id);
-            })
-            .catch((error) => console.error(error));
-        };
-      },
       getCurrentUser: async () => {
         const response = await fetch(process.env.BACKEND_URL + "/api/user", {
           method: "POST",

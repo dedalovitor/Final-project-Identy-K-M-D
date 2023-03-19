@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FavoritesButton } from "./favoritesbutton";
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
@@ -18,12 +17,17 @@ export const Navbar = () => {
               height="65"
             ></img>
           </span>
-
         </Link>
         <div className="ml-auto">
           {store.dataUser ? (
             <>
-              <FavoritesButton />
+              <button
+                type="button"
+                class="btn btn-outline-success"
+                onClick={() => navigate("/favorites")}
+              >
+                Favorites
+              </button>
               <button
                 className="btn btn-danger"
                 onClick={async () => {
@@ -45,7 +49,6 @@ export const Navbar = () => {
               </Link>
             </>
           )}
-          
         </div>
       </div>
     </nav>
