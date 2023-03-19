@@ -148,7 +148,7 @@ export const Home = () => {
               <a href="#scrollspyHeading4">
                 Visitas Guiadas
                 <img
-                  src="https://w7.pngwing.com/pngs/337/767/png-transparent-location-marker-path-road-navigation-and-mapping-icon.png"
+                  src="https://www.pc-nexus.net/diplomas/fondoexp.png"
                   className="img-route"
                   alt="Responsive image"
                 ></img>
@@ -163,7 +163,7 @@ export const Home = () => {
       <div className="text-center p-4">
         <h3>Ciudades con encanto</h3>
       </div>
-      <div className="row mx-5 p-4 card-row justify-content-center align-items-center">
+      <div className="detailcitycard row mx-5 p-4 card-row justify-content-center align-items-center">
         {indexRegions[0] > 0 ? (
           <button
             className="btn btn-outline-danger previousRegion"
@@ -185,20 +185,35 @@ export const Home = () => {
                 <div className="card-logo">
                   <img src={regions[indexRegion].logo} height="30px"></img>
                 </div>
+                <i
+                  className={
+                    store.userInfo.favorites.length > 0 &&
+                    store.userInfo.favorites
+                      .map((favorite) => favorite.region_id)
+                      .includes(regions[indexRegion].id)
+                      ? "card-fav fa-solid fa-heart text-danger"
+                      : "card-fav fa-solid fa-heart text-secondary"
+                  }
+                  onClick={() =>
+                    actions.addFavorite(regions[indexRegion].id, "ciudad")
+                  }
+                ></i>
                 <img
                   src={regions[indexRegion].photo}
                   height="200px"
                   className="card-img-top"
                   alt={regions[indexRegion].photo}
                 />
-                <div className="card-text text-center">
-                  <div className="card-body">
-                    <h5 className="namecard card-title text-center">
+                <div className="card-body row">
+                  <div className="col-6 d-flex align-items-center">
+                    <h5 className="namecard card-title m-0">
                       {regions[indexRegion].name}
                     </h5>
-                    <div>
+                  </div>
+                  <div className="col-6">
+                    <div className="text-end">
                       <Link to={`/ciudad/${regions[indexRegion].id}`}>
-                        <button className="btn btn-outline-danger mt-4">
+                        <button className="btn btn-outline-danger">
                           Ver lugar
                         </button>
                       </Link>
@@ -221,11 +236,11 @@ export const Home = () => {
           </button>
         ) : null}
       </div>
-      <div className="text-center" id="scrollspyHeading1">
+      <div className="text-center p-4" id="scrollspyHeading1">
         <h3>Patrimonio natural, arquitectónico, histórico que descubrir</h3>
       </div>
 
-      <div className="row mx-5 p-4 card-row justify-content-center align-items-center">
+      <div className="detailcitycard row mx-5 p-4 card-row justify-content-center align-items-center">
         {indexPatrimonys[0] > 0 ? (
           <button
             className="btn btn-outline-danger previousPatrimony"
@@ -244,24 +259,44 @@ export const Home = () => {
               className="col-2 col-sm-6 col-md-4 col-lg-2"
             >
               <div className="card">
+                <div className="card-logo">
+                  <img
+                    src={patrimonys[indexPatrimony].logo}
+                    height="30px"
+                  ></img>
+                </div>
+                <i
+                  className={
+                    store.userInfo.favorites.length > 0 &&
+                    store.userInfo.favorites
+                      .map((favorite) => favorite.patrimony_id)
+                      .includes(regions[indexPatrimony].id)
+                      ? "card-fav fa-solid fa-heart text-danger"
+                      : "card-fav fa-solid fa-heart text-secondary"
+                  }
+                  onClick={() =>
+                    actions.addFavorite(
+                      regions[indexPatrimony].id,
+                      "patrimonio"
+                    )
+                  }
+                ></i>
                 <img
                   src={patrimonys[indexPatrimony].photo}
                   height="200px"
                   className="card-img-top"
-                  alt={patrimonys[indexPatrimony].name}
+                  alt={patrimonys[indexPatrimony].photo}
                 />
-                <div className="card-body">
-                  <h5 className="namecard card-title text-center">
-                    {patrimonys[indexPatrimony].name}
-                  </h5>
-                  <div className="card-text text-center">
-                    <img
-                      src={patrimonys[indexPatrimony].logo}
-                      height="30px"
-                    ></img>
-                    <div>
+                <div className="card-body row">
+                  <div className="col-6 d-flex align-items-center">
+                    <h5 className="namecard card-title m-0">
+                      {patrimonys[indexPatrimony].name}
+                    </h5>
+                  </div>
+                  <div className="col-6">
+                    <div className="text-end">
                       <Link to={`/patrimonio/${patrimonys[indexPatrimony].id}`}>
-                        <button className="btn btn-outline-danger mt-4">
+                        <button className="btn btn-outline-danger">
                           Ver lugar
                         </button>
                       </Link>
@@ -284,11 +319,11 @@ export const Home = () => {
           </button>
         ) : null}
       </div>
-      <div className="text-center" id="scrollspyHeading2">
+      <div className="text-center p-4" id="scrollspyHeading2">
         <h3>Donde comer bien</h3>
       </div>
 
-      <div className="row mx-5 p-4 card-row justify-content-center align-items-center">
+      <div className="detailcitycard row mx-5 p-4 card-row justify-content-center align-items-center">
         {indexRestorations[0] > 0 ? (
           <button
             className="btn btn-outline-danger previousRestoration"
@@ -307,29 +342,46 @@ export const Home = () => {
               className="col-2 col-sm-6 col-md-4 col-lg-2"
             >
               <div className="card">
+                <div className="card-logo">
+                  <img
+                    src={restorations[indexRestoration].logo}
+                    height="30px"
+                  ></img>
+                </div>
+                <i
+                  className={
+                    store.userInfo.favorites.length > 0 &&
+                    store.userInfo.favorites
+                      .map((favorite) => favorite.restoration_id)
+                      .includes(regions[indexRestoration].id)
+                      ? "card-fav fa-solid fa-heart text-danger"
+                      : "card-fav fa-solid fa-heart text-secondary"
+                  }
+                  onClick={() =>
+                    actions.addFavorite(
+                      regions[indexRestoration].id,
+                      "restoration"
+                    )
+                  }
+                ></i>
                 <img
                   src={restorations[indexRestoration].photo}
                   height="200px"
                   className="card-img-top"
-                  alt={restorations[indexRestoration].name}
+                  alt={restorations[indexRestoration].photo}
                 />
-                <div className="card-body">
-                  <h5 className="namecard card-title text-center">
-                    {restorations[indexRestoration].name}
-                  </h5>
-                  <p className="card-text text-center">
-                    {restorations[indexRestoration].type_bussiness}
-                  </p>
-                  <div className="card-text text-center">
-                    <img
-                      src={restorations[indexRestoration].logo}
-                      height="30px"
-                    ></img>
-                    <div>
+                <div className="card-body row">
+                  <div className="col-6 d-flex align-items-center">
+                    <h5 className="namecard card-title m-0">
+                      {restorations[indexRestoration].name}
+                    </h5>
+                  </div>
+                  <div className="col-6">
+                    <div className="text-end">
                       <Link
                         to={`/restoration/${restorations[indexRestoration].id}`}
                       >
-                        <button className="btn btn-outline-danger mt-4">
+                        <button className="btn btn-outline-danger">
                           Ver lugar
                         </button>
                       </Link>
@@ -353,11 +405,11 @@ export const Home = () => {
           </button>
         ) : null}
       </div>
-      <div className="text-center" id="scrollspyHeading3">
+      <div className="text-center p-4" id="scrollspyHeading3">
         <h3>Alojamientos con encanto</h3>
       </div>
 
-      <div className="row mx-5 p-4 card-row justify-content-center align-items-center">
+      <div className="detailcitycard row mx-5 p-4 card-row justify-content-center align-items-center">
         {indexAccommodations[0] > 0 ? (
           <button
             className="btn btn-outline-danger previousAccommodation"
@@ -376,29 +428,46 @@ export const Home = () => {
               className="col-2 col-sm-6 col-md-4 col-lg-2"
             >
               <div className="card">
+                <div className="card-logo">
+                  <img
+                    src={accommodations[indexAccommodation].logo}
+                    height="30px"
+                  ></img>
+                </div>
+                <i
+                  className={
+                    store.userInfo.favorites.length > 0 &&
+                    store.userInfo.favorites
+                      .map((favorite) => favorite.accommodation_id)
+                      .includes(regions[indexAccommodation].id)
+                      ? "card-fav fa-solid fa-heart text-danger"
+                      : "card-fav fa-solid fa-heart text-secondary"
+                  }
+                  onClick={() =>
+                    actions.addFavorite(
+                      regions[indexAccommodation].id,
+                      "accommodation"
+                    )
+                  }
+                ></i>
                 <img
                   src={accommodations[indexAccommodation].photo}
                   height="200px"
                   className="card-img-top"
                   alt={accommodations[indexAccommodation].name}
                 />
-                <div className="card-body">
-                  <h5 className="namecard card-title text-center">
-                    {accommodations[indexAccommodation].name}
-                  </h5>
-                  <p className="card-text text-center">
-                    {accommodations[indexAccommodation].type_bussiness}
-                  </p>
-                  <div className="logocard card-text text-center">
-                    <img
-                      src={accommodations[indexAccommodation].logo}
-                      height="30px"
-                    ></img>
-                    <div>
+                <div className="card-body row">
+                  <div className="col-6 d-flex align-items-center">
+                    <h5 className="namecard card-title m-0">
+                      {accommodations[indexAccommodation].name}
+                    </h5>
+                  </div>
+                  <div className="col-6">
+                    <div className="text-end">
                       <Link
                         to={`/accommodation/${accommodations[indexAccommodation].id}`}
                       >
-                        <button className="btn btn-outline-danger mt-4">
+                        <button className="btn btn-outline-danger">
                           Ver lugar
                         </button>
                       </Link>
@@ -422,11 +491,11 @@ export const Home = () => {
           </button>
         ) : null}
       </div>
-      <div className="text-center" id="scrollspyHeading4">
+      <div className="text-center p-4" id="scrollspyHeading4">
         <h3>Visitas / Experiencias Guiadas</h3>
       </div>
 
-      <div className="row mx-5 p-4 card-row justify-content-center align-items-center">
+      <div className="detailcitycard row mx-5 p-4 card-row justify-content-center align-items-center">
         {indexExperiences[0] > 0 ? (
           <button
             className="btn btn-outline-danger previousExperience"
@@ -445,26 +514,46 @@ export const Home = () => {
               className="col-2 col-sm-6 col-md-4 col-lg-2"
             >
               <div className="card">
+                <div className="card-logo">
+                  <img
+                    src={experiences[indexExperience].logo}
+                    height="30px"
+                  ></img>
+                </div>
+                <i
+                  className={
+                    store.userInfo.favorites.length > 0 &&
+                    store.userInfo.favorites
+                      .map((favorite) => favorite.experience_id)
+                      .includes(regions[indexExperience].id)
+                      ? "card-fav fa-solid fa-heart text-danger"
+                      : "card-fav fa-solid fa-heart text-secondary"
+                  }
+                  onClick={() =>
+                    actions.addFavorite(
+                      regions[indexExperience].id,
+                      "experience"
+                    )
+                  }
+                ></i>
                 <img
                   src={experiences[indexExperience].photo}
                   height="200px"
                   className="card-img-top"
-                  alt={experiences[indexExperience].name}
+                  alt={experiences[indexExperience].photo}
                 />
-                <div className="card-body">
-                  <h5 className="namecard card-title text-center">
-                    {experiences[indexExperience].name}
-                  </h5>
-                  <div className="card-text text-center">
-                    <img
-                      src={experiences[indexExperience].logo}
-                      height="30px"
-                    ></img>
-                    <div>
+                <div className="card-body row">
+                  <div className="col-6 d-flex align-items-center">
+                    <h5 className="namecard card-title m-0">
+                      {experiences[indexExperience].name}{" "}
+                    </h5>
+                  </div>
+                  <div className="col-6">
+                    <div className="text-end">
                       <Link
                         to={`/experience/${experiences[indexExperience].id}`}
                       >
-                        <button className="btn btn-outline-danger mt-4">
+                        <button className="btn btn-outline-danger">
                           Ver lugar
                         </button>
                       </Link>
@@ -475,6 +564,7 @@ export const Home = () => {
             </div>
           );
         })}
+
         {indexExperiences[indexExperiences.length - 1] <
           experiences.length - 1 ? (
           <button

@@ -13,7 +13,8 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
-            "name": self.name
+            "name": self.name,
+            "favorites": [favorite.serialize()for favorite in self.favorites]
             # do not serialize the password, its a security breach
         }
     def __repr__(self):
@@ -64,7 +65,7 @@ class Region(db.Model):
     resume = db.Column(db.Text, unique=False, nullable=False)
     photo = db.Column(db.String(255), nullable=False)
     logo = db.Column(db.String(255), nullable=False)
-    coordinates = db.Column(db.String(255), nullable=True)
+    coordinates = db.Column(db.Text, nullable=True)
     user_region_id = db.Column(db.Integer, db.ForeignKey('user_region.id'), unique=True)
     restorations = db.relationship('Restoration' ,backref='region')
     accomodation = db.relationship('Accommodation', backref='region')
@@ -118,7 +119,7 @@ class Restoration(db.Model):
     time_open = db.Column(db.String(255), nullable=True)
     cart = db.Column(db.String(255), nullable=True)
     location = db.Column(db.String(255), nullable=True)
-    coordinates = db.Column(db.String(255), nullable=True)
+    coordinates = db.Column(db.Text, nullable=True)
     longitud = db.Column(db.Float(), nullable=True)
     latitud = db.Column(db.Float(), nullable=True)
     contact = db.Column(db.String(255), nullable=True)
@@ -162,7 +163,7 @@ class Accommodation(db.Model):
     logo = db.Column(db.String(255), nullable=True)
     time_open = db.Column(db.String(255), nullable=True)
     location = db.Column(db.String(255), nullable=True)
-    coordinates = db.Column(db.String(255), nullable=True)
+    coordinates = db.Column(db.Text, nullable=True)
     longitud = db.Column(db.Float(), nullable=True)
     latitud = db.Column(db.Float(), nullable=True)
     contact = db.Column(db.String(255), nullable=True)
@@ -204,7 +205,7 @@ class Experience(db.Model):
     logo = db.Column(db.String(255), nullable=True)
     time_open = db.Column(db.String(255), nullable=True)
     meeting_point = db.Column(db.String(255), nullable=True)
-    coordinates = db.Column(db.String(255), nullable=True)
+    coordinates = db.Column(db.Text, nullable=True)
     longitud = db.Column(db.Float(), nullable=True)
     latitud = db.Column(db.Float(), nullable=True)
     contact = db.Column(db.String(255), nullable=True)
@@ -249,7 +250,7 @@ class Patrimony(db.Model):
     logo = db.Column(db.String(255), nullable=False)
     time_open = db.Column(db.String(255), nullable=True)
     location = db.Column(db.String(255), nullable=True)
-    coordinates = db.Column(db.String(255), nullable=True)
+    coordinates = db.Column(db.Text, nullable=True)
     longitud = db.Column(db.Float(), nullable=True)
     latitud = db.Column(db.Float(), nullable=True)
     contact = db.Column(db.String(255), nullable=True)
@@ -291,13 +292,33 @@ class Favorites(db.Model):
     accommodation = db.relationship('Accommodation')
     patrimony_id = db.Column(db.Integer, db.ForeignKey('patrimony.id'))
     patrimony = db.relationship('Patrimony')
+    experience_id = db.Column(db.Integer, db.ForeignKey('experience.id'))
+    experience = db.relationship('Experience')
 
     def serialize(self):
-        return {
+        if self.region_id:
+            data = {"id": self.region.id, "logo": self.region.logo, "name": self.region.name, "photo": self.region.photo, "type": "ciudad"}
+        if self.restoration_id:
+            data = {"id": self.restoration.id, "logo": self.restoration.logo, "name": self.restoration.name, "photo": self.restoration.photo, "type": "restoration"}
+        if self.accommodation_id:
+            data = {"id": self.accommodation.id, "logo": self.accommodation.logo, "name": self.accommodation.name, "photo": self.accommodation.photo, "type": "accommodation"}
+        if self.patrimony_id:
+            data = {"id": self.patrimony.id, "logo": self.patrimony.logo, "name": self.patrimony.name, "photo": self.patrimony.photo, "type": "patrimonio"}
+        if self.experience_id:
+            data = {"id": self.experience.id, "logo": self.experience.logo, "name": self.experience.name, "photo": self.experience.photo, "type": "experience"}
+
+        return{
             "id": self.id,
-            "name": self.name,
-            
-            }
+            "region_id": self.region_id,
+            "restoration_id": self.restoration_id,
+            "accommodation_id": self.accommodation_id,
+            "patrimony_id": self.patrimony_id,
+             "patrimony_id": self.patrimony_id,
+            "experience_id": self.experience_id,
+            "data": data           
+        }
+
+        
     def __repr__(self):
         return f'{self.name}'
 
@@ -320,10 +341,15 @@ class Comments(db.Model):
     experience = db.relationship('Experience')
 
     def serialize(self):
-        return {
-            "user_id": self.user_id,
-            "user_region": self.user_region,
-            "text": self.text,
-            # do not serialize the password, its a security breach
-        }
-    
+        if self.user: 
+            return {
+                "user": {"name": self.user.name, "id": self.user.id},
+                "text": self.text,
+                # do not serialize the password, its a security breach
+            }
+        elif self.user_region: 
+            return {
+                "user_region": {"name": self.user_region.name, "id": self.user_region.id},
+                "text": self.text,
+                # do not serialize the password, its a security breach
+            }

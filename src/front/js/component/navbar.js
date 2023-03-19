@@ -17,20 +17,28 @@ export const Navbar = () => {
               height="65"
             ></img>
           </span>
-
         </Link>
         <div className="ml-auto">
           {store.dataUser ? (
-            <button
-              className="btn btn-danger"
-              onClick={async () => {
-                if (await actions.logout()) {
-                  navigate("/");
-                }
-              }}
-            >
-              Logout
-            </button>
+            <>
+              <button
+                type="button"
+                class="btn btn-outline-success"
+                onClick={() => navigate("/favorites")}
+              >
+                Favorites
+              </button>
+              <button
+                className="btn btn-danger"
+                onClick={async () => {
+                  if (await actions.logout()) {
+                    navigate("/");
+                  }
+                }}
+              >
+                Logout
+              </button>
+            </>
           ) : (
             <>
               <Link to="/login">
@@ -41,7 +49,6 @@ export const Navbar = () => {
               </Link>
             </>
           )}
-
         </div>
       </div>
     </nav>

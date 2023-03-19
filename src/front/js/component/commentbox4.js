@@ -2,14 +2,14 @@ import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 import { useParams } from "react-router-dom";
 
-export const Commentbox = (props) => {
+export const Commentbox4 = (props) => {
   const { store, actions } = useContext(Context);
   const [comment, setComment] = useState("");
   const [successComment, setSuccessComment] = useState(false);
   const params = useParams();
-  const createCommentRestoration = async () => {
+  const createCommentExperience = async () => {
     const response = await fetch(
-      process.env.BACKEND_URL + "/api/addcommentsrestoration/" + params.id,
+      process.env.BACKEND_URL + "/api/addcommentsexperience/" + params.id,
       {
         method: "POST",
         headers: {
@@ -20,7 +20,7 @@ export const Commentbox = (props) => {
           comment: comment,
           user_id: props.user_id,
           user_region_id: props.user_region_id,
-          restoration_id: props.restoration_id,
+          experience_id: props.experience_id,
         }),
       }
     );
@@ -41,7 +41,7 @@ export const Commentbox = (props) => {
       {successComment ? (
         <p>Su mensaje ha sido enviado con éxito</p>
       ) : (
-        <button className="btn btn-success" onClick={createCommentRestoration}>
+        <button className="btn btn-success" onClick={createCommentExperience}>
           Enviar Comentario
         </button>
       )}
@@ -49,4 +49,4 @@ export const Commentbox = (props) => {
   );
 };
 
-export default Commentbox;
+export default Commentbox4;

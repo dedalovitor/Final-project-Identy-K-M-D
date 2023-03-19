@@ -16,13 +16,12 @@ import { PatrimonyDetail } from "./pages/detailpatrimonio";
 import { RestorationDetail } from "./pages/detailrestoration";
 import { AccommodationDetail } from "./pages/detailaccommodation";
 import { ExperienceDetail } from "./pages/detailexperience";
+import { Favorites } from "./pages/favorites";
 import { Search } from "./component/search";
 import { CardRegion } from "./component/cardregion";
 import { CardRestoration } from "./component/cardrestoration.js";
 import { CardPatrimony } from "./component/cardpatrimony.js";
 import { CardAccommodation } from "./component/cardaccommodation.js";
-
-
 
 //create your first component
 const Layout = () => {
@@ -44,9 +43,13 @@ const Layout = () => {
             <Route element={<CityDetail />} path="/ciudad/:id" />
             <Route element={<PatrimonyDetail />} path="/patrimonio/:id" />
             <Route element={<RestorationDetail />} path="/restoration/:id" />
-            <Route element={<AccommodationDetail />} path="/accommodation/:id" />
+            <Route
+              element={<AccommodationDetail />}
+              path="/accommodation/:id"
+            />
             <Route element={<ExperienceDetail />} path="/experience/:id" />
             <Route element={<Profileuserregion />} path="/profileuserregion" />
+            <Route element={<Favorites />} path="/favorites" />
             <Route element={<h1>Not found!</h1>} />
             <Route element={<Footer />} path="/" />
           </Routes>

@@ -2,9 +2,9 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 
-from flask import Flask, request, jsonify, url_for, Blueprint, json
-from api.models import db, User, Region, Restoration, Accommodation, Experience, Patrimony , Comments, User_region , PatrimonyChoices, RestorationChoices, AccommodationChoices, ExperienceChoices
 
+from flask import Flask, request, jsonify, url_for, Blueprint, json
+from api.models import db, User, Region, Restoration, Accommodation, Experience, Patrimony , Comments, User_region , PatrimonyChoices, RestorationChoices, AccommodationChoices, ExperienceChoices, Favorites
 from api.utils import generate_sitemap, APIException
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import jwt_required
@@ -126,29 +126,32 @@ def get_experiences_by_id(experience_id):
 @api.route('/commentsrestoration/<int:id>', methods=['GET'])
 def comments_restoration(id):
     comments = Comments.query.filter_by(restoration_id=id).all()
-    result = [comments.serialize() for comments in comments]
+    result = [comment.serialize() for comment in comments]
     return jsonify(result), 200
 
 @api.route('/commentsaccommodation/<int:id>', methods=['GET'])
 def comments_accommodation(id):
     comments = Comments.query.filter_by(accommodation_id=id).all()
-    result = [comments.serialize() for comments in comments]
-    print(result)
+    result = [comment.serialize() for comment in comments]
     return jsonify(result), 200
 
 @api.route('/commentspatrimony/<int:id>', methods=['GET'])
 def comments_patrimony(id):
     comments = Comments.query.filter_by(patrimony_id=id).all()
-    result = [comments.serialize() for comments in comments]
-    print(result)
+    result = [comment.serialize() for comment in comments]
     return jsonify(result), 200
 
+@api.route('/commentsexperience/<int:id>', methods=['GET'])
+def comments_experience(id):
+    comments = Comments.query.filter_by(experience_id=id).all()
+    result = [comment.serialize() for comment in comments]
+    return jsonify(result), 200
 
 @api.route('/addcommentsrestoration/<int:id>', methods=['POST'])
 def addcomments_restoration(id):
     request_data = request.get_json()
     result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), restoration_id=request_data.get("restoration_id"))   
-    print(result)
+    # user_name=request_data.get ("user_name"), 
     db.session.add(result)
     db.session.commit()
     return "success", 200
@@ -157,7 +160,6 @@ def addcomments_restoration(id):
 def addcomments_patrimony(id):
     request_data = request.get_json()
     result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), patrimony_id=request_data.get("patrimony_id"))   
-    print(result)
     db.session.add(result)
     db.session.commit()
     return "success", 200
@@ -166,7 +168,14 @@ def addcomments_patrimony(id):
 def addcomments_accommodation(id):
     request_data = request.get_json()
     result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), accommodation_id=request_data.get("accommodation_id"))
-    print(result)   
+    db.session.add(result)
+    db.session.commit()
+    return "success", 200
+
+@api.route('/addcommentsexperience/<int:id>', methods=['POST'])
+def addcomments_experience(id):
+    request_data = request.get_json()
+    result = Comments(user_id=request_data.get("user_id"), text=request_data.get("comment"),user_region=request_data.get("user_region"), experience_id=request_data.get("experience_id"))
     db.session.add(result)
     db.session.commit()
     return "success", 200
@@ -482,3 +491,62 @@ def delete_experience(region_id):
      db.session.commit()
      return jsonify({ "response": "Experience deleted correctly"}), 200
      return jsonify({ "response": "Experience not deleted"}), 400
+
+
+
+@api.route('/addfavorite', methods=['POST'])
+@jwt_required()
+def add_favorite():
+    user_id = get_jwt_identity()
+    data = request.json
+    if data["type"] == "ciudad":
+        favorite = Favorites.query.filter_by(user_id=user_id, region_id = data["id"]).first()
+        if favorite:
+            db.session.delete(favorite)
+            db.session.commit()
+        else: 
+            new_favorite = Favorites(user_id = user_id, region_id = data["id"])
+            print(new_favorite)
+            db.session.add(new_favorite)
+            db.session.commit()
+    if data["type"] == "restoration":
+        favorite = Favorites.query.filter_by(user_id=user_id, restoration_id = data["id"]).first()
+        if favorite:
+            db.session.delete(favorite)
+            db.session.commit()
+        else: 
+            new_favorite = Favorites(user_id = user_id, restoration_id = data["id"])
+            print(new_favorite)
+            db.session.add(new_favorite)
+            db.session.commit()
+    if data["type"] == "accommodation":
+        favorite = Favorites.query.filter_by(user_id=user_id, accommodation_id = data["id"]).first()
+        if favorite:
+            db.session.delete(favorite)
+            db.session.commit()
+        else: 
+            new_favorite = Favorites(user_id = user_id, accommodation_id = data["id"])
+            print(new_favorite)
+            db.session.add(new_favorite)
+            db.session.commit()
+    if data["type"] == "patrimonio":
+        favorite = Favorites.query.filter_by(user_id=user_id, patrimony_id = data["id"]).first()
+        if favorite:
+            db.session.delete(favorite)
+            db.session.commit()
+        else: 
+            new_favorite = Favorites(user_id = user_id, patrimony_id = data["id"])
+            print(new_favorite)
+            db.session.add(new_favorite)
+            db.session.commit()
+    if data["type"] == "experience":
+        favorite = Favorites.query.filter_by(user_id=user_id, experience_id = data["id"]).first()
+        if favorite:
+            db.session.delete(favorite)
+            db.session.commit()
+        else: 
+            new_favorite = Favorites(user_id = user_id, experience_id = data["id"])
+            print(new_favorite)
+            db.session.add(new_favorite)
+            db.session.commit()
+    return jsonify({'message': 'Favorite added successfully'}), 201
