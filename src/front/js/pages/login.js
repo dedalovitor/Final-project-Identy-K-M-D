@@ -34,43 +34,67 @@ export const Login = () => {
   };
 
   return (
-    <div className="text-center mt-5">
-      LOGIN
-      <div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            name="email"
-            placeholder="email"
-            value={email}
-            onChange={(e) => {
-              setError(false);
-              setEmail(e.target.value);
-            }}
-          ></input>
+
+    <div className="container">
+      <div className="row justify-content-center">
+
+
+
+        <div className="col-3 mt-5">
+          <div className="card p-4">
+            <h5>LOGIN</h5>
+            <div>
+              <div >
+                <p class="mb-n1">Email</p>
+                <input
+                  className="col-12"
+                  name="email"
+                  placeholder="email"
+                  value={email}
+                  onChange={(e) => {
+                    setError(false);
+                    setEmail(e.target.value);
+                  }}
+                ></input>
+              </div>
+              <div>
+                <p class="mb-n1">Password</p>
+                <input
+                  className="col-12"
+                  name="password"
+                  placeholder="password"
+                  value={password}
+                  onChange={(e) => {
+                    setError(false);
+                    setPassword(e.target.value);
+                  }}
+                ></input>
+              </div>
+
+              <div className="text-center">
+                <button
+                  className="btn btn-outline-primary mt-4"
+                  onClick={() => sendLoginCredential()}
+                >
+                  Login
+                </button>
+                {error ? (
+                  <p className="alert alert-danger">Error en credenciales</p>
+                ) : null}
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            name="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => {
-              setError(false);
-              setPassword(e.target.value);
-            }}
-          ></input>
-        </div>
-        <button
-          className="btn btn-primary"
-          onClick={() => sendLoginCredential()}
-        >
-          Login
-        </button>
-        {error ? (
-          <p className="alert alert-danger">Error en credenciales</p>
-        ) : null}
+
+
+
+
+
       </div>
-    </div>
+    </div >
+
+
+
+
   );
 };
