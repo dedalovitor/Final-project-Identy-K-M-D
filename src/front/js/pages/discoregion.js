@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import { CardRegion } from "../component/cardregion";
-import { CardPatrimony } from "../component/cardpatrimony";
 
 export const DiscoRegion = () => {
   const { store, actions } = useContext(Context);
