@@ -59,6 +59,11 @@ export const AccommodationDetail = () => {
               </div>
               <div className="col-12">
                 <div className="text-bg-dark text-left p-2">
+                  <p>Tipo de negocio: {accommodations.type_bussiness}</p>
+                </div>
+              </div>
+              <div className="col-12">
+                <div className="text-bg-dark text-left p-2">
                   <p>Teléfono de contacto: {accommodations.contact}</p>
                 </div>
               </div>

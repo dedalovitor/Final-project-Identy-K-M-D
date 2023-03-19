@@ -217,7 +217,7 @@
 
 .nextPatrimonyRegion {
   position: absolute;
-  top: 50%;
+  top: 30%;
   right: -2vw;
   z-index: 1000;
   width: 50px;
@@ -227,7 +227,7 @@
 
 .previousPatrimonyRegion {
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: -2vw;
   z-index: 1000;
   width: 50px;

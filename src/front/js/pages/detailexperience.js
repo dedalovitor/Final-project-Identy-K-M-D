@@ -58,6 +58,10 @@ export const ExperienceDetail = () => {
                 </div>
               </div>
               <div className="col-12">
+              <div className="text-bg-dark text-left p-2">
+                <p>Tipo de experiencia: {experiences.type_bussiness}</p>
+              </div>
+              <div className="col-12">
                 <div className="text-bg-dark text-left p-2">
                   <p>Teléfono de contacto: {experiences.contact}</p>
                 </div>
@@ -67,28 +71,26 @@ export const ExperienceDetail = () => {
                   <p>Horarios de apertura: {experiences.time_open}</p>
                 </div>
                 <div className="col-12">
-                <div className="text-bg-dark text-left p-2">
-                  <p>Dirección: {experiences.location}</p>
+                  <div className="text-bg-dark text-left p-2">
+                    <p>Dirección: {experiences.location}</p>
+                  </div>
                 </div>
-              </div>
               </div>
               <div className="col-12">
                 <div className="text-bg-dark text-left p-2">
-              <a href="#scrollspyHeading1">
-                Escribe tu comentario
-                </a>
+                  <a href="#scrollspyHeading1">Escribe tu comentario</a>
                 </div>
               </div>
             </div>
           </div>
+          </div>
         </div>
-        
       </div>
       <div className="container justify-content-between">
         <div className="row">
           <div className="col p-4 restoration-image">
             <div className="text-bg-dark text-left">
-            {/* {comments &&
+              {comments &&
               comments.map((comentarios) => {
                 return (
                   <div
@@ -106,12 +108,11 @@ export const ExperienceDetail = () => {
                     </div>
                   </div>
                 );
-              })} */}
+              })}
             </div>
           </div>
           <div className="col p-4 ">
             <div className="row col-10 mx-auto p-4">
-              
               <iframe
                 src={experiences.coordinates}
                 width="800"
@@ -122,8 +123,7 @@ export const ExperienceDetail = () => {
                 aria-hidden="false"
                 tabIndex="0"
               />
-              </div>
-              
+            </div>
           </div>
         </div>
       </div>
