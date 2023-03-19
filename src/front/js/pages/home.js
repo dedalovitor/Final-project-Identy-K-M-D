@@ -393,7 +393,7 @@ export const Home = () => {
           );
         })}
         {indexRestorations[indexRestorations.length - 1] <
-        restorations.length - 1 ? (
+          restorations.length - 1 ? (
           <button
             className="btn btn-outline-danger nextRestoration"
             onClick={() => {
@@ -479,7 +479,7 @@ export const Home = () => {
           );
         })}
         {indexAccommodations[indexAccommodations.length - 1] <
-        accommodations.length - 1 ? (
+          accommodations.length - 1 ? (
           <button
             className="btn btn-outline-danger nextAccommodation"
             onClick={() => {
@@ -566,7 +566,7 @@ export const Home = () => {
         })}
 
         {indexExperiences[indexExperiences.length - 1] <
-        experiences.length - 1 ? (
+          experiences.length - 1 ? (
           <button
             className="btn btn-outline-danger nextExperience"
             onClick={() => {

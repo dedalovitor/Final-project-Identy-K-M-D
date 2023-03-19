@@ -91,6 +91,12 @@
   height: 50px;
   border-radius: 50px;
 }
+.card-logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
 .logo-card {
   position: absolute;
   top: 10px;
@@ -168,6 +174,73 @@
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
 }
+
+
+.mb-n1 {
+  margin: 20px 0px 0px 0px;
+}
+
+.button-pur {
+  margin: 10px 0px 0px 15px;
+  border-style: dashed;
+  border-color: #e62848;
+  border-radius: 5px;
+  background-color: whitesmoke;
+}
+
+.fa-camera {
+  color: #e62848;
+}
+
+.file-select {
+  position: relative;
+  display: inline-block;
+}
+
+.file-select::before {
+  background-color: #5678ef;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  content: ""; /* testo por defecto */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.file-select input[type="file"] {
+  opacity: 0;
+  width: 200px;
+  height: 120px;
+  display: inline-block;
+}
+
+#src-file1::before {
+  background: url(https://cdn-icons-png.flaticon.com/512/56/56887.png?w=740&t=st=1679138165~exp=1679138765~hmac=e2ff16c4074447de6e1b49b8081d6fd492b6f64a51d48137b4ac48a4303a06ea)
+    center center no-repeat;
+  background-size: 60px;
+  border-style: dashed;
+  border-color: #e62848;
+  padding: 30px;
+}
+
+#src-file1:hover {
+  background-color: #e62848;
+  border-color: aliceblue;
+  border-style: dashed;
+}
+
+#src-file2::before {
+  content: "Seleccionar Archivo 2";
+}
+
+.profileuserregionlogo {
+  margin: 75px 0px -10px 10px;
+
 .boxcomment {
   background-color: #f8f8f8;
   border: 1px solid #ddd;
@@ -239,4 +312,5 @@
   width: 50px;
   height: 50px;
   border-radius: 50px;
+
 }

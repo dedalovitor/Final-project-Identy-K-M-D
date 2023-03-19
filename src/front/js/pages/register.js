@@ -10,6 +10,7 @@ export const Register = () => {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
 
+
   const gettinRegister = async () => {
     const response = await fetch(process.env.BACKEND_URL + "/api/register", {
       method: "POST",
@@ -31,52 +32,73 @@ export const Register = () => {
   };
 
   return (
-    <div className="text-center mt-5">
-      REGISTER
-      <div>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            name="name"
-            placeholder="name"
-            value={name}
-            onChange={(e) => {
-              setError(false);
-              setName(e.target.value);
-            }}
-          ></input>
+
+    <div className="container">
+      <div className="row justify-content-center">
+
+
+
+        <div className="col-4 mt-5">
+          <div className="card p-4">
+            <h5>REGISTRAR USUARIO</h5>
+            <div>
+              <div>
+                <p class="mb-n1">Pon tu nombre de usuario (obligatorio)</p>
+                <input className="col-12"
+                  name="name"
+                  placeholder="nombre de usuario"
+                  value={name}
+                  onChange={(e) => {
+                    setError(false);
+                    setName(e.target.value);
+                  }}
+                ></input>
+              </div>
+              <div>
+                <p class="mb-n1">Escribe tu email (obligatorio)</p>
+                <input
+                  className="col-12"
+                  name="email"
+                  placeholder="email"
+                  value={email}
+                  onChange={(e) => {
+                    setError(false);
+                    setEmail(e.target.value);
+                  }}
+                ></input>
+              </div>
+              <div>
+                <p class="mb-n1">Escribe tu password (obligatorio)</p>
+                <input
+                  className="col-12"
+                  name="password"
+                  placeholder="debe de contener 6 caracteres alfanuméricos"
+                  value={password}
+                  onChange={(e) => {
+                    setError(false);
+                    setPassword(e.target.value);
+                  }}
+                ></input>
+              </div>
+              <div className="text-center">
+                <button className="btn btn-outline-danger mt-4" onClick={() => gettinRegister()}>
+                  Registrarse
+                </button>
+                {error ? (
+                  <p className="alert alert-danger">Error en credenciales</p>
+                ) : null}
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            name="email"
-            placeholder="email"
-            value={email}
-            onChange={(e) => {
-              setError(false);
-              setEmail(e.target.value);
-            }}
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            name="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => {
-              setError(false);
-              setPassword(e.target.value);
-            }}
-          ></input>
-        </div>
-        <button className="btn btn-primary" onClick={() => gettinRegister()}>
-          Register
-        </button>
-        {error ? (
-          <p className="alert alert-danger">Error en credenciales</p>
-        ) : null}
+
+
+
+
+
       </div>
-    </div>
+    </div >
+
+
   );
 };

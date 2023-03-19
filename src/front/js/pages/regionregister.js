@@ -46,126 +46,145 @@ export const Regionregister = () => {
   };
 
   return (
-    <div className="text-center mt-5">
-      REGISTER
-      <div>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            name="name"
-            placeholder="name"
-            value={name}
-            onChange={(e) => {
-              setError(false);
-              setName(e.target.value);
-            }}
-          ></input>
+
+    <div className="container">
+      <div className="row justify-content-center">
+
+        <div className="col-5 mt-5">
+          <div className="card p-4">
+            <h5>REGISTRAR REGIÓN</h5>
+            <div>
+              <div>
+                <p class="mb-n1">Pon tu nombre de usuario (obligatorio)</p>
+                <input
+                  className="col-12"
+                  name="name"
+                  placeholder="nombre de usuario"
+                  value={name}
+                  onChange={(e) => {
+                    setError(false);
+                    setName(e.target.value);
+                  }}
+                ></input>
+              </div>
+              <div>
+                <p class="mb-n1">Escribe tu email (obligatorio)</p>
+                <input
+                  className="col-12"
+                  name="email"
+                  placeholder="email"
+                  value={email}
+                  onChange={(e) => {
+                    setError(false);
+                    setEmail(e.target.value);
+                  }}
+                ></input>
+              </div>
+              <div>
+                <p class="mb-n1">Escribe tu password (obligatorio)</p>
+                <input
+                  className="col-12"
+                  name="password"
+                  placeholder="debe de contener 6 caracteres alfanuméricos"
+                  value={password}
+                  onChange={(e) => {
+                    setError(false);
+                    setPassword(e.target.value);
+                  }}
+                ></input>
+              </div>
+              <div>
+                <p class="mb-n1">Escribe el nombre de tu persona de contacto</p>
+                <input
+                  className="col-12"
+                  name="name"
+                  placeholder="nombre y apellidos tal y como aparecen en el DNI"
+                  value={contactPersonName}
+                  onChange={(e) => {
+                    setError(false);
+                    setContactPersonName(e.target.value);
+                  }}
+                ></input>
+              </div>
+              <div>
+                <p class="mb-n1">Escribe el número de teléfono de la persona de contacto</p>
+                <input
+                  className="col-12"
+                  name="tel"
+                  placeholder="número personal de teléfono"
+                  value={contactPersonTelf}
+                  onChange={(e) => {
+                    setError(false);
+                    setContactPersonTelf(e.target.value);
+                  }}
+                ></input>
+              </div>
+              <div>
+                <p class="mb-n1">Introduce el NIF de tu organización pública</p>
+                <input
+                  className="col-12"
+                  name="nif"
+                  placeholder="número NIF"
+                  value={nif}
+                  onChange={(e) => {
+                    setError(false);
+                    setNif(e.target.value);
+                  }}
+                ></input>
+              </div>
+              <div>
+                <p class="mb-n1">Introduce la dirección de tu organización pública</p>
+                <input
+                  className="col-12"
+                  name="Address"
+                  placeholder="dirección y código postal "
+                  value={address}
+                  onChange={(e) => {
+                    setError(false);
+                    setAddress(e.target.value);
+                  }}
+                ></input>
+              </div>
+              <div>
+                <p class="mb-n1">Indica el país de tu organización pública</p>
+                <input
+                  className="col-12"
+                  name="country"
+                  placeholder="país"
+                  value={country}
+                  onChange={(e) => {
+                    setError(false);
+                    setCountry(e.target.value);
+                  }}
+                ></input>
+              </div>
+              <div>
+                <p class="mb-n1">Introduce la ciudad de tu organización pública</p>
+                <input
+                  className="col-12"
+                  name="city"
+                  placeholder="ciudad"
+                  value={city}
+                  onChange={(e) => {
+                    setError(false);
+                    setCity(e.target.value);
+                  }}
+                ></input>
+              </div>
+              <div className="text-center">
+                <button
+                  className="btn btn-outline-danger mt-4"
+                  onClick={() => gettinRegionregister()}
+                >
+                  Registrarse
+                </button>
+                {error ? (
+                  <p className="alert alert-danger">Error en credenciales</p>
+                ) : null}
+              </div>
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="email">Email</label>
-          <input
-            name="email"
-            placeholder="email"
-            value={email}
-            onChange={(e) => {
-              setError(false);
-              setEmail(e.target.value);
-            }}
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            name="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => {
-              setError(false);
-              setPassword(e.target.value);
-            }}
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="contact person name">Contact name</label>
-          <input
-            name="name"
-            placeholder="name"
-            value={contactPersonName}
-            onChange={(e) => {
-              setError(false);
-              setContactPersonName(e.target.value);
-            }}
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="contact person telf">Contact tel</label>
-          <input
-            name="tel"
-            placeholder="tel"
-            value={contactPersonTelf}
-            onChange={(e) => {
-              setError(false);
-              setContactPersonTelf(e.target.value);
-            }}
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="nif">Nif</label>
-          <input
-            name="nif"
-            placeholder="nif"
-            value={nif}
-            onChange={(e) => {
-              setError(false);
-              setNif(e.target.value);
-            }}
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="address">Address</label>
-          <input
-            name="Address"
-            placeholder="Adress"
-            value={address}
-            onChange={(e) => {
-              setError(false);
-              setAddress(e.target.value);
-            }}
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="country">Country</label>
-          <input
-            name="country"
-            placeholder="country"
-            value={country}
-            onChange={(e) => {
-              setError(false);
-              setCountry(e.target.value);
-            }}
-          ></input>
-        </div>
-        <div>
-          <label htmlFor="city">City</label>
-          <input
-            name="city"
-            placeholder="city"
-            value={city}
-            onChange={(e) => {
-              setError(false);
-              setCity(e.target.value);
-            }}
-          ></input>
-        </div>
-        <button
-          className="btn btn-primary"
-          onClick={() => gettinRegionregister()}
-        >
-          Register
-        </button>
-        {error ? (
-          <p className="alert alert-danger">Error en credenciales</p>
-        ) : null}
       </div>
     </div>
   );

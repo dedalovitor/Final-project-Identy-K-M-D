@@ -6,7 +6,7 @@ export const Navbar = () => {
   const { store, actions } = useContext(Context);
   const navigate = useNavigate();
   return (
-    <nav className="navbar navbar-light bg-light">
+    <nav className="navbar navbar-light bg-light p-3">
       <div className="container">
         <Link to="/">
           <span className="navbar-brand mb-0 h1">
@@ -42,10 +42,10 @@ export const Navbar = () => {
           ) : (
             <>
               <Link to="/login">
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-outline-primary me-3">Login</button>
               </Link>
               <Link to="/register">
-                <button className="btn btn-success">Register</button>
+                <button className="btn btn-outline-success">Registro</button>
               </Link>
             </>
           )}
