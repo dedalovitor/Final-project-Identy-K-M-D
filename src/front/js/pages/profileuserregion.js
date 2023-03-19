@@ -524,7 +524,7 @@ export const Profileuserregion = () => {
                                     {patrimonys.map((x) => {
                                         return <div key={x.id} className="card p-2 m-2" style={{ width: "18rem" }}>
                                             <div className="card-logo">
-                                                <img className="profileuserregionlogo" src={x.logo} height="30px"></img>
+                                                <img className="profileuserregionlogo1" src={x.logo} height="30px"></img>
                                             </div>
                                             <img
                                                 src={x.photo}
@@ -616,7 +616,7 @@ export const Profileuserregion = () => {
                                     {restorations.map((x) => {
                                         return <div key={x.id} className="card p-2 m-2" style={{ width: "18rem" }}>
                                             <div className="card-logo">
-                                                <img className="profileuserregionlogo" src={x.logo} height="30px"></img>
+                                                <img className="profileuserregionlogo1" src={x.logo} height="30px"></img>
                                             </div>
                                             <img
                                                 src={x.photo}
@@ -707,7 +707,7 @@ export const Profileuserregion = () => {
                                     {accommodations.map((x) => {
                                         return <div key={x.id} className="card p-2 m-2" style={{ width: "18rem" }}>
                                             <div className="card-logo">
-                                                <img className="profileuserregionlogo" src={x.logo} height="30px"></img>
+                                                <img className="profileuserregionlogo1" src={x.logo} height="30px"></img>
                                             </div>
                                             <img
                                                 src={x.photo}
@@ -804,7 +804,7 @@ export const Profileuserregion = () => {
                                 {experiences.map((x) => {
                                     return <div key={x.id} className="card p-2 m-2" style={{ width: "18rem" }}>
                                         <div className="card-logo">
-                                            <img className="profileuserregionlogo" src={x.logo} height="30px"></img>
+                                            <img className="profileuserregionlogo1" src={x.logo} height="30px"></img>
                                         </div>
                                         <img
                                             src={x.photo}
