@@ -185,13 +185,25 @@ export const Home = () => {
                 <div className="card-logo">
                   <img src={regions[indexRegion].logo} height="30px"></img>
                 </div>
+                <i
+                  className={
+                    store.userInfo.favorites.length > 0 &&
+                    store.userInfo.favorites
+                      .map((favorite) => favorite.region_id)
+                      .includes(regions[indexRegion].id)
+                      ? "card-fav fa-solid fa-heart text-danger"
+                      : "card-fav fa-solid fa-heart text-secondary"
+                  }
+                  onClick={() =>
+                    actions.addFavorite(regions[indexRegion].id, "ciudad")
+                  }
+                ></i>
                 <img
                   src={regions[indexRegion].photo}
                   height="200px"
                   className="card-img-top"
                   alt={regions[indexRegion].photo}
                 />
-
                 <div className="card-body row">
                   <div className="col-6 d-flex align-items-center">
                     <h5 className="namecard card-title m-0">
@@ -205,21 +217,6 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
-                      <button
-                        className={
-                          store.userInfo.favorites.length > 0 &&
-                          store.userInfo.favorites
-                            .map((favorite) => favorite.region_id)
-                            .includes(regions[indexRegion].id)
-                            ? "btn btn-outline-danger text-danger bg-white mt-4"
-                            : "btn btn-outline-secondary text-secondary bg-white mt-4"
-                        }
-                        onClick={() =>
-                          actions.addFavorite(regions[indexRegion].id, "region")
-                        }
-                      >
-                        <i class="fa-solid fa-heart"></i>
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -268,6 +265,22 @@ export const Home = () => {
                     height="30px"
                   ></img>
                 </div>
+                <i
+                  className={
+                    store.userInfo.favorites.length > 0 &&
+                    store.userInfo.favorites
+                      .map((favorite) => favorite.patrimony_id)
+                      .includes(regions[indexPatrimony].id)
+                      ? "card-fav fa-solid fa-heart text-danger"
+                      : "card-fav fa-solid fa-heart text-secondary"
+                  }
+                  onClick={() =>
+                    actions.addFavorite(
+                      regions[indexPatrimony].id,
+                      "patrimonio"
+                    )
+                  }
+                ></i>
                 <img
                   src={patrimonys[indexPatrimony].photo}
                   height="200px"
@@ -280,16 +293,14 @@ export const Home = () => {
                       {patrimonys[indexPatrimony].name}
                     </h5>
                   </div>
-                    <div className="col-6">
-                      <div className="text-end">
-                        <Link
-                          to={`/patrimonio/${patrimonys[indexPatrimony].id}`}
-                        >
-                          <button className="btn btn-outline-danger">
-                            Ver lugar
-                          </button>
-                        </Link>
-                      </div>
+                  <div className="col-6">
+                    <div className="text-end">
+                      <Link to={`/patrimonio/${patrimonys[indexPatrimony].id}`}>
+                        <button className="btn btn-outline-danger">
+                          Ver lugar
+                        </button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -337,6 +348,22 @@ export const Home = () => {
                     height="30px"
                   ></img>
                 </div>
+                <i
+                  className={
+                    store.userInfo.favorites.length > 0 &&
+                    store.userInfo.favorites
+                      .map((favorite) => favorite.restoration_id)
+                      .includes(regions[indexRestoration].id)
+                      ? "card-fav fa-solid fa-heart text-danger"
+                      : "card-fav fa-solid fa-heart text-secondary"
+                  }
+                  onClick={() =>
+                    actions.addFavorite(
+                      regions[indexRestoration].id,
+                      "restoration"
+                    )
+                  }
+                ></i>
                 <img
                   src={restorations[indexRestoration].photo}
                   height="200px"
@@ -346,8 +373,8 @@ export const Home = () => {
                 <div className="card-body row">
                   <div className="col-6 d-flex align-items-center">
                     <h5 className="namecard card-title m-0">
-                      {restorations[indexRestoration].name}</h5>
-                    
+                      {restorations[indexRestoration].name}
+                    </h5>
                   </div>
                   <div className="col-6">
                     <div className="text-end">
@@ -358,24 +385,6 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
-                      <button
-                        className={
-                          store.userInfo.favorites.length > 0 &&
-                          store.userInfo.favorites
-                            .map((favorite) => favorite.restoration_id)
-                            .includes(restorations[indexRestoration].id)
-                            ? "btn btn-outline-danger text-danger bg-white mt-4"
-                            : "btn btn-outline-secondary text-secondary bg-white mt-4"
-                        }
-                        onClick={() =>
-                          actions.addFavorite(
-                            restorations[indexRestoration].id,
-                            "restoration"
-                          )
-                        }
-                      >
-                        <i class="fa-solid fa-heart"></i>
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -425,6 +434,22 @@ export const Home = () => {
                     height="30px"
                   ></img>
                 </div>
+                <i
+                  className={
+                    store.userInfo.favorites.length > 0 &&
+                    store.userInfo.favorites
+                      .map((favorite) => favorite.accommodation_id)
+                      .includes(regions[indexAccommodation].id)
+                      ? "card-fav fa-solid fa-heart text-danger"
+                      : "card-fav fa-solid fa-heart text-secondary"
+                  }
+                  onClick={() =>
+                    actions.addFavorite(
+                      regions[indexAccommodation].id,
+                      "accommodation"
+                    )
+                  }
+                ></i>
                 <img
                   src={accommodations[indexAccommodation].photo}
                   height="200px"
@@ -434,8 +459,8 @@ export const Home = () => {
                 <div className="card-body row">
                   <div className="col-6 d-flex align-items-center">
                     <h5 className="namecard card-title m-0">
-                    {accommodations[indexAccommodation].name}
-                  </h5>
+                      {accommodations[indexAccommodation].name}
+                    </h5>
                   </div>
                   <div className="col-6">
                     <div className="text-end">
@@ -446,27 +471,8 @@ export const Home = () => {
                           Ver lugar
                         </button>
                       </Link>
-                      <button
-                        className={
-                          store.userInfo.favorites.length > 0 &&
-                          store.userInfo.favorites
-                            .map((favorite) => favorite.accommodation_id)
-                            .includes(accommodations[indexAccommodation].id)
-                            ? "btn btn-outline-danger text-danger bg-white mt-4"
-                            : "btn btn-outline-secondary text-secondary bg-white mt-4"
-                        }
-                        onClick={() =>
-                          actions.addFavorite(
-                            accommodations[indexAccommodation].id,
-                            "accommodation"
-                          )
-                        }
-                      >
-                        <i class="fa-solid fa-heart"></i>
-                      </button>
                     </div>
                   </div>
-                  
                 </div>
               </div>
             </div>
@@ -514,6 +520,22 @@ export const Home = () => {
                     height="30px"
                   ></img>
                 </div>
+                <i
+                  className={
+                    store.userInfo.favorites.length > 0 &&
+                    store.userInfo.favorites
+                      .map((favorite) => favorite.experience_id)
+                      .includes(regions[indexExperience].id)
+                      ? "card-fav fa-solid fa-heart text-danger"
+                      : "card-fav fa-solid fa-heart text-secondary"
+                  }
+                  onClick={() =>
+                    actions.addFavorite(
+                      regions[indexExperience].id,
+                      "experience"
+                    )
+                  }
+                ></i>
                 <img
                   src={experiences[indexExperience].photo}
                   height="200px"
@@ -523,21 +545,22 @@ export const Home = () => {
                 <div className="card-body row">
                   <div className="col-6 d-flex align-items-center">
                     <h5 className="namecard card-title m-0">
-                    {experiences[indexExperience].name}                 </h5>
-                    </div>
+                      {experiences[indexExperience].name}{" "}
+                    </h5>
+                  </div>
                   <div className="col-6">
                     <div className="text-end">
-                  
-                    <Link to={`/experience/${experiences[indexExperience].id}`}>
-                      <button className="btn btn-outline-danger">
-                        Ver lugar
-                      </button>
-                    </Link>
+                      <Link
+                        to={`/experience/${experiences[indexExperience].id}`}
+                      >
+                        <button className="btn btn-outline-danger">
+                          Ver lugar
+                        </button>
+                      </Link>
                     </div>
                   </div>
-                
+                </div>
               </div>
-            </div>
             </div>
           );
         })}
