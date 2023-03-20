@@ -7,7 +7,7 @@ export const CityDetail = () => {
   const params = useParams();
   console.log(params.id);
   const { store, actions } = useContext(Context);
-  const [region, setRegion] = useState({restorations:[], accomodation:[], experiences:[], patrimonies:[]  });
+  const [region, setRegion] = useState({ restorations: [], accomodation: [], experiences: [], patrimonies: [] });
   const [indexRestorations, setIndexRestorations] = useState([]);
   const [indexPatrimonys, setIndexPatrimonys] = useState([]);
   const [indexAccommodations, setIndexAccommodations] = useState([]);
@@ -164,14 +164,14 @@ export const CityDetail = () => {
                   </h5>
                   <div className="card-text text-center">
                     <div>
-                    <div className="text-end ms-2">
-                      <Link
-                        to={`/patrimonio/${region.patrimonies[indexPatrimony].id}`}
-                      >
-                        <button className="btn btn-outline-danger mt-4">
-                          Ver lugar
-                        </button>
-                      </Link>
+                      <div className="text-end ms-2">
+                        <Link
+                          to={`/patrimonio/${region.patrimonies[indexPatrimony].id}`}
+                        >
+                          <button className="btn btn-outline-danger ps-4 pe-4">
+                            Ver
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -196,7 +196,7 @@ export const CityDetail = () => {
         <h3>Donde comer bien en {region.name}</h3>
       </div>
       <div className="detailcitycard row mx-5 p-4 card-row justify-content-center align-items-center">
-      {indexRestorations[0] > 0 ? (
+        {indexRestorations[0] > 0 ? (
           <button
             className="btn btn-outline-danger previousRestoration"
             onClick={() => {
@@ -238,8 +238,8 @@ export const CityDetail = () => {
                       <Link
                         to={`/restoration/${region.restorations[indexRestoration].id}`}
                       >
-                        <button className="btn btn-outline-danger mt-4">
-                          Ver lugar
+                        <button className="btn btn-outline-danger ps-4 pe-4">
+                          Ver
                         </button>
                       </Link>
                     </div>
@@ -250,7 +250,7 @@ export const CityDetail = () => {
           );
         })}
         {indexRestorations[indexRestorations.length - 1] <
-        region.restorations.length - 1 ? (
+          region.restorations.length - 1 ? (
           <button
             className="btn btn-outline-danger nextRestoration"
             onClick={() => {
@@ -261,14 +261,14 @@ export const CityDetail = () => {
             <h2 style={{ marginTop: "-3px" }}>→</h2>
           </button>
         ) : null}
-        
+
       </div>
       <div className="text-center p-4" id="scrollspyHeading3">
         <h3>Alojamientos con encanto de {region.name}</h3>
       </div>
 
       <div className="detailcitycard row mx-5 p-4 card-row justify-content-center align-items-center">
-      {indexAccommodations[0] > 0 ? (
+        {indexAccommodations[0] > 0 ? (
           <button
             className="btn btn-outline-danger previousAccommodation"
             onClick={() => {
@@ -279,7 +279,7 @@ export const CityDetail = () => {
             <h2 style={{ marginTop: "-3px" }}>←</h2>
           </button>
         ) : null}
-      {indexAccommodations[0] > 0 ? (
+        {indexAccommodations[0] > 0 ? (
           <button
             className="btn btn-outline-danger previousAccommodation"
             onClick={() => {
@@ -321,8 +321,8 @@ export const CityDetail = () => {
                       <Link
                         to={`/accommodation/${region.accomodation[indexAccommodation].id}`}
                       >
-                        <button className="btn btn-outline-danger mt-4">
-                          Ver lugar
+                        <button className="btn btn-outline-danger ps-4 pe-4">
+                          Ver
                         </button>
                       </Link>
                     </div>
@@ -333,7 +333,7 @@ export const CityDetail = () => {
           );
         })}
         {indexAccommodations[indexAccommodations.length - 1] <
-        region.accomodation.length - 1 ? (
+          region.accomodation.length - 1 ? (
           <button
             className="btn btn-outline-danger nextAccommodation"
             onClick={() => {
@@ -344,14 +344,14 @@ export const CityDetail = () => {
             <h2 style={{ marginTop: "-3px" }}>→</h2>
           </button>
         ) : null}
-        
+
       </div>
 
       <div className="text-center p-4" id="scrollspyHeading4">
         <h3>Visitas / Experiencias Guiadas en {region.name}</h3>
       </div>
       <div className="detailcitycard row mx-5 p-4 card-row justify-content-center align-items-center">
-      {indexExperiences[0] > 0 ? (
+        {indexExperiences[0] > 0 ? (
           <button
             className="btn btn-outline-danger previousExperience"
             onClick={() => {
@@ -385,16 +385,13 @@ export const CityDetail = () => {
                   <h5 className="namecard card-title ml-2">
                     {region.experiences[indexExperience].name}
                   </h5>
-                  <p className="card-text text-left">
-                    {region.experiences[indexExperience].type_bussiness}
-                  </p>
                   <div className="text-end ms-2">
                     <div>
                       <Link
                         to={`/experience/${region.experiences[indexExperience].id}`}
                       >
-                        <button className="btn btn-outline-danger mt-4">
-                          Ver lugar
+                        <button className="btn btn-outline-danger ps-4 pe-4">
+                          Ver
                         </button>
                       </Link>
                     </div>
@@ -405,7 +402,7 @@ export const CityDetail = () => {
           );
         })}
         {indexExperiences[indexExperiences.length - 1] <
-        region.experiences.length - 1 ? (
+          region.experiences.length - 1 ? (
           <button
             className="btn btn-outline-danger nextExperience"
             onClick={() => {
@@ -421,19 +418,19 @@ export const CityDetail = () => {
         <h3>Mapa de {region.name}</h3>
       </div>
       <div className="row col-6 mx-auto p-4">
-              
-              <iframe
-                src={region.coordinates}
-                width="800"
-                height="400"
-                frameBorder="0"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                aria-hidden="false"
-                tabIndex="0"
-              />
-              </div>
-      
+
+        <iframe
+          src={region.coordinates}
+          width="800"
+          height="400"
+          frameBorder="0"
+          style={{ border: 0 }}
+          allowFullScreen=""
+          aria-hidden="false"
+          tabIndex="0"
+        />
+      </div>
+
     </>
   );
 };

@@ -21,13 +21,13 @@ export const Navbar = () => {
         <div className="ml-auto">
           {store.dataUser ? (
             <>
-              {store.userData == "user" ? <button
+              <button
                 type="button"
-                class="btn btn-outline-success"
+                className="btn btn-outline-success me-2"
                 onClick={() => navigate("/favorites")}
               >
-                Favorites
-              </button> : null}
+                Favoritos
+              </button>
               <button
                 className="btn btn-danger"
                 onClick={async () => {
