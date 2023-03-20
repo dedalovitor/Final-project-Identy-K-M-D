@@ -105,10 +105,10 @@ export const Home = () => {
           <div>
             <button
               type="button"
-              className="buttonhome btn btn-outline-danger m-2 "
+              className="buttonhome btn btn-outline-danger ps-4 pe-4 m-2"
             >
               <a href="#scrollspyHeading1">
-                Lugares que Visitar/Patrimonio
+                Patrimonio
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/1009/1009921.png"
                   className="img-patrimony"
@@ -122,7 +122,7 @@ export const Home = () => {
             >
               <a href="#scrollspyHeading2">
                 {" "}
-                Restaurantes/Gastronomia
+                Restaurantes
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/1980/1980788.png"
                   className="img-restoration"
@@ -148,7 +148,7 @@ export const Home = () => {
               className="buttonhome btn btn-outline-warning m-2"
             >
               <a href="#scrollspyHeading4">
-                Visitas Guiadas
+                Experiencias
                 <img
                   src="https://www.pc-nexus.net/diplomas/fondoexp.png"
                   className="img-route"

@@ -29,7 +29,7 @@ export const Navbar = () => {
                 Favoritos
               </button>
               <button
-                className="btn btn-danger"
+                className="btn btn-outline-danger"
                 onClick={async () => {
                   if (await actions.logout()) {
                     navigate("/");
@@ -38,6 +38,7 @@ export const Navbar = () => {
               >
                 Logout
               </button>
+
             </>
           ) : (
             <>

@@ -230,9 +230,6 @@ export const CityDetail = () => {
                   <h5 className="namecard card-title ml-2">
                     {region.restorations[indexRestoration].name}
                   </h5>
-                  <p className="card-text text-left">
-                    {region.restorations[indexRestoration].type_bussiness}
-                  </p>
                   <div className="text-end ms-2">
                     <div>
                       <Link
@@ -313,9 +310,6 @@ export const CityDetail = () => {
                   <h5 className="namecard card-title ml-2">
                     {region.accomodation[indexAccommodation].name}
                   </h5>
-                  <p className="card-text text-left">
-                    {region.accomodation[indexAccommodation].type_bussiness}
-                  </p>
                   <div className="text-end ms-2">
                     <div>
                       <Link
