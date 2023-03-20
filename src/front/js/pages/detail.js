@@ -40,61 +40,69 @@ export const CityDetail = () => {
           backgroundSize: "cover",
         }}
       >
-        <div className="container h-25 d-flex justify-content-center align-items-center p-4">
-          <div>
-            <button
-              type="button"
-              className="buttonhome btn btn-outline-danger m-2 "
-            >
-              <a href="#scrollspyHeading1">
-                Lugares que Visitar/Patrimonio
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/1009/1009921.png"
-                  className="img-patrimony"
-                  alt="Responsive image"
-                ></img>
-              </a>
-            </button>
-            <button
-              type="button"
-              className="buttonhome btn btn-outline-success m-2"
-            >
-              <a href="#scrollspyHeading2">
-                {" "}
-                Restaurantes/Gastronomia
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/1980/1980788.png"
-                  className="img-restoration"
-                  alt="Responsive image"
-                ></img>
-              </a>
-            </button>
-            <button
-              type="button"
-              className="buttonhome btn btn-outline-primary m-2"
-            >
-              <a href="#scrollspyHeading3">
-                Alojamientos
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/2933/2933772.png"
-                  className="img-accommodation"
-                  alt="Responsive image"
-                ></img>
-              </a>
-            </button>
-            <button
-              type="button"
-              className="buttonhome btn btn-outline-warning m-2"
-            >
-              <a href="#scrollspyHeading4">
-                Visitas Guiadas
-                <img
-                  src="https://www.pc-nexus.net/diplomas/fondoexp.png"
-                  className="img-route"
-                  alt="Responsive image"
-                ></img>
-              </a>
-            </button>
+        <div
+          className="container h-25 d-flex justify-content-center align-items-center"
+          style={{
+            backgroundImage: "https://images4.alphacoders.com/975/97548.jpg",
+            backgroundSize: "cover",
+          }}
+        >
+          <div className="container h-25 d-flex justify-content-center align-items-center p-4">
+            <div>
+              <button
+                type="button"
+                className="buttonhome btn btn-outline-danger ps-4 pe-4 m-2"
+              >
+                <a href="#scrollspyHeading1">
+                  Patrimonio
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/1009/1009921.png"
+                    className="img-patrimony"
+                    alt="Responsive image"
+                  ></img>
+                </a>
+              </button>
+              <button
+                type="button"
+                className="buttonhome btn btn-outline-success m-2"
+              >
+                <a href="#scrollspyHeading2">
+                  {" "}
+                  Restaurantes
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/128/1980/1980788.png"
+                    className="img-restoration"
+                    alt="Responsive image"
+                  ></img>
+                </a>
+              </button>
+              <button
+                type="button"
+                className="buttonhome btn btn-outline-primary m-2"
+              >
+                <a href="#scrollspyHeading3">
+                  Alojamientos
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/128/2933/2933772.png"
+                    className="img-accommodation"
+                    alt="Responsive image"
+                  ></img>
+                </a>
+              </button>
+              <button
+                type="button"
+                className="buttonhome btn btn-outline-warning m-2"
+              >
+                <a href="#scrollspyHeading4">
+                  Experiencias
+                  <img
+                    src="https://www.pc-nexus.net/diplomas/fondoexp.png"
+                    className="img-route"
+                    alt="Responsive image"
+                  ></img>
+                </a>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -193,7 +201,7 @@ export const CityDetail = () => {
         ) : null}
       </div>
       <div className="text-center p-4" id="scrollspyHeading2">
-        <h3>Donde comer bien en {region.name}</h3>
+        <h3>Dónde comer bien en {region.name}</h3>
       </div>
       <div className="detailcitycard row mx-5 p-4 card-row justify-content-center align-items-center">
         {indexRestorations[0] > 0 ? (

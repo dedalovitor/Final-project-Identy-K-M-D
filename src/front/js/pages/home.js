@@ -322,7 +322,7 @@ export const Home = () => {
         ) : null}
       </div>
       <div className="text-center p-4" id="scrollspyHeading2">
-        <h3>Donde comer bien</h3>
+        <h3>Dónde comer bien</h3>
       </div>
 
       <div className="detailcitycard row mx-5 p-4 card-row justify-content-center align-items-center">
